@@ -3,19 +3,21 @@ import 'package:dine_dash_delivery/src/feature/auth/screens/registr_number.dart'
 import 'package:go_router/go_router.dart';
 
 enum AppRoute{
- otpCode, 
+  registrPhone,
+  otpCode,
 }
 
 final GoRouter goRouter = GoRouter(
   routes: [
     GoRoute(
+      name: AppRoute.registrPhone.name,
       path: '/',
-      builder: (context, state) => RegistrNumberScreen(),
+      builder: (context, state) => const RegistrNumberScreen(),
       routes: [
         GoRoute(
-          path: 'otpCode',
           name: AppRoute.otpCode.name,
-          builder: (context, state) => OTPCode(),
+          path: 'otpCode',
+          builder: (context, state) => const OTPCode(),
         )
       ]
     )
