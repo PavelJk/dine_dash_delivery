@@ -12,12 +12,14 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: AppRoute.registrPhone.name,
       path: '/',
-      builder: (context, state) => const RegistrNumberScreen(),
+      builder: (context, state) => RegistrNumberScreen(),
       routes: [
         GoRoute(
           name: AppRoute.otpCode.name,
-          path: 'otpCode',
-          builder: (context, state) => const OTPCode(),
+          path: 'otpCode/:phoneNumber',
+          builder: (context, state) => OTPCode(
+            phoneNumber: state.pathParameters["phoneNumber"]!,
+          ),
         )
       ]
     )
