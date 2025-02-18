@@ -36,18 +36,19 @@ final TextTheme textTheme = TextTheme(
     headlineMedium: TextStyle(
       fontSize: 16,
       fontWeight: FontWeight.w400,
-      color: Colors.white.withValues(alpha: 85)
+      color: Colors.white.withValues(alpha: 85),
+      height: 1.6,
     ),
     headlineSmall: TextStyle(
 
     ),
     bodyLarge: TextStyle(
       fontSize: 14,
-      color: Color(0xff32343E),
       fontWeight: FontWeight.w400,
     ),
     bodyMedium: TextStyle(
-      
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
     ),
     bodySmall: TextStyle(
 
@@ -56,7 +57,6 @@ final TextTheme textTheme = TextTheme(
       fontSize: 13,
       fontWeight: FontWeight.w400,
       letterSpacing: 0.3,
-      color: Color(0xff32343E),
     ),
     labelMedium: TextStyle(
       fontSize: 14,
