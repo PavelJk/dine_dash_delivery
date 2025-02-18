@@ -4,7 +4,9 @@ import 'package:flutter/services.dart';
 class CustomTextFieldWidget extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? controller;
-  const CustomTextFieldWidget({super.key, this.inputFormatters, this.controller});
+  final String? Function(String?)? validator;
+
+  const CustomTextFieldWidget({super.key, this.inputFormatters, this.controller, this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +21,17 @@ class CustomTextFieldWidget extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide.none
         ),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
         filled: true,
         fillColor: Theme.of(context).colorScheme.surface,
       ),
+      
       inputFormatters: inputFormatters,
       controller: controller,
+      validator: validator,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
     );
   }
 }
