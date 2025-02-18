@@ -1,21 +1,27 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
+import 'package:dine_dash_delivery/src/feature/auth/validators/validators.dart';
 import 'package:dine_dash_delivery/src/feature/auth/widgets/text_field_widget.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class RegistrNumberScreen extends StatelessWidget {
 
-  final _maskFormatter = MaskTextInputFormatter(
-    mask: '+# ### ### ## ##', 
+  final MaskTextInputFormatter _maskFormatter = MaskTextInputFormatter(
+    mask: '+7 ### ### ## ##', 
     filter: { "#": RegExp(r'[0-9]') },
     type: MaskAutoCompletionType.lazy
   );
 
-  final _controllerPhoneNumber = TextEditingController();
+  //final TextEditingController _controllerPhoneNumber = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   RegistrNumberScreen({super.key});
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +30,16 @@ class RegistrNumberScreen extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            child: Image.asset(
+            child: SvgPicture.asset(
               PathImages.ellipseAuth,
+              width: 155,
             ),
           ),
           Positioned(
-            right: 2,
-            child: Image.asset(
+            right: 0,
+            child: SvgPicture.asset(
               PathImages.vectorAuth,
+              width: 98,
             ),
           ),
           Padding(
@@ -42,7 +50,7 @@ class RegistrNumberScreen extends StatelessWidget {
                   "Телефон",
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                SizedBox(height: 10,),
+                SizedBox(height: 6,),
                 Text(
                   textAlign: TextAlign.center,
                   "Пожалуйста введите свой номер\nтелефон",
@@ -68,19 +76,25 @@ class RegistrNumberScreen extends StatelessWidget {
                               style: Theme.of(context).textTheme.titleMedium,
                             ),
                             SizedBox(height: 6,),
-                            CustomTextFieldWidget(
-                              inputFormatters: [_maskFormatter],
-                              controller: _controllerPhoneNumber,
+                            Form(
+                              key: _formKey,
+                              child: CustomTextFieldWidget(
+                                inputFormatters: [_maskFormatter],
+                                //controller: _controllerPhoneNumber,
+                                validator: (mobile) => Validator.phoneNumber(mobile),
+                              ),
                             ),
                             Spacer(),
                             CustomButtonWidget(
                               onPressed: (){
-                                context.goNamed(
-                                  AppRoute.otpCode.name,
-                                  pathParameters:{
-                                    "phoneNumber" : _maskFormatter.getMaskedText()
-                                  },
-                                );
+                                if(_formKey.currentState!.validate()){
+                                  context.goNamed(
+                                    AppRoute.otpCode.name,
+                                    pathParameters:{
+                                      "phoneNumber" : _maskFormatter.getMaskedText()
+                                    },
+                                  );
+                                }
                               },
                             ),
                           ],
@@ -96,3 +110,4 @@ class RegistrNumberScreen extends StatelessWidget {
     );
   }
 }
+ 
