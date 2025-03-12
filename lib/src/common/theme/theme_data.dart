@@ -5,10 +5,14 @@ final ThemeData lightTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.light(
     primary: Color(0xff32343E),
+    onPrimary: Colors.black,
     secondary: Color(0xff121223),
+    onSecondary: Color(0xfff6f6f6),
     tertiary: Color(0xffFFE500),
+    onTertiary: Color(0xffECF0F4),
     surface: Color(0xffF0F5FA),
-    inversePrimary: Color(0xffffffff)
+    onSurface: Color(0xff676767),
+    inversePrimary: Color(0xffffffff),
   ),
   textTheme: GoogleFonts.senTextTheme(textTheme),
   scaffoldBackgroundColor: Color(0xffffffff),
@@ -40,7 +44,8 @@ final TextTheme textTheme = TextTheme(
       height: 1.6,
     ),
     headlineSmall: TextStyle(
-
+      fontSize: 20,
+      fontWeight: FontWeight.w400,
     ),
     bodyLarge: TextStyle(
       fontSize: 14,
@@ -61,6 +66,9 @@ final TextTheme textTheme = TextTheme(
     labelMedium: TextStyle(
       fontSize: 14,
       fontWeight: FontWeight.bold,
-      color: Color(0xff121223)
-    )
+    ),
+    labelSmall: TextStyle(
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+    ),
 );

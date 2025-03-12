@@ -96,6 +96,7 @@ class RegistrNumberScreen extends StatelessWidget {
                                   );
                                 }
                               },
+                              text: 'ПРОДОЛЖИТЬ',
                             ),
                           ],
                         ),

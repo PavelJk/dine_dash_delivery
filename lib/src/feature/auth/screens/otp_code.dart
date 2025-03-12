@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/auth/validators/validators.dart';
-import 'package:dine_dash_delivery/src/feature/widgets/appbar_widget.dart';
+import 'package:dine_dash_delivery/src/feature/auth/widgets/appbar_widget.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -67,6 +67,8 @@ class _OTPCodeState extends State<OTPCode> {
         onTap: () {
           context.goNamed(AppRoute.registrPhone.name);
         },
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        iconColor: Theme.of(context).colorScheme.primary,
       ),
       body: Stack(
         children: [
@@ -175,6 +177,7 @@ class _OTPCodeState extends State<OTPCode> {
                                   context.goNamed(AppRoute.registrInfoAboutMe.name);
                                 }
                               },
+                              text: 'ПРОДОЛЖИТЬ',
                             )
                           ],
                         ),
