@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomButtonWidget extends StatelessWidget {
 
   final void Function()? onPressed;
-
-  const CustomButtonWidget({super.key, required  this.onPressed});
+  final String text;
+  final String? assetName;
+  final bool? isImagesText;
+  const CustomButtonWidget({super.key, required  this.onPressed, required this.text, this.isImagesText, this.assetName});
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +23,21 @@ class CustomButtonWidget extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(12)),
           ),
         ),
-        child: Text(
-          "ПРОДОЛЖИТЬ",
-          style: Theme.of(context).textTheme.labelMedium,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              text,
+              style: Theme.of(context).textTheme.labelMedium,
+            ),
+            isImagesText != null ? Padding(
+              padding: const EdgeInsets.only(left: 7),
+              child: SvgPicture.asset(
+                assetName!,
+              ),
+            ):
+            SizedBox.shrink()
+          ],
         ),
       ),
     );
