@@ -97,7 +97,9 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                               children: [
                                 Text(
                                   "ИМЯ",
-                                  style: Theme.of(context).textTheme.titleMedium,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Theme.of(context).colorScheme.onPrimary,
+                                  ),
                                 ),
                                 SizedBox(height: 6,),
                                 CustomTextFieldWidget(
@@ -107,7 +109,9 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                 SizedBox(height: 23,),
                                 Text(
                                   "ФАМИЛИЯ",
-                                  style: Theme.of(context).textTheme.titleMedium,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Theme.of(context).colorScheme.onPrimary,
+                                  ),
                                 ),
                                 SizedBox(height: 6,),
                                 CustomTextFieldWidget(
@@ -117,7 +121,9 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                 SizedBox(height: 23,),
                                 Text(
                                   "ПОЧТА",
-                                  style: Theme.of(context).textTheme.titleMedium,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Theme.of(context).colorScheme.onPrimary,
+                                  ),
                                 ),
                                 SizedBox(height: 6,),
                                 CustomTextFieldWidget(
@@ -127,7 +133,9 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                 SizedBox(height: 23,),
                                 Text(
                                   "ДАТА РОЖДЕНИЯ",
-                                  style: Theme.of(context).textTheme.titleMedium,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Theme.of(context).colorScheme.onPrimary,
+                                  ),
                                 ),
                                 SizedBox(height: 6,),
                                 CustomTextFieldWidget(

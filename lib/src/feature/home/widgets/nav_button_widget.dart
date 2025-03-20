@@ -16,8 +16,9 @@ class NavButtonWidget extends StatelessWidget {
           width: double.infinity,
           height: 62,
           decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.onSecondary,
-              borderRadius: BorderRadius.circular(10)),
+            color: Theme.of(context).colorScheme.onSecondary,
+            borderRadius: BorderRadius.circular(10)
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -27,9 +28,7 @@ class NavButtonWidget extends StatelessWidget {
               ),
               Text(
                 text,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.onPrimary,
-                ),
+                style: Theme.of(context).textTheme.labelSmall
               ),
             ],
           ),

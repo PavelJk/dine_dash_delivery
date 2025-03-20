@@ -119,13 +119,16 @@ class _OTPCodeState extends State<OTPCode> {
                               children: [
                                 Text(
                                   "КОД",
-                                  style: Theme.of(context).textTheme.titleMedium,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: Theme.of(context).colorScheme.onPrimary,
+                                  ),
                                 ),
                                 _isResendCode ?
                                 Text(
                                   "Получить повторно: $_currentTimerValue сек.",
                                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                     fontSize: 14,
+                                    color: Theme.of(context).colorScheme.onPrimary,
                                   ),
                                 ):
                                 SizedBox(

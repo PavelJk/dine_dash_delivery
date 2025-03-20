@@ -73,7 +73,9 @@ class RegistrNumberScreen extends StatelessWidget {
                           children: [
                             Text(
                               "НОМЕР ТЕЛФОНА",
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
                             ),
                             SizedBox(height: 6,),
                             Form(
