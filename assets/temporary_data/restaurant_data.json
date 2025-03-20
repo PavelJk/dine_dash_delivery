@@ -1,0 +1,26 @@
+[
+    {
+      "name": "Бургер Кинг",
+      "menu": "Бургеры - Картошка фри - Нагетсы - Напитки",
+      "rating": "4.4",
+      "delivery": "бесплатно",
+      "clock": "35 мин",
+      "image": "https://avatars.mds.yandex.net/i?id=fa41e27c5f7ac00bdf09fbc23aaf2b9643684aa5-12625178-images-thumbs&n=13"
+    },
+    {
+      "name": "Автосуши",
+      "menu": "Супы - Суши - Пицца - Поке",
+      "rating": "4.7",
+      "delivery": "бесплатно",
+      "clock": "20 мин",
+      "image": "https://avatars.mds.yandex.net/i?id=de94162a6ff6f4647aa03c43b06456303efd5cc3-9842162-images-thumbs&n=13"
+    },
+    {
+      "name": "Камелот",
+      "menu": "Салаты - Пицца - Закуски - Горячее",
+      "rating": "5.0",
+      "delivery": "бесплатно",
+      "clock": "40 мин",
+      "image": "https://avatars.mds.yandex.net/i?id=c2c5c0176b1cc7200f999175d100344c88d08186-8438802-images-thumbs&n=13"
+    }
+]
