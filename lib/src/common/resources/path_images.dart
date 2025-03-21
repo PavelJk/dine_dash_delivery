@@ -12,4 +12,7 @@ class PathImages {
   static const String product = "assets/images/product.png";
   static const String restoran = "assets/images/restoran.png";
   static const String forward = "assets/icons/forward.svg";
+  static const String star = "assets/icons/star.svg";
+  static const String delivery = "assets/icons/delivery.svg";
+  static const String clock = "assets/icons/clock.svg";
 }
