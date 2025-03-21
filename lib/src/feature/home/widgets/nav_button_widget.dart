@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class NavButtonWidget extends StatelessWidget {
+class MyNavButtonWidget extends StatelessWidget {
   final void Function()? onTap;
   final String text;
   final String iconName;
-  const NavButtonWidget({super.key, this.onTap, required this.text, required this.iconName});
+  const MyNavButtonWidget({super.key, this.onTap, required this.text, required this.iconName});
 
   @override
   Widget build(BuildContext context) {
