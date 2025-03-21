@@ -27,9 +27,7 @@ class ProdAndRestButtonWidget extends StatelessWidget {
         ),
         Text(
           text,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
-              ),
+          style: Theme.of(context).textTheme.bodyLarge
         ),
       ],
     );

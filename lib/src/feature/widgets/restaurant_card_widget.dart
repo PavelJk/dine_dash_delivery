@@ -65,6 +65,7 @@ class MyRestaurantCard extends StatelessWidget {
                             MyDescriptionRestaurant(
                               nameIcon: PathImages.star,
                               text: ratingRestaurant,
+                              isBoldStyleText: true,
                             ),
                             SizedBox(
                               width: 30,
@@ -72,6 +73,7 @@ class MyRestaurantCard extends StatelessWidget {
                             MyDescriptionRestaurant(
                               nameIcon: PathImages.delivery,
                               text: deliveryRestaurant,
+                              isBoldStyleText: false,
                             ),
                             SizedBox(
                               width: 30,
@@ -79,6 +81,7 @@ class MyRestaurantCard extends StatelessWidget {
                             MyDescriptionRestaurant(
                               nameIcon: PathImages.clock,
                               text: clockRestaurant,
+                              isBoldStyleText: false,
                             ),
                         ],
                       )
@@ -96,7 +99,8 @@ class MyRestaurantCard extends StatelessWidget {
 class MyDescriptionRestaurant extends StatelessWidget {
   final String nameIcon;
   final String text;
-  const MyDescriptionRestaurant({super.key, required this.nameIcon, required this.text});
+  final bool isBoldStyleText;
+  const MyDescriptionRestaurant({super.key, required this.nameIcon, required this.text, required this.isBoldStyleText});
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +112,10 @@ class MyDescriptionRestaurant extends StatelessWidget {
         ),
         Text(
           text,
-          style: Theme.of(context).textTheme.bodyMedium,
+          style: isBoldStyleText ? Theme.of(context).textTheme.bodyMedium 
+          : Theme.of(context).textTheme.bodyMedium?.copyWith(
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ],
     );
