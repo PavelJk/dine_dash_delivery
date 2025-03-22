@@ -65,7 +65,7 @@ class _MainHomeState extends State<MainHome> {
             );
           }
           return Padding(
-            padding: EdgeInsets.only(right: 24, left: 24, top: 25),
+            padding: EdgeInsets.only(right: 24, left: 24, top: 40),
             child: CustomScrollView(
               slivers: [
                 MySliverAppbarHomeWidget(
@@ -92,7 +92,7 @@ class _MainHomeState extends State<MainHome> {
                     onChanged: (item) => setState(() => selectItem = item),
                   ),
                 ),
-                SliverPadding(padding: EdgeInsets.all(20)),
+                SliverPadding(padding: EdgeInsets.all(11)),
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
@@ -113,12 +113,12 @@ class _MainHomeState extends State<MainHome> {
                     ]
                   )
                 ),
-                SliverPadding(padding: EdgeInsets.all(10)),
+                SliverPadding(padding: EdgeInsets.all(5)),
                 SliverAppBar(
                   pinned: true,
                   scrolledUnderElevation: 0,
                   automaticallyImplyLeading: false,
-                  toolbarHeight: 40,
+                  toolbarHeight: 60,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -130,7 +130,7 @@ class _MainHomeState extends State<MainHome> {
                           text: 'Поиск',
                           iconName: PathImages.search,
                         ),
-                        SizedBox(width: 25,),
+                        SizedBox(width: 18,),
                         MyNavButtonWidget(
                           onTap: () {
                             
@@ -142,6 +142,7 @@ class _MainHomeState extends State<MainHome> {
                     ),
                   ),
                 ),
+                SliverPadding(padding: EdgeInsets.all(11)),
                 SliverToBoxAdapter(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -163,6 +164,7 @@ class _MainHomeState extends State<MainHome> {
                     ],
                   ),
                 ),
+                SliverPadding(padding: EdgeInsets.all(9)),
                 SliverToBoxAdapter(
                   child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -200,6 +202,7 @@ class _MainHomeState extends State<MainHome> {
                   ],
                 ),
                 ),
+                SliverPadding(padding: EdgeInsets.all(2.5)),
                 newSlivreElement,
               ],
             ),

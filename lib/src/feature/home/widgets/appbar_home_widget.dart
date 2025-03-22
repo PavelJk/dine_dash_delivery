@@ -13,7 +13,7 @@ class MySliverAppbarHomeWidget extends StatelessWidget {
       automaticallyImplyLeading: false,
       scrolledUnderElevation: 0,
       pinned: true,
-      toolbarHeight: 60,
+      toolbarHeight: 61,
       title: Padding(
         padding: const EdgeInsets.only(left: 5),
         child: Column(

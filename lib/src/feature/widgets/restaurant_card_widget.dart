@@ -28,7 +28,7 @@ class MyRestaurantCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-          padding: const EdgeInsets.only(bottom: 18),
+          padding: const EdgeInsets.only(bottom: 19),
           child: Column(
             children: [
               ClipRRect(
