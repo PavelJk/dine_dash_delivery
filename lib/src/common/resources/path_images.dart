@@ -15,4 +15,5 @@ class PathImages {
   static const String star = "assets/icons/star.svg";
   static const String delivery = "assets/icons/delivery.svg";
   static const String clock = "assets/icons/clock.svg";
+  static const String geolocator = "assets/icons/geolocator.svg";
 }
