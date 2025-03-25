@@ -19,6 +19,7 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   //final Completer<GoogleMapController> _controller = Completer<GoogleMapController>();
+  bool _isPanelOpen = false;
 
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(56.631600, 47.886178),
@@ -45,8 +46,8 @@ class _MapScreenState extends State<MapScreen> {
               _controller.complete(controller);
             },*/
           ),
-          Positioned(
-            bottom: 120,
+          !_isPanelOpen ? Positioned(
+            bottom: 150,
             right: 12,
             child: GestureDetector(
               onTap: () {
@@ -60,15 +61,21 @@ class _MapScreenState extends State<MapScreen> {
                 ),
               ),
             ),
-          ),
+          ) : SizedBox.shrink(),
           SlidingUpPanel(
             padding: EdgeInsets.only(top: 6.5, right: 24, left: 24, bottom: 18),
             backdropEnabled: true,
+            backdropOpacity: 0.7,
             backdropColor: Theme.of(context).colorScheme.inversePrimary,
             minHeight: 140,
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(24),
             ),
+            onPanelSlide: (position) {
+              setState(() {
+                _isPanelOpen = position > 0.03;
+              });
+            },
             panel: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -84,12 +91,41 @@ class _MapScreenState extends State<MapScreen> {
                   ),
                 ),
                 SizedBox(height: 20,),
-                Text(
-                  'АДРЕС ДОСТАВКИ',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                MyTextFieldLocation(
+                  text: 'АДРЕС ДОСТАВКИ',
                 ),
-                SizedBox(height: 7,),
-                MyTextFieldLocation()
+                SizedBox(height: 13,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: MyTextFieldLocation(
+                        text: 'КВ/ОФИС',
+                      ),
+                    ),
+                    SizedBox(width: 12,),
+                    Expanded(
+                      child: MyTextFieldLocation(
+                        text: 'ПОДЪЕЗД'
+                      )
+                    ),
+                  ],
+                ),
+                SizedBox(height: 13,),
+                Row(
+                  children: [
+                    Expanded(
+                      child: MyTextFieldLocation(
+                        text: 'ЭТАЖ',
+                      ),
+                    ),
+                    SizedBox(width: 12,),
+                    Expanded(
+                      child: MyTextFieldLocation(
+                        text: 'ДОМОФОН'
+                      )
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
