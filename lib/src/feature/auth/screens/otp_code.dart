@@ -110,7 +110,7 @@ class _OTPCodeState extends State<OTPCode> {
                         )
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 130),
+                        padding: const EdgeInsets.all(24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -155,15 +155,15 @@ class _OTPCodeState extends State<OTPCode> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 8,),
+                            SizedBox(height: 6,),
                             Form(
                               key: _formKey,
                               child: Pinput(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                                 defaultPinTheme: PinTheme(
-                                  width: 70,
-                                  height: 70,
+                                  width: 65,
+                                  height: 65,
                                   textStyle: Theme.of(context).textTheme.bodyMedium,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),

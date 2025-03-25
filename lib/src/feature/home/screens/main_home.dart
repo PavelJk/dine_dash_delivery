@@ -65,7 +65,7 @@ class _MainHomeState extends State<MainHome> {
             );
           }
           return Padding(
-            padding: EdgeInsets.only(right: 24, left: 24, top: 40),
+            padding: EdgeInsets.only(right: 16, left: 16, top: 50, bottom: 5),
             child: CustomScrollView(
               slivers: [
                 MySliverAppbarHomeWidget(
@@ -80,7 +80,7 @@ class _MainHomeState extends State<MainHome> {
                     items: address.map((item) => DropdownMenuItem<String>(
                       value: item,
                       child: Padding(
-                        padding: const EdgeInsets.only(right: 8),
+                        padding: const EdgeInsets.only(right: 2),
                         child: Text(
                           item,
                           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -92,7 +92,7 @@ class _MainHomeState extends State<MainHome> {
                     onChanged: (item) => setState(() => selectItem = item),
                   ),
                 ),
-                SliverPadding(padding: EdgeInsets.all(11)),
+                SliverPadding(padding: EdgeInsets.all(8)),
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
@@ -113,12 +113,12 @@ class _MainHomeState extends State<MainHome> {
                     ]
                   )
                 ),
-                SliverPadding(padding: EdgeInsets.all(5)),
+                SliverPadding(padding: EdgeInsets.all(2)),
                 SliverAppBar(
                   pinned: true,
                   scrolledUnderElevation: 0,
                   automaticallyImplyLeading: false,
-                  toolbarHeight: 60,
+                  toolbarHeight: 50,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -174,7 +174,7 @@ class _MainHomeState extends State<MainHome> {
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 8),
+                      padding: const EdgeInsets.only(top: 3),
                       child: TextButton.icon(
                         onPressed: () {
                           
@@ -202,7 +202,6 @@ class _MainHomeState extends State<MainHome> {
                   ],
                 ),
                 ),
-                SliverPadding(padding: EdgeInsets.all(2.5)),
                 newSlivreElement,
               ],
             ),

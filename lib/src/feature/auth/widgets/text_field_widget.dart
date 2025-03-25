@@ -20,7 +20,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     return TextFormField(
       decoration: InputDecoration(
         suffixIcon: suffixIcon,
-        contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 18),
+        contentPadding: EdgeInsets.symmetric(vertical: 17, horizontal: 18),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide.none

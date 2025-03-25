@@ -67,7 +67,7 @@ class RegistrNumberScreen extends StatelessWidget {
                         )
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 24, right: 24, top: 24, bottom: 130),
+                        padding: const EdgeInsets.all(24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -77,7 +77,7 @@ class RegistrNumberScreen extends StatelessWidget {
                                 color: Theme.of(context).colorScheme.onPrimary,
                               ),
                             ),
-                            SizedBox(height: 6,),
+                            SizedBox(height: 3,),
                             Form(
                               key: _formKey,
                               child: CustomTextFieldWidget(

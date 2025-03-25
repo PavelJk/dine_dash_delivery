@@ -1,5 +1,6 @@
 import 'package:dine_dash_delivery/src/feature/auth/screens/info_about_me.dart';
 import 'package:dine_dash_delivery/src/feature/auth/screens/otp_code.dart';
+import 'package:dine_dash_delivery/src/feature/auth/screens/registr_number.dart';
 import 'package:dine_dash_delivery/src/feature/home/screens/main_home.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/location_access.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/map.dart';

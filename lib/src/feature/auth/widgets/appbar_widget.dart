@@ -30,8 +30,8 @@ class AppbarWidget extends StatelessWidget implements  PreferredSizeWidget {
           ),
         ),
       ),
-      leadingWidth: 75,
-      toolbarHeight: 110,
+      leadingWidth: 73,
+      toolbarHeight: 85,
     );
   }
 

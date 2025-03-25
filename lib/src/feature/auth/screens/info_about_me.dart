@@ -81,7 +81,7 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                 Expanded(
                   child: SingleChildScrollView(
                     child: Container(
-                        height: MediaQuery.of(context).size.height * 0.755,
+                        height: MediaQuery.of(context).size.height * 0.732,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.inversePrimary,
                           borderRadius: BorderRadius.vertical(
@@ -101,43 +101,43 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                     color: Theme.of(context).colorScheme.onPrimary,
                                   ),
                                 ),
-                                SizedBox(height: 6,),
+                                SizedBox(height: 2,),
                                 CustomTextFieldWidget(
                                   //controller: _controllerPhoneNumber,
                                   validator: (name) => Validator.nameAndSurname(name),
                                 ),
-                                SizedBox(height: 23,),
+                                SizedBox(height: 13,),
                                 Text(
                                   "ФАМИЛИЯ",
                                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: Theme.of(context).colorScheme.onPrimary,
                                   ),
                                 ),
-                                SizedBox(height: 6,),
+                                SizedBox(height: 2,),
                                 CustomTextFieldWidget(
                                   //controller: _controllerPhoneNumber,
                                   validator: (surname) => Validator.nameAndSurname(surname),
                                 ),
-                                SizedBox(height: 23,),
+                                SizedBox(height: 13,),
                                 Text(
                                   "ПОЧТА",
                                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: Theme.of(context).colorScheme.onPrimary,
                                   ),
                                 ),
-                                SizedBox(height: 6,),
+                                SizedBox(height: 2,),
                                 CustomTextFieldWidget(
                                   //controller: _controllerPhoneNumber,
                                   validator: (email) => Validator.email(email),
                                 ),
-                                SizedBox(height: 23,),
+                                SizedBox(height: 13,),
                                 Text(
                                   "ДАТА РОЖДЕНИЯ",
                                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                                     color: Theme.of(context).colorScheme.onPrimary,
                                   ),
                                 ),
-                                SizedBox(height: 6,),
+                                SizedBox(height: 2,),
                                 CustomTextFieldWidget(
                                   controller: _datePickerController,
                                   readOnly : true,

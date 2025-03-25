@@ -28,70 +28,65 @@ class MyRestaurantCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-          padding: const EdgeInsets.only(bottom: 19),
-          child: Column(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-                child: Image.network(
-                  imageRestaurant,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: 137,
+        padding: const EdgeInsets.only(bottom: 16),
+        child: Column(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+              child: Image.network(
+                imageRestaurant,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: 137,
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Color(0xffDBDBDB)),
+                borderRadius: BorderRadius.vertical(bottom: Radius.circular(10))),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        nameRestaurant,
+                        style: Theme.of(context).textTheme.headlineSmall,
+                      ),
+                      Text(
+                        menuRestaurant,
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: Color(0xffA0A5BA),
+                        ),
+                      ),
+                      SizedBox(height: 8,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          MyDescriptionRestaurant(
+                            nameIcon: PathImages.star,
+                            text: ratingRestaurant,
+                            isBoldStyleText: true,
+                          ),
+                          MyDescriptionRestaurant(
+                            nameIcon: PathImages.delivery,
+                            text: deliveryRestaurant,
+                            isBoldStyleText: false,
+                          ),
+                          MyDescriptionRestaurant(
+                            nameIcon: PathImages.clock,
+                            text: clockRestaurant,
+                            isBoldStyleText: false,
+                          ),
+                      ],
+                    )
+                  ],
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Color(0xffDBDBDB)),
-                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(10))),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          nameRestaurant,
-                          style: Theme.of(context).textTheme.headlineSmall,
-                        ),
-                        Text(
-                          menuRestaurant,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Color(0xffA0A5BA),
-                          ),
-                        ),
-                        SizedBox(height: 8,),
-                        Row(
-                          children: [
-                            MyDescriptionRestaurant(
-                              nameIcon: PathImages.star,
-                              text: ratingRestaurant,
-                              isBoldStyleText: true,
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            MyDescriptionRestaurant(
-                              nameIcon: PathImages.delivery,
-                              text: deliveryRestaurant,
-                              isBoldStyleText: false,
-                            ),
-                            SizedBox(
-                              width: 30,
-                            ),
-                            MyDescriptionRestaurant(
-                              nameIcon: PathImages.clock,
-                              text: clockRestaurant,
-                              isBoldStyleText: false,
-                            ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ],
-          )
+            ),
+          ],
         ),
+      ),
     );
   }
 }
