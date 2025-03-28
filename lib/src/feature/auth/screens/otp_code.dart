@@ -174,7 +174,7 @@ class _OTPCodeState extends State<OTPCode> {
                               ),
                             ),
                             Spacer(),
-                            CustomButtonWidget(
+                            MyCustomButtonWidget(
                               onPressed: (){
                                 if (_formKey.currentState!.validate()) {
                                   context.goNamed(AppRoute.registrInfoAboutMe.name);

@@ -153,7 +153,7 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                   )
                                 ),
                                 Spacer(),
-                                CustomButtonWidget(
+                                MyCustomButtonWidget(
                                   onPressed: (){
                                     if(_formKey.currentState!.validate()){
                                       context.goNamed(AppRoute.locationAccess.name,);

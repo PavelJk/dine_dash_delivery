@@ -20,7 +20,7 @@ class LocationAccess extends StatelessWidget {
                 PathImages.geoLocation,
               ),
                SizedBox(height: 100,),
-              CustomButtonWidget(
+              MyCustomButtonWidget(
                 onPressed: (){
                   context.goNamed(AppRoute.map.name);
                 },

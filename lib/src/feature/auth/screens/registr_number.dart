@@ -87,7 +87,7 @@ class RegistrNumberScreen extends StatelessWidget {
                               ),
                             ),
                             Spacer(),
-                            CustomButtonWidget(
+                            MyCustomButtonWidget(
                               onPressed: (){
                                 if(_formKey.currentState!.validate()){
                                   context.goNamed(
