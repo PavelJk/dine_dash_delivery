@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MyTextFieldLocation extends StatelessWidget {
+class MyLocationTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final TextEditingController? controller;
   final String text;
 
-  const MyTextFieldLocation({super.key, this.prefixIcon, this.controller, required this.text});
+  const MyLocationTextField({super.key, this.prefixIcon, this.controller, required this.text});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class MyTextFieldLocation extends StatelessWidget {
         TextFormField(
           decoration: InputDecoration(
             prefixIcon: prefixIcon,
-            contentPadding: EdgeInsets.all(18),
+            contentPadding: EdgeInsets.all(15),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               borderSide: BorderSide.none
