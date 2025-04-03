@@ -1,11 +1,11 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
-import 'package:dine_dash_delivery/src/feature/widgets/button_widget.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class LocationAccess extends StatelessWidget {
-  const LocationAccess({super.key});
+class LocationAccessScreen extends StatelessWidget {
+  const LocationAccessScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class LocationAccess extends StatelessWidget {
                 PathImages.geoLocation,
               ),
                SizedBox(height: 100,),
-              MyCustomButtonWidget(
+              MyCustomMainButton(
                 onPressed: (){
                   context.goNamed(AppRoute.map.name);
                 },

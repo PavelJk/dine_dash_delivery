@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class MyCustomButtonWidget extends StatelessWidget {
+class MyCustomMainButton extends StatelessWidget {
 
   final void Function()? onPressed;
   final String text;
   final String? assetName;
   final bool? isImagesText;
-  const MyCustomButtonWidget({super.key, required  this.onPressed, required this.text, this.isImagesText, this.assetName});
+  const MyCustomMainButton({super.key, required  this.onPressed, required this.text, this.isImagesText, this.assetName});
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class CustomTextFieldWidget extends StatelessWidget {
+class MyCustomAuthTextField extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
   final bool? readOnly;
-  const CustomTextFieldWidget({
+  const MyCustomAuthTextField({
     super.key, 
     this.inputFormatters, 
     this.controller, 

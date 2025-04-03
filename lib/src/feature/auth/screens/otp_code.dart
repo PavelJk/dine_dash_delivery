@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/auth/validators/validators.dart';
-import 'package:dine_dash_delivery/src/feature/auth/widgets/appbar_widget.dart';
-import 'package:dine_dash_delivery/src/feature/widgets/button_widget.dart';
+import 'package:dine_dash_delivery/src/feature/auth/widgets/appbar.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -63,7 +63,7 @@ class _OTPCodeState extends State<OTPCode> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Theme.of(context).colorScheme.secondary,
-      appBar: AppbarWidget(
+      appBar: MyAuthAndLocationAppbar(
         onTap: () {
           context.goNamed(AppRoute.registrPhone.name);
         },
@@ -174,7 +174,7 @@ class _OTPCodeState extends State<OTPCode> {
                               ),
                             ),
                             Spacer(),
-                            MyCustomButtonWidget(
+                            MyCustomMainButton(
                               onPressed: (){
                                 if (_formKey.currentState!.validate()) {
                                   context.goNamed(AppRoute.registrInfoAboutMe.name);

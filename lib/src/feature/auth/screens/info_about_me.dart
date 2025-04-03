@@ -1,13 +1,13 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
+import 'package:dine_dash_delivery/src/feature/auth/date/select_date.dart';
 import 'package:dine_dash_delivery/src/feature/auth/validators/validators.dart';
-import 'package:dine_dash_delivery/src/feature/auth/widgets/text_field_widget.dart';
-import 'package:dine_dash_delivery/src/feature/auth/widgets/appbar_widget.dart';
-import 'package:dine_dash_delivery/src/feature/widgets/button_widget.dart';
+import 'package:dine_dash_delivery/src/feature/auth/widgets/text_field.dart';
+import 'package:dine_dash_delivery/src/feature/auth/widgets/appbar.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:intl/intl.dart';
 
 
 class RegistrInfoAboutMe extends StatefulWidget {
@@ -24,16 +24,10 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
   final TextEditingController _datePickerController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  Future<void> _selectDate() async {
-    final DateTime? pickedDate = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime(2030),
-    );
-
-   if (pickedDate == null) return;
-   _datePickerController.text = DateFormat('dd.MM.yyyy').format(pickedDate);
+  @override
+  void dispose() {
+    _datePickerController.dispose();
+    super.dispose();
   }
 
   @override
@@ -41,7 +35,7 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Theme.of(context).colorScheme.secondary,
-      appBar: AppbarWidget(
+      appBar: MyAuthAndLocationAppbar(
         onTap: () {
           context.goNamed(AppRoute.registrPhone.name);
         },
@@ -102,7 +96,7 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                   ),
                                 ),
                                 SizedBox(height: 2,),
-                                CustomTextFieldWidget(
+                                MyCustomAuthTextField(
                                   //controller: _controllerPhoneNumber,
                                   validator: (name) => Validator.nameAndSurname(name),
                                 ),
@@ -114,7 +108,7 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                   ),
                                 ),
                                 SizedBox(height: 2,),
-                                CustomTextFieldWidget(
+                                MyCustomAuthTextField(
                                   //controller: _controllerPhoneNumber,
                                   validator: (surname) => Validator.nameAndSurname(surname),
                                 ),
@@ -126,7 +120,7 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                   ),
                                 ),
                                 SizedBox(height: 2,),
-                                CustomTextFieldWidget(
+                                MyCustomAuthTextField(
                                   //controller: _controllerPhoneNumber,
                                   validator: (email) => Validator.email(email),
                                 ),
@@ -138,13 +132,13 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                   ),
                                 ),
                                 SizedBox(height: 2,),
-                                CustomTextFieldWidget(
+                                MyCustomAuthTextField(
                                   controller: _datePickerController,
                                   readOnly : true,
                                   validator: (date) => Validator.nameAndSurname(date),
                                   suffixIcon: IconButton(
                                   onPressed: (){
-                                    _selectDate();
+                                    selectDate(_datePickerController, context);
                                   },
                                    icon: SvgPicture.asset(
                                     PathImages.happybirsday,
@@ -153,7 +147,7 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
                                   )
                                 ),
                                 Spacer(),
-                                MyCustomButtonWidget(
+                                MyCustomMainButton(
                                   onPressed: (){
                                     if(_formKey.currentState!.validate()){
                                       context.goNamed(AppRoute.locationAccess.name,);
@@ -176,4 +170,3 @@ class _RegistrInfoAboutMeState extends State<RegistrInfoAboutMe> {
     );
   }
 }
- 

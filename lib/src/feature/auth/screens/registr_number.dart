@@ -1,8 +1,8 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/auth/validators/validators.dart';
-import 'package:dine_dash_delivery/src/feature/auth/widgets/text_field_widget.dart';
-import 'package:dine_dash_delivery/src/feature/widgets/button_widget.dart';
+import 'package:dine_dash_delivery/src/feature/auth/widgets/text_field.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -20,8 +20,6 @@ class RegistrNumberScreen extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   RegistrNumberScreen({super.key});
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -80,14 +78,14 @@ class RegistrNumberScreen extends StatelessWidget {
                             SizedBox(height: 3,),
                             Form(
                               key: _formKey,
-                              child: CustomTextFieldWidget(
+                              child: MyCustomAuthTextField(
                                 inputFormatters: [_maskFormatter],
                                 //controller: _controllerPhoneNumber,
                                 validator: (mobile) => Validator.phoneNumber(mobile),
                               ),
                             ),
                             Spacer(),
-                            MyCustomButtonWidget(
+                            MyCustomMainButton(
                               onPressed: (){
                                 if(_formKey.currentState!.validate()){
                                   context.goNamed(

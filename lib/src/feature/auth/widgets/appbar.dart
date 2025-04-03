@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../common/resources/path_images.dart';
 
-class AppbarWidget extends StatelessWidget implements  PreferredSizeWidget {
+class MyAuthAndLocationAppbar extends StatelessWidget implements  PreferredSizeWidget {
 
   final void Function()? onTap;
   final Color? backgroundColor;
   final Color iconColor;
-  const AppbarWidget({super.key, this.onTap, this.backgroundColor, required this.iconColor});
+  const MyAuthAndLocationAppbar({super.key, this.onTap, this.backgroundColor, required this.iconColor});
 
   @override
   Widget build(BuildContext context) {

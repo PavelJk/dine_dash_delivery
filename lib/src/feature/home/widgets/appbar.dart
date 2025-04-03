@@ -1,11 +1,13 @@
+import 'package:dine_dash_delivery/src/feature/home/widgets/nav_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../common/resources/path_images.dart';
 
-class MySliverAppbarHomeWidget extends StatelessWidget {
+class MyFirstHomeSliverAppbar extends StatelessWidget {
   final void Function()? onTap;
   final DropdownButton<String> dropdownButton;
-  const MySliverAppbarHomeWidget({super.key, this.onTap, required this.dropdownButton});
+  const MyFirstHomeSliverAppbar(
+      {super.key, this.onTap, required this.dropdownButton});
 
   @override
   Widget build(BuildContext context) {
@@ -41,16 +43,15 @@ class MySliverAppbarHomeWidget extends StatelessWidget {
                   Text(
                     'ДОСТАВИТЬ В',
                     style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontSize: 12,
-                    ),
+                          fontSize: 12,
+                        ),
                   ),
                   dropdownButton,
                 ],
               ),
             ),
             GestureDetector(
-              onTap: () {
-              },
+              onTap: () {},
               child: Stack(
                 children: [
                   SizedBox(
@@ -71,9 +72,10 @@ class MySliverAppbarHomeWidget extends StatelessWidget {
                       backgroundColor: Theme.of(context).colorScheme.tertiary,
                       child: Text(
                         '2',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontSize: 20
-                        ),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(fontSize: 20),
                       ),
                     ),
                   ),
@@ -81,6 +83,43 @@ class MySliverAppbarHomeWidget extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class MySecondNavHomeSliverAppBar extends StatelessWidget {
+  const MySecondNavHomeSliverAppBar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      pinned: true,
+      scrolledUnderElevation: 0,
+      automaticallyImplyLeading: false,
+      toolbarHeight: 60,
+      flexibleSpace: FlexibleSpaceBar(
+        background: Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              MyNavHomeButton(
+                onTap: () {},
+                text: 'Поиск',
+                iconName: PathImages.search,
+              ),
+              SizedBox(
+                width: 18,
+              ),
+              MyNavHomeButton(
+                onTap: () {},
+                text: 'Рецепты',
+                iconName: PathImages.video,
+              )
+            ],
+          ),
         ),
       ),
     );

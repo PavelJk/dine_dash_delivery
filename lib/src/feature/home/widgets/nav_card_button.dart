@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ProdAndRestButtonWidget extends StatelessWidget {
+class NavCardHomeButton extends StatelessWidget {
 
   final String text;
   final String nameImage;
   final void Function()? onTap;
-  const ProdAndRestButtonWidget({super.key, required this.text, required this.nameImage, this.onTap});
+  const NavCardHomeButton({super.key, required this.text, required this.nameImage, this.onTap});
 
   @override
   Widget build(BuildContext context) {
