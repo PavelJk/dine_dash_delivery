@@ -1,12 +1,13 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/home/data/data.dart';
 import 'package:dine_dash_delivery/src/feature/home/model/info_restaurant.dart';
-import 'package:dine_dash_delivery/src/feature/home/widgets/appbar_home_widget.dart';
-import 'package:dine_dash_delivery/src/feature/home/widgets/nav_button_widget.dart';
-import 'package:dine_dash_delivery/src/feature/home/widgets/prod_and_rest_button_widget.dart';
-import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card_widget.dart';
+import 'package:dine_dash_delivery/src/feature/home/widgets/appbar.dart';
+import 'package:dine_dash_delivery/src/feature/home/widgets/nav_card_button.dart';
+import 'package:dine_dash_delivery/src/feature/home/widgets/section_header.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({super.key});
@@ -16,6 +17,7 @@ class MainHome extends StatefulWidget {
 }
 
 class _MainHomeState extends State<MainHome> {
+  
   List<String> address = ['ул. Пушкина, 15, кв. 50', 'ул. Дружбы, 89, кв. 50'];
   String? selectItem = 'ул. Пушкина, 15, кв. 50';
   late final Future<List<Restaurant>> restaurantFuture;
@@ -68,7 +70,7 @@ class _MainHomeState extends State<MainHome> {
             padding: EdgeInsets.only(right: 16, left: 16, top: 50, bottom: 5),
             child: CustomScrollView(
               slivers: [
-                MySliverAppbarHomeWidget(
+                MyFirstHomeSliverAppbar(
                   dropdownButton: DropdownButton<String>(
                     iconEnabledColor: Theme.of(context).colorScheme.secondary,
                     underline: const SizedBox(),
@@ -92,7 +94,7 @@ class _MainHomeState extends State<MainHome> {
                     onChanged: (item) => setState(() => selectItem = item),
                   ),
                 ),
-                SliverPadding(padding: EdgeInsets.all(8)),
+                SliverPadding(padding: EdgeInsets.all(10)),
                 SliverToBoxAdapter(
                   child: Column(
                     children: [
@@ -114,51 +116,24 @@ class _MainHomeState extends State<MainHome> {
                   )
                 ),
                 SliverPadding(padding: EdgeInsets.all(2)),
-                SliverAppBar(
-                  pinned: true,
-                  scrolledUnderElevation: 0,
-                  automaticallyImplyLeading: false,
-                  toolbarHeight: 50,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        MyNavButtonWidget(
-                          onTap: () {
-                            
-                          },
-                          text: 'Поиск',
-                          iconName: PathImages.search,
-                        ),
-                        SizedBox(width: 18,),
-                        MyNavButtonWidget(
-                          onTap: () {
-                            
-                          },
-                          text: 'Рецепты',
-                          iconName: PathImages.video,
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                MySecondNavHomeSliverAppBar(),
                 SliverPadding(padding: EdgeInsets.all(11)),
                 SliverToBoxAdapter(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ProdAndRestButtonWidget(
+                      NavCardHomeButton(
                         text: 'Продукты', 
                         nameImage: PathImages.product,
                         onTap: () {
                           
                         }
                       ),
-                      ProdAndRestButtonWidget(
+                      NavCardHomeButton(
                         text: 'Рестораны', 
                         nameImage: PathImages.restoran,
                         onTap: () {
-                          
+                          context.goNamed(AppRoute.restaurantHome.name);
                         },
                       ),
                     ],
@@ -166,41 +141,9 @@ class _MainHomeState extends State<MainHome> {
                 ),
                 SliverPadding(padding: EdgeInsets.all(9)),
                 SliverToBoxAdapter(
-                  child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Рестораны',
-                      style: Theme.of(context).textTheme.headlineSmall,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 3),
-                      child: TextButton.icon(
-                        onPressed: () {
-                          
-                        },
-                        label: Text(
-                          'Смотреть все',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        icon: Padding(
-                          padding: const EdgeInsets.only(top: 2.5),
-                          child: SvgPicture.asset(
-                            PathImages.forward,
-                          ),
-                        ),
-                        iconAlignment: IconAlignment.end,
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          splashFactory: NoSplash.splashFactory,
-                          enableFeedback: false,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  child: MySectionHeadersHome(
+                    text: 'Рестораны'
+                  ),
                 ),
                 newSlivreElement,
               ],
