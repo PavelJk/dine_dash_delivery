@@ -19,4 +19,16 @@ class PathImages {
   static const String location = "assets/icons/location.svg";
   static const String marker = "assets/images/marker.png";
   static const String fire = "assets/images/fire.png";
+  static const String avatarNull = "assets/images/avatar_null.png";
+  static const String vopr = "assets/icons/chat_vopr.svg";
+  static const String favorite = "assets/icons/favorite.svg";
+  static const String iconAddress = "assets/icons/icon_address.svg";
+  static const String iconProfile = "assets/icons/icon_profile.svg";
+  static const String logout = "assets/icons/logout.svg";
+  static const String myOrder = "assets/icons/my_order.svg";
+  static const String myReview = "assets/icons/myrive.svg";
+  static const String qalet = "assets/icons/qalet.svg";
+  static const String setting = "assets/icons/settings.svg";
+  static const String myvid = "assets/icons/myvideonac.svg";
+  static const String basket = "assets/icons/basket.svg";
 }

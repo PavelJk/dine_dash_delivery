@@ -1,4 +1,6 @@
+import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -6,106 +8,192 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        children: [
-          UserAccountsDrawerHeader(
-            accountName: const Text("Павел Бартеньев"),
-            accountEmail: const Text("Я люблю фаст-фуд"),
-            currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.white,
-              child: Text(
-                "ПБ",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-            ),
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.only(right: 24, left: 24, top: 55),
+        child: Column(
+          children: [
+            Row(
               children: [
-                _buildListTile(
-                  icon: Icons.info_outline,
-                  title: "Информация",
-                  onTap: () {},
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage(PathImages.avatarNull),
                 ),
-                _buildListTile(
-                  icon: Icons.location_on_outlined,
-                  title: "Адрес",
-                  onTap: () {},
-                ),
-                const Divider(),
-                _buildListTile(
-                  icon: Icons.shopping_cart_outlined,
-                  title: "Корзина",
-                  onTap: () {},
-                ),
-                _buildListTile(
-                  icon: Icons.favorite_border,
-                  title: "Избранное",
-                  onTap: () {},
-                ),
-                _buildListTile(
-                  icon: Icons.list_alt,
-                  title: "Мои заказы",
-                  onTap: () {},
-                ),
-                _buildListTile(
-                  icon: Icons.ondemand_video,
-                  title: "Видео рецепты",
-                  onTap: () {},
-                ),
-                _buildListTile(
-                  icon: Icons.credit_card,
-                  title: "Способ оплаты",
-                  onTap: () {},
-                ),
-                const Divider(),
-                _buildListTile(
-                  icon: Icons.help_outline,
-                  title: "Частые вопросы",
-                  onTap: () {},
-                ),
-                _buildListTile(
-                  icon: Icons.rate_review_outlined,
-                  title: "Мои отзывы",
-                  onTap: () {},
-                ),
-                _buildListTile(
-                  icon: Icons.settings_outlined,
-                  title: "Настройки",
-                  onTap: () {},
+                SizedBox(width: 30,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Павел Бартеньев",
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8,),
+                    Text(
+                      "Я люблю фаст-фуд",
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                        color: Color(0xffA0A5BA),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ListTile(
-              leading: const Icon(Icons.exit_to_app),
-              title: const Text("Выйти из аккаунта"),
-              onTap: () {
-                Navigator.pop(context);
-              },
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.only(bottom: 20, top: 25),
+                children: [
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      children: [
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.iconProfile,
+                          title: "Информация",
+                          onTap: () {},
+                        ),
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.iconAddress,
+                          title: "Адрес",
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 21,),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      children: [
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.basket,
+                          title: "Корзина",
+                          onTap: () {},
+                        ),
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.favorite,
+                          title: "Избранное",
+                          onTap: () {
+                          },
+                        ),
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.myOrder,
+                          title: "Мои заказы",
+                          onTap: () {},
+                        ),
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.myvid,
+                          title: "Видео рецепты",
+                          onTap: () {},
+                        ),
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.qalet,
+                          title: "Способ оплаты",
+                          onTap: () {
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 21,),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      children: [
+                         _buildListTile(
+                          context: context,
+                          icon: PathImages.vopr,
+                          title: "Частые вопросы",
+                          onTap: () {},
+                        ),
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.myReview,
+                          title: "Мои отзывы",
+                          onTap: () {},
+                        ),
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.setting,
+                          title: "Настройки",
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 21,),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 12),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.onSecondary,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      children: [
+                        _buildListTile(
+                          context: context,
+                          icon: PathImages.logout,
+                          title: "Выйти из аккаунта",
+                          onTap: () {},
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildListTile({
-    required IconData icon,
+    required String icon,
     required String title,
     required VoidCallback onTap,
+    required BuildContext context,
   }) {
     return ListTile(
-      leading: Icon(icon),
+      leading: Container(
+        width: 40,
+        height: 40,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.inversePrimary,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: SvgPicture.asset(
+          icon,
+          width: 10,
+          height: 10,
+          fit: BoxFit.scaleDown,
+        ),
+      ),
+      trailing: Icon(
+        Icons.chevron_right,
+        color: Color(0xff747783),
+        size: 20,
+      ),
       title: Text(title),
       onTap: onTap,
     );

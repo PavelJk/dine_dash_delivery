@@ -1,9 +1,9 @@
-import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/feature/home/data/data.dart';
 import 'package:dine_dash_delivery/src/feature/home/model/categorie_dish.dart';
 import 'package:dine_dash_delivery/src/feature/home/model/info_restaurant.dart';
 import 'package:dine_dash_delivery/src/feature/home/widgets/appbar.dart';
 import 'package:dine_dash_delivery/src/feature/home/widgets/section_header.dart';
+import 'package:dine_dash_delivery/src/feature/setting/screens/nav_menu.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 
@@ -23,6 +23,7 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
   late final Future<List<CategorieDish>> categorieDishFuture;
   late Widget newSlivreElement;
   late Widget newSlivreElement2;
+  final GlobalKey<ScaffoldState> _openDraver = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -34,6 +35,8 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _openDraver,
+      drawer: AppDrawer(),
       body: FutureBuilder<List<Restaurant>>(
         future: restaurantFuture, 
         builder: (context, snapshot) {
@@ -95,6 +98,12 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
                     )).toList(),
                     onChanged: (item) => setState(() => selectItem = item),
                   ),
+                  onTap: () {
+                    setState(() {
+                      print("object");
+                      _openDraver.currentState?.openDrawer();
+                    });
+                  },
                 ),
                 MySecondNavHomeSliverAppBar(),
                 SliverToBoxAdapter(

@@ -16,6 +16,9 @@ final ThemeData lightTheme = ThemeData(
   ),
   textTheme: GoogleFonts.senTextTheme(textTheme),
   scaffoldBackgroundColor: Color(0xffffffff),
+  drawerTheme: DrawerThemeData(
+    backgroundColor: Color(0xffffffff),
+  ),
   appBarTheme: AppBarTheme(
     backgroundColor: Color(0xffffffff),
   )

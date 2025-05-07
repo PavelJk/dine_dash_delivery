@@ -5,6 +5,7 @@ import 'package:dine_dash_delivery/src/feature/home/model/info_restaurant.dart';
 import 'package:dine_dash_delivery/src/feature/home/widgets/appbar.dart';
 import 'package:dine_dash_delivery/src/feature/home/widgets/nav_card_button.dart';
 import 'package:dine_dash_delivery/src/feature/home/widgets/section_header.dart';
+import 'package:dine_dash_delivery/src/feature/setting/screens/nav_menu.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,6 +23,8 @@ class _MainHomeState extends State<MainHome> {
   String? selectItem = 'ул. Пушкина, 15, кв. 50';
   late final Future<List<Restaurant>> restaurantFuture;
   late Widget newSlivreElement;
+  final GlobalKey<ScaffoldState> _openDraver = GlobalKey<ScaffoldState>();
+
 
   @override
   void initState() {
@@ -32,6 +35,8 @@ class _MainHomeState extends State<MainHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _openDraver,
+      drawer: AppDrawer(),
       body: FutureBuilder<List<Restaurant>>(
         future: restaurantFuture, 
         builder: (context, snapshot) {
@@ -93,6 +98,11 @@ class _MainHomeState extends State<MainHome> {
                     )).toList(),
                     onChanged: (item) => setState(() => selectItem = item),
                   ),
+                  onTap: () {
+                    setState(() {
+                      _openDraver.currentState?.openDrawer();
+                    });
+                  },
                 ),
                 SliverPadding(padding: EdgeInsets.all(10)),
                 SliverToBoxAdapter(

@@ -21,7 +21,7 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: AppRoute.registrPhone.name,
       path: '/',
-      builder: (context, state) => RestaurantHomeScreen(),
+      builder: (context, state) => MainHome(),
       routes: [
         GoRoute(
           name: AppRoute.otpCode.name,
