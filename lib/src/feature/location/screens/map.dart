@@ -58,7 +58,7 @@ class _MapScreenState extends State<MapScreen> {
         extendBodyBehindAppBar: true,
         appBar: MyAuthAndLocationAppbar(
           onTap: () {
-            context.goNamed(AppRoute.locationAccess.name);
+            context.pop('value');
           },
           backgroundColor: Theme.of(context).colorScheme.secondary,
           iconColor: Theme.of(context).colorScheme.inversePrimary,
@@ -130,6 +130,7 @@ class _MapScreenState extends State<MapScreen> {
                             pinned: true,
                             primary: false,
                             scrolledUnderElevation: 0,
+                            automaticallyImplyLeading: false,
                             toolbarHeight: 27,
                             flexibleSpace: MyAppBarSlidingUpPanel(),
                           ),

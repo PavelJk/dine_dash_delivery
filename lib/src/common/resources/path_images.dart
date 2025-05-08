@@ -34,4 +34,8 @@ class PathImages {
   static const String hypi = "assets/icons/hypi.svg";
   static const String email = "assets/icons/email.svg";
   static const String phone = "assets/icons/phone.svg";
+  static const String editAddress = "assets/icons/editicon.svg";
+  static const String deletedAddress = "assets/icons/deleteicon.svg";
+  static const String home = "assets/icons/home.svg";
+  static const String work = "assets/icons/work.svg";
 }

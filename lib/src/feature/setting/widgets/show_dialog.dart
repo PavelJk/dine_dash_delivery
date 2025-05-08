@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-void showDeleteAccountDialog(BuildContext context, String title, String content) {
+void showDeleteAccountDialog(BuildContext context, String title, String content, String textButton) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -15,8 +15,8 @@ void showDeleteAccountDialog(BuildContext context, String title, String content)
             onPressed: () {
               Navigator.pop(context);
             },
-            child: const Text(
-              'Удалить',
+            child: Text(
+              textButton,
               style: TextStyle(color: Colors.red),
             ),
           ),

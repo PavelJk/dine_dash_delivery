@@ -1,6 +1,10 @@
+import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/setting/widgets/setting_appbar.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class AddressScreen extends StatefulWidget {
   const AddressScreen({super.key});
@@ -13,11 +17,11 @@ class _AddressScreenState extends State<AddressScreen> {
   final List<Address> _addresses = [
     Address(
       title: 'ДОМ',
-      fullAddress: 'г. Йошкар-Ола, ул. Пушкина, 15, кв. 50, 2 под., 3 этаж, домофон',
+      fullAddress: 'г. Йошкар-Ола, ул. Пушкина, 15, кв. 50, 2 под., 3 этаж, домофон +',
     ),
     Address(
       title: 'РАБОТА',
-      fullAddress: 'г. Йошкар-Ола, ул. Прохоров, 30, оф., 1 под., 1 этаж, домофон',
+      fullAddress: 'г. Йошкар-Ола, ул. Прохоров, 30, оф., 1 под., 1 этаж, домофон -',
     ),
   ];
   @override
@@ -36,7 +40,9 @@ class _AddressScreenState extends State<AddressScreen> {
           Padding(
             padding: const EdgeInsets.all(24),
             child: MyCustomMainButton(
-              onPressed: _addNewAddress,
+              onPressed: () {
+                context.goNamed(AppRoute.map.name);
+              },
               text: 'ДОБАВИТЬ АДРЕС',
             ),
           ),
@@ -45,50 +51,65 @@ class _AddressScreenState extends State<AddressScreen> {
     );
   }
   Widget _buildAddressCard(Address address) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              address.title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(address.fullAddress),
-            const SizedBox(height: 12),
-            Row(
-              children: [
-                TextButton(
-                  onPressed: () => _editAddress(address),
-                  child: const Text('Редактировать'),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Color(0xffF0F5FA),
+          borderRadius: BorderRadius.circular(20)
+        ),
+        child: ListTile(
+          contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          leading: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.inversePrimary,
+                  borderRadius: BorderRadius.circular(24),
                 ),
-                const SizedBox(width: 16),
-                TextButton(
-                  onPressed: () => _deleteAddress(address),
-                  child: const Text(
-                    'Удалить',
-                    style: TextStyle(color: Colors.red),
+                child: SvgPicture.asset(
+                  address.title == 'ДОМ' ? PathImages.home : PathImages.work,
+                  width: 10,
+                  height: 10,
+                  fit: BoxFit.scaleDown,
+                ),
+              ),
+            ],
+          ),
+          title: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    address.title,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  GestureDetector(
+                   onTap: () => _deleteAddress(address),
+                   child: SvgPicture.asset(
+                       PathImages.deletedAddress,
+                   ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8),
+               Text(
+                  address.fullAddress,
+                  style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    color: Color(0xff32343E).withValues(alpha: 0.5)
                   ),
                 ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
-  void _addNewAddress() {
-    _showAddressEditDialog(null);
-  }
-  void _editAddress(Address address) {
-    _showAddressEditDialog(address);
-  }
+
   void _deleteAddress(Address address) {
     showDialog(
       context: context,
@@ -106,74 +127,11 @@ class _AddressScreenState extends State<AddressScreen> {
                 _addresses.remove(address);
               });
               Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Адрес удален')),
-              );
             },
             child: const Text(
               'Удалить',
               style: TextStyle(color: Colors.red),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-  void _showAddressEditDialog(Address? address) {
-    final titleController = TextEditingController(text: address?.title ?? '');
-    final addressController = TextEditingController(text: address?.fullAddress ?? '');
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(address == null ? 'Новый адрес' : 'Редактировать адрес'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: const InputDecoration(
-                labelText: 'Название (Дом, Работа и т.д.)',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 16),
-            TextField(
-              controller: addressController,
-              decoration: const InputDecoration(
-                labelText: 'Полный адрес',
-                border: OutlineInputBorder(),
-              ),
-              maxLines: 3,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Отмена'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              final newAddress = Address(
-                title: titleController.text,
-                fullAddress: addressController.text,
-              );
-
-              setState(() {
-                if (address == null) {
-                  _addresses.add(newAddress);
-                } else {
-                  final index = _addresses.indexOf(address);
-                  _addresses[index] = newAddress;
-                }
-              });
-
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Адрес "${newAddress.title}" сохранен')),
-              );
-            },
-            child: const Text('Сохранить'),
           ),
         ],
       ),

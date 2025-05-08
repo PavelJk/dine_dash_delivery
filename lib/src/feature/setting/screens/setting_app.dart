@@ -80,6 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       context,
                       'Удалить аккаунт?',
                       'Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить.',
+                      'Удалить',
                     );
                   },
                 ),
