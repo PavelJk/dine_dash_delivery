@@ -1,3 +1,5 @@
+import 'package:dine_dash_delivery/src/feature/setting/widgets/setting_appbar.dart';
+import 'package:dine_dash_delivery/src/feature/setting/widgets/show_dialog.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -14,73 +16,81 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Настройки'),
+      appBar: SettingsAppBar(
+        text: 'Настройки',
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          _buildSettingsSection(
-            title: 'Уведомления',
-            children: [
-              SwitchListTile(
-                title: const Text('Получать уведомления'),
-                value: _notificationsEnabled,
-                onChanged: (value) {
-                  setState(() {
-                    _notificationsEnabled = value;
-                  });
-                },
-              ),
-            ],
-          ),
-          
-          const SizedBox(height: 24),
-          _buildSettingsSection(
-            title: 'Тема',
-            children: [
-              RadioListTile<bool>(
-                title: const Text('Светлая тема'),
-                value: false,
-                groupValue: _darkThemeEnabled,
-                onChanged: (value) {
-                  setState(() {
-                    _darkThemeEnabled = false;
-                  });
-                },
-              ),
-              RadioListTile<bool>(
-                title: const Text('Тёмная тема'),
-                value: true,
-                groupValue: _darkThemeEnabled,
-                onChanged: (value) {
-                  setState(() {
-                    _darkThemeEnabled = true;
-                  });
-                },
-              ),
-            ],
-          ),
-          
-          const SizedBox(height: 24),
-          _buildSettingsSection(
-            title: 'Аккаунт',
-            children: [
-              ListTile(
-                title: const Text(
-                  'Удалить аккаунт',
-                  style: TextStyle(color: Colors.red),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+        child: Column(
+          children: [
+            _buildSettingsSection(
+              title: 'Уведомления',
+              children: [
+                SwitchListTile(
+                  activeTrackColor: Theme.of(context).colorScheme.tertiary,
+                  activeColor: Colors.black,
+                  contentPadding: EdgeInsets.only(right: 6, left: 15),
+                  title: const Text('Получать уведомления'),
+                  value: _notificationsEnabled,
+                  onChanged: (value) {
+                    setState(() {
+                      _notificationsEnabled = value;
+                    });
+                  },
                 ),
-                onTap: () {
-                  _showDeleteAccountDialog(context);
-                },
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+            const SizedBox(height: 24),
+            _buildSettingsSection(
+              title: 'Тема',
+              children: [
+                RadioListTile<bool>(
+                  title: const Text('Светлая тема'),
+                  value: false,
+                  groupValue: _darkThemeEnabled,
+                  onChanged: (value) {
+                    setState(() {
+                      _darkThemeEnabled = false;
+                    });
+                  },
+                ),
+                RadioListTile<bool>(
+                  title: const Text('Тёмная тема'),
+                  value: true,
+                  groupValue: _darkThemeEnabled,
+                  onChanged: (value) {
+                    setState(() {
+                      _darkThemeEnabled = true;
+                    });
+                  },
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            _buildSettingsSection(
+              title: 'Аккаунт',
+              children: [
+                ListTile(
+                  title: const Text(
+                    'Удалить аккаунт',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  onTap: () {
+                    showDeleteAccountDialog(
+                      context,
+                      'Удалить аккаунт?',
+                      'Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить.',
+                    );
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
+  
   Widget _buildSettingsSection({
     required String title,
     required List<Widget> children,
@@ -105,28 +115,5 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ],
     );
   }
-  void _showDeleteAccountDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Удалить аккаунт?'),
-        content: const Text('Вы уверены, что хотите удалить аккаунт? Это действие нельзя отменить.'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Отмена'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text(
-              'Удалить',
-              style: TextStyle(color: Colors.red),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+
 }

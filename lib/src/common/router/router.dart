@@ -4,6 +4,10 @@ import 'package:dine_dash_delivery/src/feature/home/screens/main_home.dart';
 import 'package:dine_dash_delivery/src/feature/home/screens/restaurant_home.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/location_access.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/map.dart';
+import 'package:dine_dash_delivery/src/feature/setting/screens/info_address.dart';
+import 'package:dine_dash_delivery/src/feature/setting/screens/profile.dart';
+import 'package:dine_dash_delivery/src/feature/setting/screens/setting_app.dart';
+import 'package:dine_dash_delivery/src/feature/transactions/screens/add_card.dart';
 import 'package:go_router/go_router.dart';
 
 enum AppRoute{
@@ -14,6 +18,9 @@ enum AppRoute{
   map,
   mainHome,
   restaurantHome,
+  profile,
+  setting,
+  infoAddress,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -54,7 +61,22 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.restaurantHome.name,
           path: 'restaurantHome',
           builder: (context, state) => RestaurantHomeScreen(),
-        )
+        ),
+        GoRoute(
+          name: AppRoute.profile.name,
+          path: 'profile',
+          builder: (context, state) => ProfileScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.setting.name,
+          path: 'setting',
+          builder: (context, state) => SettingsScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.infoAddress.name,
+          path: 'infoAddress',
+          builder: (context, state) => AddressScreen(),
+        ),
       ]
     )
   ]

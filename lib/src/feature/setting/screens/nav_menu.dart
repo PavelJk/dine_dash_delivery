@@ -1,6 +1,9 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
+import 'package:dine_dash_delivery/src/feature/setting/widgets/show_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -56,13 +59,17 @@ class AppDrawer extends StatelessWidget {
                           context: context,
                           icon: PathImages.iconProfile,
                           title: "Информация",
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(AppRoute.profile.name,);
+                          },
                         ),
                         _buildListTile(
                           context: context,
                           icon: PathImages.iconAddress,
                           title: "Адрес",
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(AppRoute.infoAddress.name,);
+                          },
                         ),
                       ],
                     ),
@@ -136,7 +143,9 @@ class AppDrawer extends StatelessWidget {
                           context: context,
                           icon: PathImages.setting,
                           title: "Настройки",
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(AppRoute.setting.name,);
+                          },
                         ),
                       ],
                     ),
@@ -154,7 +163,13 @@ class AppDrawer extends StatelessWidget {
                           context: context,
                           icon: PathImages.logout,
                           title: "Выйти из аккаунта",
-                          onTap: () {},
+                          onTap: () {
+                            showDeleteAccountDialog(
+                              context,
+                              'Выйти из аккаунта?',
+                              'Вы точно хотите выйти из аккаунта? После выхода понадобится повторный вход.'
+                            );
+                          },
                         ),
                       ],
                     ),

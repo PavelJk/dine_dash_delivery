@@ -31,4 +31,7 @@ class PathImages {
   static const String setting = "assets/icons/settings.svg";
   static const String myvid = "assets/icons/myvideonac.svg";
   static const String basket = "assets/icons/basket.svg";
+  static const String hypi = "assets/icons/hypi.svg";
+  static const String email = "assets/icons/email.svg";
+  static const String phone = "assets/icons/phone.svg";
 }

@@ -1,3 +1,5 @@
+import 'package:dine_dash_delivery/src/feature/setting/widgets/setting_appbar.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 
 class AddressScreen extends StatefulWidget {
@@ -21,9 +23,7 @@ class _AddressScreenState extends State<AddressScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Мой адрес'),
-      ),
+      appBar: SettingsAppBar(text: 'Мой адрес'),
       body: Column(
         children: [
           Expanded(
@@ -34,16 +34,10 @@ class _AddressScreenState extends State<AddressScreen> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                onPressed: _addNewAddress,
-                child: const Text('ДОБАВИТЬ АДРЕС'),
-              ),
+            padding: const EdgeInsets.all(24),
+            child: MyCustomMainButton(
+              onPressed: _addNewAddress,
+              text: 'ДОБАВИТЬ АДРЕС',
             ),
           ),
         ],
