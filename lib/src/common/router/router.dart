@@ -1,13 +1,16 @@
 import 'package:dine_dash_delivery/src/feature/auth/screens/info_about_me.dart';
 import 'package:dine_dash_delivery/src/feature/auth/screens/otp_code.dart';
+import 'package:dine_dash_delivery/src/feature/history/screen/add_review.dart';
+import 'package:dine_dash_delivery/src/feature/history/screen/review.dart';
 import 'package:dine_dash_delivery/src/feature/home/screens/main_home.dart';
 import 'package:dine_dash_delivery/src/feature/home/screens/restaurant_home.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/location_access.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/map.dart';
+import 'package:dine_dash_delivery/src/feature/questions/questions.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/info_address.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/profile.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/setting_app.dart';
-import 'package:dine_dash_delivery/src/feature/transactions/screens/add_card.dart';
+import 'package:dine_dash_delivery/src/feature/transactions/screens/payment_method_empty.dart';
 import 'package:go_router/go_router.dart';
 
 enum AppRoute{
@@ -21,6 +24,10 @@ enum AppRoute{
   profile,
   setting,
   infoAddress,
+  review,
+  questions,
+  addReviewScreen,
+  paymentMethodEmpty,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -76,6 +83,29 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.infoAddress.name,
           path: 'infoAddress',
           builder: (context, state) => AddressScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.review.name,
+          path: 'review',
+          builder: (context, state) => ReviewsScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.questions.name,
+          path: 'questions',
+          builder: (context, state) => QuestionsScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.addReviewScreen.name,
+          path: 'addReviewScreen/:productName/:productImage',
+          builder: (context, state) => AddReviewScreen(
+            productName: state.pathParameters["productName"]!,
+            productImage: state.pathParameters["productImage"]!,
+          ),
+        ),
+        GoRoute(
+          name: AppRoute.paymentMethodEmpty.name,
+          path: 'paymentMethodEmpty',
+          builder: (context, state) => PaymentMethodEmpty(),
         ),
       ]
     )

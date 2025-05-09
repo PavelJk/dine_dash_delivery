@@ -38,4 +38,5 @@ class PathImages {
   static const String deletedAddress = "assets/icons/deleteicon.svg";
   static const String home = "assets/icons/home.svg";
   static const String work = "assets/icons/work.svg";
+  static const String cardTrans = "assets/images/card_trans.png";
 }

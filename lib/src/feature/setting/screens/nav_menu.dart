@@ -113,6 +113,7 @@ class AppDrawer extends StatelessWidget {
                           icon: PathImages.qalet,
                           title: "Способ оплаты",
                           onTap: () {
+                            context.goNamed(AppRoute.paymentMethodEmpty.name,);
                           },
                         ),
                       ],
@@ -131,13 +132,17 @@ class AppDrawer extends StatelessWidget {
                           context: context,
                           icon: PathImages.vopr,
                           title: "Частые вопросы",
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(AppRoute.questions.name,);
+                          },
                         ),
                         _buildListTile(
                           context: context,
                           icon: PathImages.myReview,
                           title: "Мои отзывы",
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(AppRoute.review.name,);
+                          },
                         ),
                         _buildListTile(
                           context: context,

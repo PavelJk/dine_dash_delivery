@@ -1,4 +1,8 @@
+import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
+import 'package:dine_dash_delivery/src/feature/history/widgets/history_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class ReviewsScreen extends StatefulWidget {
   const ReviewsScreen({super.key});
@@ -25,16 +29,13 @@ class _ReviewsScreenState extends State<ReviewsScreen> with SingleTickerProvider
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Мои отзывы'),
-        bottom: TabBar(
-          controller: _tabController,
-          tabs: const [
-            Tab(text: 'Ждут отзыва'),
-            Tab(text: 'Мои отзывы'),
-          ],
-        ),
+      appBar: HistoryAppBar(
+        title: 'Мои отзывы', 
+        textTabBarOne: 'Ждут отзыва', 
+        textTabBarTwo: 'Мои отзывы',
+        controller: _tabController,
       ),
+
       body: TabBarView(
         controller: _tabController,
         children: [
@@ -47,127 +48,170 @@ class _ReviewsScreenState extends State<ReviewsScreen> with SingleTickerProvider
 
   Widget _buildPendingReviews() {
     final items = [
-      'Вегетарианский буррито',
-      'Полоски бекона из индейки',
-      'Суп "Борщ"',
-      'Пицца "Буффало"',
+      'Кофе Вилль',
     ];
-
+    final items2 = [
+      'https://avatars.mds.yandex.net/i?id=a473c0ccfdf43ebf31334b39d4bde8ffa1daac47-5314093-images-thumbs&n=13',
+      
+    ];
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(22),
       itemCount: items.length,
-      itemBuilder: (context, index) => _buildReviewItem(items[index], true),
+      itemBuilder: (context, index) => _buildReviewItem(items[index], items2[index], null, null, null, null, true),
     );
   }
 
   Widget _buildMyReviews() {
     final items = [
-      'Вегетарианский буррито',
-      'Полоски бекона из индейки',
-      'Суп "Борщ"',
-      'Пицца "Буффало"',
+      'Вкусно-И Точка',
+      'Пиццерия Милано',
     ];
-
+    final items2 = [
+      'https://avatars.mds.yandex.net/i?id=9d409d39e7998ae6482cbd4a0ea45a9fe49d78ac-6221753-images-thumbs&n=13',
+      'https://avatars.mds.yandex.net/i?id=1cd619b20cfedad63c2c431bf8d2dcaa967b3e9c-10636727-images-thumbs&n=13',
+    ];
+    final items3 = [
+      '25.01.25',
+      '12.04.25',
+    ];
+    final items4 = [
+      'Здорово и вкусно',
+      'Отличная еда и обслуживание',
+    ];
+    final items5 = [
+      'Не могу сказать, что остался в восторге. Заказывал салаты и десерт, но один из салатов пришел не тем, что я заказывал. Однако служба поддержки быстро всё исправила и предложила скидку на следующий заказ.',
+      'Заказал пиццу и суши через доставку, и остался очень доволен! Пицца была горячей и вкусной, а суши свежими. Доставили быстро, всего за 25 минут. Обязательно закажу еще!',
+    ];
+    final items6 = [4,5];
     return ListView.builder(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(22),
       itemCount: items.length,
-      itemBuilder: (context, index) => _buildReviewItem(items[index], false),
+      itemBuilder: (context, index) => _buildReviewItem(items[index], items2[index], items3[index], items4[index], items5[index], items6[index], false),
     );
   }
 
-  Widget _buildReviewItem(String title, bool isPending) {
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 8),
-            if (isPending)
-              ElevatedButton(
-                onPressed: () {
-                  _showReviewDialog(context, title);
-                },
-                child: const Text('Оставить отзыв'),
-              )
-            else
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+  Widget _buildReviewItem(String title, String image, String? data, String? header, String? body, int? rating, bool isPending) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: isPending ? GestureDetector(
+        onTap: () {
+          context.goNamed(
+            AppRoute.addReviewScreen.name,
+            pathParameters:{
+              "productName" : title,
+              "productImage" : image,
+            },
+          );
+        },
+        child: Card(
+          color: Color(0xffF6F6F6),
+          elevation: 0,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
                   Row(
                     children: [
-                      Icon(Icons.star, color: Colors.amber, size: 16),
-                      Icon(Icons.star, color: Colors.amber, size: 16),
-                      Icon(Icons.star, color: Colors.amber, size: 16),
-                      Icon(Icons.star, color: Colors.amber, size: 16),
-                      Icon(Icons.star_outline, color: Colors.amber, size: 16),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          image,
+                          width: 70,
+                          height: 70,
+                        ),
+                      ),
+                      SizedBox(width: 15,),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          SizedBox(height: 15),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: List.generate(5, (index) {
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 1), 
+                                child: Icon(
+                                  Icons.star,
+                                  color: Color(0xffC7C7C7),
+                                  size: 31,
+                                ),
+                              );
+                            }),
+                          ),
+                        ],
+                      )
                     ],
+                  )
+                  ], 
+                  )))):
+                  Card(
+                    color: Color(0xffF6F6F6),
+                    elevation: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data!,
+                            style: TextStyle(fontSize: 12, color: Color(0xff9C9BA6), fontWeight: FontWeight.w400),
+                          ),
+                          SizedBox(height: 15),
+                          Container(
+                            padding: EdgeInsets.only(left: 5),
+                            height: 55,
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(15),
+                              border: Border.all(color: Color(0xff9C9BA6))
+                            ),
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    image,
+                                    width: 42,
+                                    height: 42,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  title,
+                                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                            header!,
+                            style: Theme.of(context).textTheme.labelMedium,
+                          ),
+                          SizedBox(height: 7),
+                          Row(
+                            children: [
+                              for (int i = 0; i < rating!; i++)
+                              Icon(Icons.star, color: Colors.amber, size: 16),
+                              for (int i = 0; i < 5-rating; i++)
+                              Icon(Icons.star_outline, color: Colors.amber, size: 16),
+                            ],
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            body!,
+                            style: TextStyle(fontSize: 12, color: Color(0xff747783), fontWeight: FontWeight.w400),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Хорошее качество, быстрая доставка. Буду заказывать еще!',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                ],
-              ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void _showReviewDialog(BuildContext context, String title) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('Оцените $title'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Ваша оценка:'),
-            const SizedBox(height: 8),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [1, 2, 3, 4, 5].map((star) => IconButton(
-                icon: Icon(
-                  star <= 3 ? Icons.star : Icons.star_outline,
-                  color: Colors.amber,
-                ),
-                onPressed: () {
-                },
-              )).toList(),
-            ),
-            const SizedBox(height: 16),
-            const TextField(
-              decoration: InputDecoration(
-                hintText: 'Ваш отзыв (необязательно)',
-                border: OutlineInputBorder(),
-              ),
-              maxLines: 3,
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Отмена'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: const Text('Отправить'),
-          ),
-        ],
-      ),
-    );
+            );
   }
 }
