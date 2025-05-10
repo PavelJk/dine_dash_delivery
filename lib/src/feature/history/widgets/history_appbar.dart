@@ -26,6 +26,7 @@ class HistoryAppBar extends StatelessWidget implements PreferredSizeWidget{
           ),
         ),
         bottom: TabBar(
+          splashFactory: NoSplash.splashFactory,
           dividerColor: Color(0xffCED7DF),
           unselectedLabelColor: Color(0xffA5A7B9),
           controller: controller,

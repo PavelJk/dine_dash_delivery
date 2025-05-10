@@ -100,13 +100,17 @@ class AppDrawer extends StatelessWidget {
                           context: context,
                           icon: PathImages.myOrder,
                           title: "Мои заказы",
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(AppRoute.myOrder.name,);
+                          },
                         ),
                         _buildListTile(
                           context: context,
                           icon: PathImages.myvid,
                           title: "Видео рецепты",
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(AppRoute.video.name,);
+                          },
                         ),
                         _buildListTile(
                           context: context,

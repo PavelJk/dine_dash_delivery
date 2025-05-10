@@ -1,6 +1,7 @@
 import 'package:dine_dash_delivery/src/feature/auth/screens/info_about_me.dart';
 import 'package:dine_dash_delivery/src/feature/auth/screens/otp_code.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/add_review.dart';
+import 'package:dine_dash_delivery/src/feature/history/screen/order.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/review.dart';
 import 'package:dine_dash_delivery/src/feature/home/screens/main_home.dart';
 import 'package:dine_dash_delivery/src/feature/home/screens/restaurant_home.dart';
@@ -11,6 +12,7 @@ import 'package:dine_dash_delivery/src/feature/setting/screens/info_address.dart
 import 'package:dine_dash_delivery/src/feature/setting/screens/profile.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/setting_app.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/payment_method_empty.dart';
+import 'package:dine_dash_delivery/src/feature/video/screen/video.dart';
 import 'package:go_router/go_router.dart';
 
 enum AppRoute{
@@ -28,6 +30,8 @@ enum AppRoute{
   questions,
   addReviewScreen,
   paymentMethodEmpty,
+  myOrder,
+  video,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -106,6 +110,16 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.paymentMethodEmpty.name,
           path: 'paymentMethodEmpty',
           builder: (context, state) => PaymentMethodEmpty(),
+        ),
+        GoRoute(
+          name: AppRoute.myOrder.name,
+          path: 'myOrder',
+          builder: (context, state) => MyOrdersScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.video.name,
+          path: 'video',
+          builder: (context, state) => VideoRecipesScreen(),
         ),
       ]
     )
