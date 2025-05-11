@@ -63,7 +63,7 @@ class FavoritesScreen extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
+        /*ClipRRect(
           borderRadius: BorderRadius.circular(12),
           child: Image.asset(
             item['image'],
@@ -71,7 +71,7 @@ class FavoritesScreen extends StatelessWidget {
             height: 80,
             fit: BoxFit.cover,
           ),
-        ),
+        ),*/
         SizedBox(width: 16),
         Expanded(
           child: Column(

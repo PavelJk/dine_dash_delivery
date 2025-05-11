@@ -1,6 +1,8 @@
+import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/home/widgets/nav_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import '../../../common/resources/path_images.dart';
 
 class MyFirstHomeSliverAppbar extends StatelessWidget {
@@ -114,7 +116,9 @@ class MySecondNavHomeSliverAppBar extends StatelessWidget {
                 width: 18,
               ),
               MyNavHomeButton(
-                onTap: () {},
+                onTap: () {
+                  context.goNamed(AppRoute.video.name,);
+                },
                 text: 'Рецепты',
                 iconName: PathImages.video,
               )

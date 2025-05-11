@@ -94,6 +94,7 @@ class AppDrawer extends StatelessWidget {
                           icon: PathImages.favorite,
                           title: "Избранное",
                           onTap: () {
+                            context.goNamed(AppRoute.favorite.name,);
                           },
                         ),
                         _buildListTile(
