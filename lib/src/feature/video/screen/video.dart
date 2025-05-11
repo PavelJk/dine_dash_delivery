@@ -29,7 +29,7 @@ class _VideoRecipesScreen extends State<VideoRecipesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leadingWidth: 75,
+        leadingWidth: 70,
         scrolledUnderElevation: 0,
         toolbarHeight: 75,
         actionsPadding: EdgeInsets.only(right: 24),
