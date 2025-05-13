@@ -118,7 +118,13 @@ class AppDrawer extends StatelessWidget {
                           icon: PathImages.qalet,
                           title: "Способ оплаты",
                           onTap: () {
-                            context.goNamed(AppRoute.paymentMethodEmpty.name,);
+                            context.goNamed(
+                              AppRoute.paymentMethodEmpty.name,
+                              pathParameters:{
+                                "isCard" : 'false',
+                                "cardNumber" : 'tet',
+                              },
+                            );
                           },
                         ),
                       ],

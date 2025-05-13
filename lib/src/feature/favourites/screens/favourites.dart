@@ -3,38 +3,47 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 
-class FavoritesScreen extends StatelessWidget {
-  final List<Map<String, dynamic>> favoriteItems = [
-    {
-      'title': 'Пицца По-Европейски',
-      'restaurant': 'Пиццерия Милано',
-      'price': 820,
-      'image': 'assets/pizza_european.jpg',
-    },
-    {
-      'title': 'Суп Борщ',
-      'restaurant': 'White Rabbit',
-      'price': 600,
-      'image': 'assets/borscht.jpg',
-    },
-    {
-      'title': 'Грибной Суп',
-      'restaurant': 'White Rabbit',
-      'price': 700,
-      'image': 'assets/mushroom_soup.jpg',
-    },
-    {
-      'title': 'Бургер Бивстро',
-      'restaurant': 'Розовый Сад',
-      'price': 340,
-      'image': 'assets/burger.jpg',
-    },
-    {
-      'title': 'Пицца Милано',
-      'restaurant': 'Пиццерия Милано',
-      'price': 580,
-      'image': 'assets/pizza_milano.jpg',
-    },
+class FavoritesScreen extends StatefulWidget {
+
+  const FavoritesScreen({super.key});
+
+  @override
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
+}
+
+class _FavoritesScreenState extends State<FavoritesScreen> {
+
+  final List<CardFavorites> product = [
+      CardFavorites(
+        title: 'Пицца По-Европейски',
+        restaurant : 'Пиццерия Милано',
+        image: 'https://avatars.mds.yandex.net/i?id=4a9bfb26ce9f230a45e26f9eb907349c762da253-10245136-images-thumbs&n=13',
+        price: '820',
+      ),
+      CardFavorites(
+        title: 'Суп Борщ',
+        restaurant : 'Белый кролик',
+        image: 'https://avatars.mds.yandex.net/i?id=ac8c02735e1c10d74522139cc55662cabcabd946-12475985-images-thumbs&n=13',
+        price: '600',
+      ),
+      CardFavorites(
+        title: 'Грибной Суп',
+        restaurant : 'Белый кролик',
+        image: 'https://avatars.mds.yandex.net/i?id=49b2b23d580e0fea869da9935b5102b72b5f6a15-5537820-images-thumbs&n=13',
+        price: '700',
+      ),
+      CardFavorites(
+        title: 'Бургер Бивстро',
+        restaurant : 'Розовый Сад',
+        image: 'https://avatars.mds.yandex.net/i?id=1f0b4cccccc1bb64d7d671cf7da3d3768d0b2278-5233733-images-thumbs&n=13',
+        price: '340',
+      ),
+      CardFavorites(
+        title: 'Пицца Милано',
+        restaurant : 'Пиццерия Милано',
+        image: 'https://avatars.mds.yandex.net/i?id=f55eef80038229120c0d0184daf3dce210373db7f73754fc-10256883-images-thumbs&n=13',
+        price: '580',
+      ),
   ];
 
   @override
@@ -74,29 +83,27 @@ class FavoritesScreen extends StatelessWidget {
         ),
       ),
       body: GridView.builder(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Количество элементов в ряду
           crossAxisSpacing: 10, // Горизонтальный отступ между элементами
-          mainAxisSpacing: 10, // Вертикальный отступ между элементами
           childAspectRatio: 0.8, // Соотношение ширины к высоте элемента
         ),
-        itemCount: favoriteItems.length,
+        itemCount: product.length,
         itemBuilder: (context, index) {
-          final item = favoriteItems[index];
+          final item = product[index];
           return _buildFavoriteItem(item);
         },
       ),
     );
   }
-  }
 
-  Widget _buildFavoriteItem(Map<String, dynamic> item) {
+  Widget _buildFavoriteItem(CardFavorites item) {
   return Stack(
     children: [
       // Трансформированный контейнер (без изображения)
       Padding(
-        padding: const EdgeInsets.only(right: 0, left: 0, top: 40, bottom: 20),
+        padding: const EdgeInsets.only(top: 45),
         child: Transform(
           transform: Matrix4.identity()
             ..setEntry(3, 2, 0.001)
@@ -104,7 +111,7 @@ class FavoritesScreen extends StatelessWidget {
           alignment: Alignment.center,
           child: Container(
             width: 153,
-            height: 130,
+            height: 140,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(24),
@@ -116,33 +123,95 @@ class FavoritesScreen extends StatelessWidget {
                 ),
               ],
             ),
+            child: Transform(
+              transform: Matrix4.identity()
+              ..setEntry(3, 2, 0.001)
+              ..rotateX(0.20),
+              alignment: Alignment.center,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 53, right: 11, left: 11),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
+                    ),
+                    Text(
+                      item.restaurant,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        color: Color(0xff646982)
+                      ),
+                    ),
+                    SizedBox(height: 5,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${item.price} р',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            
+                          },
+                          child: CircleAvatar(
+                            radius: 17,
+                            backgroundColor: Theme.of(context).colorScheme.tertiary,
+                            child: Icon(
+                              Icons.add,
+                              size: 22,
+                              color: Colors.black,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
       ),
       // Изображение поверх контейнера (не подвержено трансформации)
       
-      Positioned(
-        left: (153 - 122) / 2, 
+      Padding(
+        padding: const EdgeInsets.only(top: 12, left: 15),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: Image.network(
-            'https://avatars.mds.yandex.net/i?id=4a9bfb26ce9f230a45e26f9eb907349c762da253-10245136-images-thumbs&n=13',
+            item.image,
             width: 122,
             height: 84,
+            fit: BoxFit.fill,
           ),
         ),
       ),
       Positioned(
-        left: 125,
-        child: CircleAvatar(
-          radius: 15,
-          backgroundColor: Colors.black,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 1, top: 1),
-            child: Icon(
-              Icons.favorite,
-              size: 18,
-              color: Colors.red,
+        left: 122,
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              product.remove(item);
+            });
+          },
+          child: CircleAvatar(
+            radius: 17,
+            backgroundColor: Colors.black,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 1, top: 1),
+              child: Icon(
+                Icons.favorite,
+                size: 18,
+                color: Colors.red,
+              ),
             ),
           ),
         )
@@ -150,4 +219,19 @@ class FavoritesScreen extends StatelessWidget {
     ],
   );
 }
+}
 
+
+class CardFavorites {
+  final String title;
+  final String restaurant;
+  final String price;
+  final String image;
+
+  CardFavorites({
+    required this.title,
+    required this.price,
+    required this.image,
+     required this.restaurant,
+  });
+}

@@ -12,6 +12,7 @@ import 'package:dine_dash_delivery/src/feature/questions/questions.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/info_address.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/profile.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/setting_app.dart';
+import 'package:dine_dash_delivery/src/feature/transactions/screens/add_card.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/payment_method_empty.dart';
 import 'package:dine_dash_delivery/src/feature/video/screen/video.dart';
 import 'package:go_router/go_router.dart';
@@ -34,6 +35,7 @@ enum AppRoute{
   myOrder,
   video,
   favorite,
+  addCardPayment,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -110,8 +112,11 @@ final GoRouter goRouter = GoRouter(
         ),
         GoRoute(
           name: AppRoute.paymentMethodEmpty.name,
-          path: 'paymentMethodEmpty',
-          builder: (context, state) => PaymentMethodEmpty(),
+          path: 'paymentMethodEmpty/:isCard/:cardNumber',
+          builder: (context, state) => PaymentMethodEmpty(
+            isCard: state.pathParameters["isCard"]!,
+            cardNumber: state.pathParameters["cardNumber"]!,
+          ),
         ),
         GoRoute(
           name: AppRoute.myOrder.name,
@@ -127,6 +132,11 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.favorite.name,
           path: 'favorite',
           builder: (context, state) => FavoritesScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.addCardPayment.name,
+          path: 'addCardPayment',
+          builder: (context, state) => AddCardScreen(),
         ),
       ]
     )

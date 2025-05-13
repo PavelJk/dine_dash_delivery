@@ -1,9 +1,17 @@
+import 'package:dine_dash_delivery/src/common/router/router.dart';
+import 'package:dine_dash_delivery/src/feature/transactions/widgets/text_field.dart';
+import 'package:dine_dash_delivery/src/feature/transactions/widgets/transac_app_bar.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AddCardScreen extends StatefulWidget {
+  const AddCardScreen({super.key});
+
   @override
-  _AddCardScreenState createState() => _AddCardScreenState();
+  State<AddCardScreen> createState() => _AddCardScreenState();
 }
 
 class _AddCardScreenState extends State<AddCardScreen> {
@@ -11,7 +19,16 @@ class _AddCardScreenState extends State<AddCardScreen> {
   final _cardNumberController = TextEditingController();
   final _expiryDateController = TextEditingController();
   final _cvvController = TextEditingController();
-
+  final MaskTextInputFormatter _maskFormatterNumberCard = MaskTextInputFormatter(
+    mask: '#### #### #### ####', 
+    filter: { "#": RegExp(r'[0-9]') },
+    type: MaskAutoCompletionType.lazy
+  );
+  final MaskTextInputFormatter _maskExpiryFormatter = MaskTextInputFormatter(
+    mask: '##/##', 
+    filter: { "#": RegExp(r'[0-9]') },
+    type: MaskAutoCompletionType.lazy
+  );
   @override
   void dispose() {
     _cardNumberController.dispose();
@@ -23,36 +40,24 @@ class _AddCardScreenState extends State<AddCardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Добавление карты'),
-        centerTitle: true,
+      appBar: TransactionsAppBar(
+        text: 'Добавление карты',
       ),
+
       body: Padding(
-        padding: EdgeInsets.all(20),
+        padding: EdgeInsets.all(24),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 20),
-              Text(
-                'Номер карты',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              SizedBox(height: 8),
-              TextFormField(
+              MyCustomTransactionTextField(
+                text: 'Номер карты',
                 controller: _cardNumberController,
-                keyboardType: TextInputType.number,
                 inputFormatters: [
-                  FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(16),
-                  CardNumberFormatter(),
+                  _maskFormatterNumberCard,
                 ],
-                decoration: InputDecoration(
-                  hintText: '2134',
-                  border: OutlineInputBorder(),
-                  suffixIcon: Icon(Icons.credit_card),
-                ),
+                hintText: '2134   _ _ _ _   _ _ _ _',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Пожалуйста, введите номер карты';
@@ -63,97 +68,58 @@ class _AddCardScreenState extends State<AddCardScreen> {
                   return null;
                 },
               ),
+
               SizedBox(height: 24),
               Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Действует до',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        TextFormField(
-                          controller: _expiryDateController,
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            LengthLimitingTextInputFormatter(4),
-                            CardExpiryFormatter(),
-                          ],
-                          decoration: InputDecoration(
-                            hintText: 'ММ/ГГ',
-                            border: OutlineInputBorder(),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Введите срок';
-                            }
-                            if (value.length != 5) {
-                              return 'Неверный формат';
-                            }
-                            return null;
-                          },
-                        ),
+                    child: MyCustomTransactionTextField(
+                      text: 'Действует до',
+                      controller: _expiryDateController,
+                      inputFormatters: [
+                        _maskExpiryFormatter,
                       ],
+                      hintText: 'ММ/ГГ',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Введите срок';
+                        }
+                        if (value.length != 5 || int.parse(value.substring(0, 2)) > 31) {
+                          return 'Неверный формат';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                   SizedBox(width: 16),
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'CVC/CVV',
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 8),
-                        TextFormField(
-                          controller: _cvvController,
-                          keyboardType: TextInputType.number,
-                          obscureText: true,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.digitsOnly,
-                            LengthLimitingTextInputFormatter(3),
-                          ],
-                          decoration: InputDecoration(
-                            hintText: '***',
-                            border: OutlineInputBorder(),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Введите CVV';
-                            }
-                            if (value.length != 3) {
-                              return 'CVV должен содержать 3 цифры';
-                            }
-                            return null;
-                          },
-                        ),
+                    child: MyCustomTransactionTextField(
+                      controller: _cvvController,
+                      text: 'CVC/CVV',
+                      obscureText: true,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(3),
                       ],
+                      hintText: '***',
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Введите CVV';
+                        }
+                        if (value.length != 3) {
+                          return 'CVV должен содержать 3 цифры';
+                        }
+                        return null;
+                      },
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 40),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  onPressed: _submitForm,
-                  child: Text(
-                    'ДОБАВИТЬ КАРТУ',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
-                ),
+              Spacer(),
+              MyCustomMainButton(
+                onPressed: _submitForm,
+                 text: 'ДОБАВИТЬ КАРТУ'
               ),
             ],
           ),
@@ -163,58 +129,14 @@ class _AddCardScreenState extends State<AddCardScreen> {
   }
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      final cardNumber = _cardNumberController.text.replaceAll(' ', '');
-      final expiryDate = _expiryDateController.text;
-      final cvv = _cvvController.text;
-      print('Card Number: $cardNumber');
-      print('Expiry Date: $expiryDate');
-      print('CVV: $cvv');
-      Navigator.pop(context, true); 
+      final cardNumber = _cardNumberController.text;
+      context.goNamed(
+        AppRoute.paymentMethodEmpty.name,
+        pathParameters:{
+          "isCard" : 'true',
+          "cardNumber" : cardNumber,
+        },
+      );
     }
-  }
-}
-class CardNumberFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue,
-    TextEditingValue newValue,
-  ) {
-    var text = newValue.text.replaceAll(' ', '');
-    if (text.length > 16) {
-      text = text.substring(0, 16);
-    }
-    var formatted = '';
-    for (int i = 0; i < text.length; i++) {
-      if (i > 0 && i % 4 == 0) {
-        formatted += ' ';
-      }
-      formatted += text[i];
-    }
-    return newValue.copyWith(
-      text: formatted,
-      selection: TextSelection.collapsed(offset: formatted.length),
-    );
-  }
-}
-class CardExpiryFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-    TextEditingValue oldValue,
-    TextEditingValue newValue,
-  ) {
-    var text = newValue.text.replaceAll('/', '');
-    
-    if (text.length > 4) {
-      text = text.substring(0, 4);
-    }
-    
-    if (text.length >= 2) {
-      text = '${text.substring(0, 2)}/${text.substring(2)}';
-    }
-    
-    return newValue.copyWith(
-      text: text,
-      selection: TextSelection.collapsed(offset: text.length),
-    );
   }
 }
