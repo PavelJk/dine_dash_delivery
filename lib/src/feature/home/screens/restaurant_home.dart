@@ -1,3 +1,4 @@
+import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/home/data/data.dart';
 import 'package:dine_dash_delivery/src/feature/home/model/categorie_dish.dart';
 import 'package:dine_dash_delivery/src/feature/home/model/info_restaurant.dart';
@@ -6,6 +7,7 @@ import 'package:dine_dash_delivery/src/feature/home/widgets/section_header.dart'
 import 'package:dine_dash_delivery/src/feature/setting/screens/nav_menu.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 
 class RestaurantHomeScreen extends StatefulWidget {
@@ -24,10 +26,12 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
   late Widget newSlivreElement;
   late Widget newSlivreElement2;
   final GlobalKey<ScaffoldState> _openDraver = GlobalKey<ScaffoldState>();
+  int? selectedCategoryIndex;
 
   @override
   void initState() {
     super.initState();
+    selectedCategoryIndex = 0;
     restaurantFuture = getRestaurant(context);
     categorieDishFuture = getCategorieDish(context);
   }
@@ -109,6 +113,9 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
                 SliverToBoxAdapter(
                   child: MySectionHeadersHome(
                     text: 'Категории',
+                    onPressed: () {
+                      context.goNamed(AppRoute.categories.name);
+                    },
                   ),
                 ),
                 SliverToBoxAdapter(child: SizedBox(height: 5,),),
@@ -126,16 +133,24 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
                             itemCount: categorieDishs.length,
                             itemBuilder: (context, index){
                               final categorie = categorieDishs[index];
+                              final isSelected = selectedCategoryIndex == index;
                               return Padding(
                                 padding: const EdgeInsets.only(right: 13),
                                 child: GestureDetector(
                                   onTap: () {
-                                    
+                                    setState(() {
+                                      // Toggle selection - if already selected, deselect
+                                      if (selectedCategoryIndex == index) {
+                                        selectedCategoryIndex = null;
+                                      } else {
+                                        selectedCategoryIndex = index;
+                                      }
+                                    });
                                   },
                                   child: Container(
                                     width: index == 0 ? 103 : 135,
                                     decoration: BoxDecoration(
-                                      color: index == 0 ? Color(0xffFFD27C) : Colors.white,
+                                      color: isSelected ? Color(0xffFFD27C) : Colors.white,
                                       borderRadius: BorderRadius.circular(50),
                                       boxShadow: [
                                         BoxShadow(
@@ -152,14 +167,11 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
                                           CircleAvatar(
                                             radius: 22,
                                             backgroundColor: Theme.of(context).colorScheme.onSecondary,
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(30),
-                                              child: Image.network(
-                                                categorie.iconDish,
-                                                fit: BoxFit.cover,
-                                                height: 33,
-                                                
-                                              ),
+                                            child: Image.network(
+                                              categorie.iconDish,
+                                              fit: BoxFit.cover,
+                                              height: 31,
+                                              
                                             ),
                                           ),
                                           SizedBox(width: 9,),

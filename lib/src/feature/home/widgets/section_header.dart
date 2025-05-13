@@ -4,7 +4,8 @@ import 'package:flutter_svg/svg.dart';
 
 class MySectionHeadersHome extends StatelessWidget {
   final String text;
-  const MySectionHeadersHome({super.key, required this.text});
+  final void Function()? onPressed;
+  const MySectionHeadersHome({super.key, required this.text, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class MySectionHeadersHome extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: 3),
           child: TextButton.icon(
-            onPressed: () {},
+            onPressed: onPressed,
             label: Text(
               'Смотреть все',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(

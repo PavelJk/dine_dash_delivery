@@ -1,5 +1,6 @@
 import 'package:dine_dash_delivery/src/feature/auth/screens/info_about_me.dart';
 import 'package:dine_dash_delivery/src/feature/auth/screens/otp_code.dart';
+import 'package:dine_dash_delivery/src/feature/categories/screens/category.dart';
 import 'package:dine_dash_delivery/src/feature/favourites/screens/favourites.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/add_review.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/order.dart';
@@ -36,6 +37,7 @@ enum AppRoute{
   video,
   favorite,
   addCardPayment,
+  categories,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -137,6 +139,11 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.addCardPayment.name,
           path: 'addCardPayment',
           builder: (context, state) => AddCardScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.categories.name,
+          path: 'categories',
+          builder: (context, state) => CategoriesScreen(),
         ),
       ]
     )
