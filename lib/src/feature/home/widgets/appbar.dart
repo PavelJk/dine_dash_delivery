@@ -53,7 +53,9 @@ class MyFirstHomeSliverAppbar extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                context.goNamed(AppRoute.basket.name,);
+              },
               child: Stack(
                 children: [
                   SizedBox(
@@ -108,7 +110,9 @@ class MySecondNavHomeSliverAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               MyNavHomeButton(
-                onTap: () {},
+                onTap: () {
+                  context.goNamed(AppRoute.search.name);
+                },
                 text: 'Поиск',
                 iconName: PathImages.search,
               ),

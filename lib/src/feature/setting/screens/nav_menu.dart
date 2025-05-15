@@ -87,7 +87,9 @@ class AppDrawer extends StatelessWidget {
                           context: context,
                           icon: PathImages.basket,
                           title: "Корзина",
-                          onTap: () {},
+                          onTap: () {
+                            context.goNamed(AppRoute.basket.name,);
+                          },
                         ),
                         _buildListTile(
                           context: context,

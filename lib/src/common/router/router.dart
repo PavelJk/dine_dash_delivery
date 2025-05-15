@@ -1,5 +1,6 @@
 import 'package:dine_dash_delivery/src/feature/auth/screens/info_about_me.dart';
 import 'package:dine_dash_delivery/src/feature/auth/screens/otp_code.dart';
+import 'package:dine_dash_delivery/src/feature/basket/basket.dart';
 import 'package:dine_dash_delivery/src/feature/categories/screens/category.dart';
 import 'package:dine_dash_delivery/src/feature/favourites/screens/favourites.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/add_review.dart';
@@ -10,6 +11,7 @@ import 'package:dine_dash_delivery/src/feature/home/screens/restaurant_home.dart
 import 'package:dine_dash_delivery/src/feature/location/screens/location_access.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/map.dart';
 import 'package:dine_dash_delivery/src/feature/questions/questions.dart';
+import 'package:dine_dash_delivery/src/feature/search/search.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/info_address.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/profile.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/setting_app.dart';
@@ -38,6 +40,8 @@ enum AppRoute{
   favorite,
   addCardPayment,
   categories,
+  basket,
+  search,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -144,6 +148,16 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.categories.name,
           path: 'categories',
           builder: (context, state) => CategoriesScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.basket.name,
+          path: 'basket',
+          builder: (context, state) => BasketScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.search.name,
+          path: 'search',
+          builder: (context, state) => SearchScreen(),
         ),
       ]
     )

@@ -1,199 +1,362 @@
+import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
-class EditCartScreen extends StatefulWidget {
+class BasketScreen extends StatefulWidget {
+  const BasketScreen({super.key});
+
   @override
-  _EditCartScreenState createState() => _EditCartScreenState();
+  State<BasketScreen> createState() => _BasketScreenState();
 }
 
-class _EditCartScreenState extends State<EditCartScreen> {
-  final List<Map<String, dynamic>> cartItems = [
-    {
-      'name': 'Пицца По-Европейски',
-      'price': 1640,
-      'size': '14 см',
-      'quantity': 2,
-    },
-    {
-      'name': 'Пицца Милано',
-      'price': 580,
-      'size': '14 см',
-      'quantity': 1,
-    },
+class _BasketScreenState extends State<BasketScreen> {
+  bool isEditMode = false;
+  List<CartItem> cartItems = [
+    CartItem(
+      name: 'Пицца По-Европейски', 
+      price: 820, 
+      size: '14 см',
+      quantity: 2,
+      image: 'https://avatars.mds.yandex.net/i?id=36646b8fdae77aad150df7ce9ad4d711003f7024-7946262-images-thumbs&n=13',
+    ),
+    CartItem(
+      name: 'Пицца Милано', 
+      price: 580, 
+      size: '14 см',
+      quantity: 1,
+      image: 'https://avatars.mds.yandex.net/i?id=bfefd39d408a2025c979bcbdeb80ca88d2cce723-4828420-images-thumbs&n=13',
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
+    int totalPrice = cartItems.fold(0, (sum, item) => sum + (item.price * item.quantity));
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Корзина'),
-        actions: [
-          TextButton(
-            child: Text(
-              'РЕДАКТИРОВАТЬ',
-              style: TextStyle(color: Colors.white),
-            ),
-            onPressed: () {},
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.center,
+            colors: [
+              Color(0xFFFFEA9F),
+              Color.fromARGB(187, 232, 124, 0),
+            ],
+            stops: [0.0, 1.0],
           ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.all(16),
-              itemCount: cartItems.length,
-              itemBuilder: (context, index) {
-                final item = cartItems[index];
-                return _buildCartItem(item, index);
-              },
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            leadingWidth: 70,
+            scrolledUnderElevation: 0,
+            toolbarHeight: 75,
+            actionsPadding: const EdgeInsets.only(right: 24),
+            title: Text(
+              'Корзина',
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
+                  ),
             ),
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: GestureDetector(
+                onTap: () {
+                  context.pop('value');
+                },
+                child: CircleAvatar(
+                  backgroundColor: Colors.black.withAlpha(25),
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 1),
+                    child: SvgPicture.asset(
+                      PathImages.back,
+                      width: 8,
+                      colorFilter:
+                          const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    isEditMode = !isEditMode;
+                  });
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  splashFactory: NoSplash.splashFactory,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 2),
+                  child: Text(
+                    isEditMode ? 'ЗАВЕРШИТЬ' : 'РЕДАКТИРОВАТЬ',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: Color(0xffC24400),
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildCartItem(Map<String, dynamic> item, int index) {
-    return Card(
-      margin: EdgeInsets.only(bottom: 16),
-      child: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  item['name'],
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+          body: Column(
+            children: [
+              // Cart items list with flexible space
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    itemCount: cartItems.length,
+                    itemBuilder: (context, index) {
+                      final item = cartItems[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 16),
+                        child: _buildCartItem(item, isEditMode),
+                      );
+                    },
                   ),
                 ),
-                Text(
-                  '${item['price']} руб.',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+              ),
+              
+              // Bottom section with address and total
+              Container(
+                height: 310,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(20),
                 ),
-              ],
-            ),
-            SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  item['size'],
-                  style: TextStyle(color: Colors.grey),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Row(
+                child: Padding(
+                  padding: const EdgeInsets.all(24),
+                  child: Column(
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.remove, size: 20),
-                        onPressed: () {
-                          setState(() {
-                            if (item['quantity'] > 1) {
-                              item['quantity']--;
-                            } else {
-                              cartItems.removeAt(index);
-                            }
-                          });
-                        },
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'АДРЕС ДОСТАВКИ',
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                  fontSize: 14, 
+                                  color: const Color(0xffA0A5BA)),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              context.goNamed(AppRoute.map.name);
+                            },
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              splashFactory: NoSplash.splashFactory,
+                            ),
+                            child: const Text(
+                              'ИЗМЕНИТЬ',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xffC24400),
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Text('${item['quantity']}'),
-                      IconButton(
-                        icon: Icon(Icons.add, size: 20),
-                        onPressed: () {
-                          setState(() {
-                            item['quantity']++;
-                          });
-                        },
+                      Container(
+                        height: 62,
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          color: const Color(0xffF0F5FA),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'ул. Пушкина, 15, кв. 50, 2 под., 3 этаж, домофон +',
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                  fontSize: 15, 
+                                  color: const Color.fromARGB(255, 118, 123, 147)),
+                          ),
+                        ),
+                      ),
+                      const Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            'ОБЩАЯ ЦЕНА:',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xffA0A5BA),
+                            ),
+                          ),
+                          Text(
+                            '$totalPrice р.',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(fontSize: 30),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      
+                      MyCustomMainButton(
+                        onPressed: () {},
+                        text: 'ПРОДОЛЖИТЬ',
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildBottomPanel(int totalPrice) {
+  Widget _buildCartItem(CartItem item, bool showEditButtons) {
     return Container(
-      padding: EdgeInsets.all(16),
+      height: 130,
       decoration: BoxDecoration(
-        border: Border(top: BorderSide(color: Colors.grey[300]!)),
+        color: Colors.white.withValues(alpha: 0.7),
+        borderRadius: BorderRadius.circular(20),
       ),
-      child: Column(
+      child: Row(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'АДРЕС ДОСТАВКИ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.grey[600],
-                ),
-              ),
-              TextButton(
-                child: Text('ИЗМЕНИТЬ'),
-                onPressed: () {},
-              ),
-            ],
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.network(
+              item.image,
+              width: 130,
+              height: 130,
+              fit: BoxFit.cover,
+            ),
           ),
-          SizedBox(height: 8),
-          Text(
-            'г. Йошкар-Ола, ул. Пушкина, 15, кв...',
-            style: TextStyle(fontSize: 16),
-          ),
-          SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'ОБЩАЯ ЦЕНА:',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                '$totalPrice р.',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.orange[800],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 16),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              onPressed: () {},
-              child: Text(
-                'ПРОДОЛЖИТЬ',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+          Expanded(
+            child: SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 110,
+                              child: Text(
+                                item.name,
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            if (isEditMode)
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    cartItems.remove(item);
+                                  });
+                                },
+                                child: const CircleAvatar(
+                                  radius: 13.5,
+                                  backgroundColor: Color.fromARGB(57, 35, 35, 35),
+                                  child: Icon(
+                                    Icons.close_outlined,
+                                    size: 17,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      '${item.price * item.quantity} руб.',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 13),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          item.size,
+                          style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                fontSize: 16,
+                                color: const Color.fromARGB(106, 35, 35, 35)),
+                        ),
+                        const SizedBox(width: 10),
+                        SizedBox(
+                          width: 82,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    if (item.quantity > 1) {
+                                      item.quantity--;
+                                    }
+                                  });
+                                },
+                                child: const CircleAvatar(
+                                  radius: 11,
+                                  backgroundColor: Color.fromARGB(57, 35, 35, 35),
+                                  child: Icon(
+                                    Icons.remove,
+                                    size: 17,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                item.quantity.toString(),
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    item.quantity++;
+                                  });
+                                },
+                                child: const CircleAvatar(
+                                  radius: 11,
+                                  backgroundColor: Color.fromARGB(57, 35, 35, 35),
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 17,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -202,4 +365,20 @@ class _EditCartScreenState extends State<EditCartScreen> {
       ),
     );
   }
+}
+
+class CartItem {
+  final String name;
+  final int price;
+  final String size;
+  int quantity;
+  final String image;
+
+  CartItem({
+    required this.name,
+    required this.price,
+    required this.size,
+    required this.quantity,
+    required this.image,
+  });
 }
