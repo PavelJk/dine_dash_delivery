@@ -103,7 +103,13 @@ class PaymentMethodEmpty extends StatelessWidget {
                     ),
                   ),
                   onPressed: (){
-                    context.goNamed(AppRoute.addCardPayment.name);  
+                    context.goNamed(
+                      AppRoute.addCardPayment.name,
+                      pathParameters:{
+                      "ismethod" : 'false',
+                      "totalAmount" : '5555',
+                    }
+                    );  
                   },
                   style: OutlinedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.tertiary,

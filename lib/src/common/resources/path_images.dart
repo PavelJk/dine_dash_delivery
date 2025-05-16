@@ -40,4 +40,5 @@ class PathImages {
   static const String work = "assets/icons/work.svg";
   static const String cardTrans = "assets/images/card_trans.png";
   static const String logoBank = "assets/images/logo_bank.png";
+  static const String successIllustation = "assets/images/successIllustation.png";
 }

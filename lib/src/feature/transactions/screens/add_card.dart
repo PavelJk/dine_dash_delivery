@@ -8,7 +8,10 @@ import 'package:go_router/go_router.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class AddCardScreen extends StatefulWidget {
-  const AddCardScreen({super.key});
+  final String ismethod;
+  final String totalAmount;
+
+   const AddCardScreen({super.key, required this.ismethod, required this.totalAmount});
 
   @override
   State<AddCardScreen> createState() => _AddCardScreenState();
@@ -130,13 +133,23 @@ class _AddCardScreenState extends State<AddCardScreen> {
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
       final cardNumber = _cardNumberController.text;
-      context.goNamed(
+      if (widget.ismethod == 'true') {
+        context.goNamed(
+        AppRoute.paymentMethodScreen.name,
+        pathParameters:{
+          "isCard" : 'true',
+          "cardNumber" : cardNumber,
+          "totalAmount" : widget.totalAmount,
+        });
+      }else{
+        context.goNamed(
         AppRoute.paymentMethodEmpty.name,
         pathParameters:{
           "isCard" : 'true',
           "cardNumber" : cardNumber,
         },
       );
+      }
     }
   }
 }

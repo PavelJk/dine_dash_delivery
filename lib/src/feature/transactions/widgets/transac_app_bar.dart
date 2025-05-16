@@ -12,6 +12,7 @@ class TransactionsAppBar extends StatelessWidget implements  PreferredSizeWidget
   Widget build(BuildContext context) {
     return AppBar(
         leadingWidth: 68,
+        scrolledUnderElevation: 0,
         toolbarHeight: 75,
         title: Text(
           text,

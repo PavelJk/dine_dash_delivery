@@ -211,7 +211,16 @@ class _BasketScreenState extends State<BasketScreen> {
                       const Spacer(),
                       
                       MyCustomMainButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.goNamed(
+                            AppRoute.paymentMethodScreen.name,
+                            pathParameters:{
+                              "totalAmount" : '$totalPrice',
+                              "isCard" : 'false',
+                              "cardNumber" : 'tet',
+                            },
+                          );
+                        },
                         text: 'ПРОДОЛЖИТЬ',
                       ),
                     ],

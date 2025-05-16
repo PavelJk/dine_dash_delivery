@@ -17,6 +17,8 @@ import 'package:dine_dash_delivery/src/feature/setting/screens/profile.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/setting_app.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/add_card.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/payment_method_empty.dart';
+import 'package:dine_dash_delivery/src/feature/transactions/screens/payment_successfull.dart';
+import 'package:dine_dash_delivery/src/feature/transactions/screens/transaction.dart';
 import 'package:dine_dash_delivery/src/feature/video/screen/video.dart';
 import 'package:go_router/go_router.dart';
 
@@ -42,6 +44,8 @@ enum AppRoute{
   categories,
   basket,
   search,
+  paymentMethodScreen,
+  paymentSecefulScreen,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -106,7 +110,7 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           name: AppRoute.questions.name,
           path: 'questions',
-          builder: (context, state) => QuestionsScreen(),
+          builder: (context, state) => FAQScreen(),
         ),
         GoRoute(
           name: AppRoute.addReviewScreen.name,
@@ -141,8 +145,11 @@ final GoRouter goRouter = GoRouter(
         ),
         GoRoute(
           name: AppRoute.addCardPayment.name,
-          path: 'addCardPayment',
-          builder: (context, state) => AddCardScreen(),
+          path: 'addCardPayment/:ismethod/:totalAmount',
+          builder: (context, state) => AddCardScreen(
+            ismethod: state.pathParameters["ismethod"]!, 
+            totalAmount: state.pathParameters["totalAmount"]!,
+          ),
         ),
         GoRoute(
           name: AppRoute.categories.name,
@@ -158,6 +165,20 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.search.name,
           path: 'search',
           builder: (context, state) => SearchScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.paymentMethodScreen.name,
+          path: 'paymentMethodScreen/:totalAmount/:isCard/:cardNumber',
+          builder: (context, state) => PaymentMethodScreen(
+            totalAmount: state.pathParameters["totalAmount"]!, 
+            isCard: state.pathParameters["isCard"]!, 
+            cardNumber: state.pathParameters["cardNumber"]!, 
+          ),
+        ),
+        GoRoute(
+          name: AppRoute.paymentSecefulScreen.name,
+          path: 'paymentSecefulScreen',
+          builder: (context, state) => PaymentSuccessScreen(),
         ),
       ]
     )
