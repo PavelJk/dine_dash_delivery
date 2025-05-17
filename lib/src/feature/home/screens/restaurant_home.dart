@@ -200,6 +200,14 @@ class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
                 SliverToBoxAdapter(
                   child: MySectionHeadersHome(
                     text: 'Рестораны',
+                    onPressed: () {
+                      context.goNamed(
+                        AppRoute.menuCategories.name,
+                        pathParameters:{
+                          "hor" : "РЕСТОРАНЫ",
+                        },
+                      );
+                    },
                   ),
                 ),
                 newSlivreElement,

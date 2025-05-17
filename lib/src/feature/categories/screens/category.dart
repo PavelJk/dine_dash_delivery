@@ -15,26 +15,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   final ScrollController _scrollController = ScrollController();
 
   final List<Categories> categories = [
-    Categories('Блюда', 'Хот-Дог',
-        'https://emojigraph.org/media/apple/hot-dog_1f32d.png'),
-    Categories('Блюда', 'Бургер',
+    Categories('Блюда', 'Бургеры',
         'https://emojigraph.org/media/apple/hamburger_1f354.png'),
     Categories('Блюда', 'Суши',
         'https://emojigraph.org/media/google/sushi_1f363.png'),
-    Categories('Блюда', 'Шаурма',
-        'https://emojigraph.org/media/emojidex/burrito_1f32f.png'),
     Categories('Блюда', 'Десерты',
         'https://emojigraph.org/media/google/shortcake_1f370.png'),
-    Categories('Блюда', 'Паста',
-        'https://emojigraph.org/media/google/spaghetti_1f35d.png'),
     Categories('Блюда', 'Пицца',
         'https://emojigraph.org/media/joypixels/pizza_1f355.png'),
-    Categories('Кухни', 'Русская',
-        'https://emojigraph.org/media/joypixels/dumpling_1f95f.png'),
-    Categories('Кухни', 'Японская',
-        'https://emojigraph.org/media/google/steaming-bowl_1f35c.png'),
-    Categories('Кухни', 'Французская ',
-        'https://emojigraph.org/media/google/croissant_1f950.png'),
   ];
 
   // Группируем категории
@@ -83,14 +71,19 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           ),
         ),
         actions: [
-          CircleAvatar(
-            radius: 22,
-            backgroundColor: const Color(0xff181C2E),
-            child: SvgPicture.asset(
-              PathImages.search,
-              width: 15,
-              colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
-              fit: BoxFit.scaleDown,
+          GestureDetector(
+            onTap: () {
+              context.goNamed(AppRoute.search.name);
+            },
+            child: CircleAvatar(
+              radius: 22,
+              backgroundColor: const Color(0xff181C2E),
+              child: SvgPicture.asset(
+                PathImages.search,
+                width: 15,
+                colorFilter: const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                fit: BoxFit.scaleDown,
+              ),
             ),
           ),
         ],
@@ -151,7 +144,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       child: InkWell(
         borderRadius: BorderRadius.circular(12),
         onTap: () {
-          print(category.name);
+          context.goNamed(
+            AppRoute.menuCategories.name,
+            pathParameters:{
+              "hor" : category.name.toUpperCase(),
+            },
+          );
         },
         child: Padding(
           padding: const EdgeInsets.all(8.0),

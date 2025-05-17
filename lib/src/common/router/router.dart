@@ -10,6 +10,7 @@ import 'package:dine_dash_delivery/src/feature/home/screens/main_home.dart';
 import 'package:dine_dash_delivery/src/feature/home/screens/restaurant_home.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/location_access.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/map.dart';
+import 'package:dine_dash_delivery/src/feature/menu_categories/screen/menu_category.dart';
 import 'package:dine_dash_delivery/src/feature/questions/questions.dart';
 import 'package:dine_dash_delivery/src/feature/search/search.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/info_address.dart';
@@ -46,6 +47,7 @@ enum AppRoute{
   search,
   paymentMethodScreen,
   paymentSecefulScreen,
+  menuCategories,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -179,6 +181,13 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.paymentSecefulScreen.name,
           path: 'paymentSecefulScreen',
           builder: (context, state) => PaymentSuccessScreen(),
+        ),
+        GoRoute(
+          name: AppRoute.menuCategories.name,
+          path: 'menuCategories/:hor',
+          builder: (context, state) => FoodCategoryScreen(
+            hor: state.pathParameters["hor"]!,
+          ),
         ),
       ]
     )

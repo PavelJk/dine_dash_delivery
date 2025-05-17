@@ -152,7 +152,15 @@ class _MainHomeState extends State<MainHome> {
                 SliverPadding(padding: EdgeInsets.all(9)),
                 SliverToBoxAdapter(
                   child: MySectionHeadersHome(
-                    text: 'Рестораны'
+                    text: 'Рестораны',
+                    onPressed: () {
+                      context.goNamed(
+                        AppRoute.menuCategories.name,
+                        pathParameters:{
+                          "hor" : "РЕСТОРАНЫ",
+                        },
+                      );
+                    },
                   ),
                 ),
                 newSlivreElement,

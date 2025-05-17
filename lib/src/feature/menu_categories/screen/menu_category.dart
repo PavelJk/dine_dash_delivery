@@ -1,142 +1,499 @@
+import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
+import 'package:dine_dash_delivery/src/feature/home/data/data.dart';
+import 'package:dine_dash_delivery/src/feature/home/model/info_restaurant.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
-// Страница с бургерами
-class MenuCategoryScreen extends StatelessWidget {
-  final List<Map<String, String>> burgers = [
-    {
-      'name': 'Бургер "Бивстро"',
-      'restaurant': 'Розовый Сад',
-      'price': '340 р',
-    },
-    {
-      'name': 'Бургер "Дымящий"',
-      'restaurant': 'Ресторан Cafenio',
-      'price': '300 р',
-    },
-    {
-      'name': 'Бургер "Баффало"',
-      'restaurant': 'Кухня Фирмы Koji',
-      'price': '400 р',
-    },
-    {
-      'name': 'Бургер "Яблочко"',
-      'restaurant': 'Ресторан "Кебаб"',
-      'price': '350 р',
-    },
+class FoodCategoryScreen extends StatefulWidget {
+  final String hor;
+  const FoodCategoryScreen({super.key, required this.hor});
+
+  @override
+  State<FoodCategoryScreen> createState() => _FoodCategoryScreenState();
+}
+
+class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
+  String? _selectedCategory;
+  late final Future<List<Restaurant>> restaurantFuture;
+  List<Restaurant> restaurants = [];
+
+  @override
+  void initState() {
+    super.initState();
+    restaurantFuture = getRestaurant(context);
+    if (_categories.contains(widget.hor)) {
+      _selectedCategory = widget.hor;
+    } else {
+      _selectedCategory = _categories.first;
+    }
+  }
+
+  final List<String> _categories = [
+    'БУРГЕРЫ',
+    'ПИЦЦА',
+    'РЕСТОРАНЫ',
+    'СУШИ',
+    'ДЕСЕРТЫ',
   ];
+
+  // Данные для разных категорий
+  final Map<String, List<Map<String, String>>> _categoryItems = {
+    'БУРГЕРЫ': [
+      {
+        'name': 'Воппер По-испански',
+        'place': 'Бургер Кинг',
+        'price': '349 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=5cd7767cd13d73d2ecaf804373ea992fdcffd804-12658900-images-thumbs&n=13',
+      },
+      {
+        'name': 'Чикен Тар-Тар',
+        'place': 'Бургер Кинг',
+        'price': '229 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=e5df7be8eb79e6a90215dbea35c928b4e21a7070-12374505-images-thumbs&n=13',
+      },
+      {
+        'name': 'Гранд Чиз',
+        'place': 'Бургер Кинг',
+        'price': '259 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=54d32bc6112f71dae8110a994f607fb48925b170-8220915-images-thumbs&n=13',
+      },
+      {
+        'name': 'Биг Спешиал',
+        'place': 'Вкусно — и точка',
+        'price': '299 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=0c58eca209506cf55b9dead1ea3d94616756b2aa-9181886-images-thumbs&n=13',
+      },
+    ],
+    'ПИЦЦА': [
+      {
+        'name': 'Пицца "Микс"',
+        'place': 'Автопицца',
+        'price': '660 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=909efe3f0bfc6e5c8fbcbbce988c9b6fe0619846-5292008-images-thumbs&n=13',
+      },
+      {
+        'name': 'Пицца "Милано"',
+        'place': 'Милано',
+        'price': '360 р',
+        'image': 'https://cdn.arora.pro/l/upload/64d836cd-bd93-4a0a-bf1f-f651d3c302b2/size-2/032be522-d3c2-4ec3-be77-b251005496f7.jpg?webp&scale=2&width=374&height=21',
+      },
+      {
+        'name': 'Пицца "Сырная"',
+        'place': 'Додо Пицца',
+        'price': '359 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=bd617427c7dc5e69db2cf2e4c26e5bb00b58c0c3-6234058-images-thumbs&n=13'
+      },
+      {
+        'name': 'Пицца "Пепперони фреш"',
+        'place': 'Додо Пицца',
+        'price': '359 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=b3d9740810e308a4c6511399ad7e2698337bfac6-7546644-images-thumbs&n=13',
+      },
+    ],
+    'СУШИ': [
+      {
+        'name': 'Ролл "Флорида"',
+        'place': 'Автосуши',
+        'price': '365 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=cf71a829e0f4ae560f10d2d136528eed1bcacdd3-6637353-images-thumbs&n=13',
+      },
+      {
+        'name': 'Ролл 4 сыра',
+        'place': 'Автосуши',
+        'price': '370 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=9eb40c26b72c30022307c9ce81953f9c8e2facef-12423753-images-thumbs&n=13',
+      },
+      {
+        'name': 'Ролл "Джамп"',
+        'place': 'Автосуши',
+        'price': '290 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=bf9693dd7351924b9eae59abf7d4239a8fec67be-4525867-images-thumbs&n=13',
+      },
+      {
+        'name': 'Ролл "Цезарь Темпура"',
+        'place': 'Автосуши',
+        'price': '310 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=b6667793c72d313bbd288802c758d5bdbe4007c5d907e9c8-6909092-images-thumbs&n=13',
+      },
+    ],
+    'ДЕСЕРТЫ': [
+      {
+        'name': 'Тирамису',
+        'place': 'Автосуши',
+        'price': '235 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=80add6aa1500b4a296b1e1dc6dab3187c40d6aef-9229750-images-thumbs&n=13',
+      },
+      {
+        'name': 'Чизкейк Нью-Йорк',
+        'place': 'Пекарня "Сладкоежка"',
+        'price': '235 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=c811b23c4a8dff5f06e87aa92752e6262e2cb446-9123854-images-thumbs&n=13',
+      },
+      {
+        'name': 'Карамельный чизкейк',
+        'place': 'Додо Пицца',
+        'price': '179 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=52fbcc17e40bf0109282ee429e027911a10a1a04-4561933-images-thumbs&n=13',
+      },
+      {
+        'name': 'Сырники',
+        'place': 'Додо Пицца',
+        'price': '145 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=cea48512e63fde7a28ff677c2f90d2fed6069b42-5065420-images-thumbs&n=13',
+      },
+    ],
+  };
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Популярные Бургеры "gtrtr"',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leadingWidth: 75,
+        scrolledUnderElevation: 0,
+        toolbarHeight: 75,
+        actionsPadding: const EdgeInsets.only(right: 24),
+        title: DropdownButtonFormField<String>(
+          value: _selectedCategory,
+          decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color.fromARGB(255, 214, 217, 220)),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Color.fromARGB(255, 214, 217, 220)),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            filled: true,
+            fillColor: Colors.transparent,
+            contentPadding: EdgeInsets.zero,
           ),
-          SizedBox(height: 16),
-          ListView.separated(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: burgers.length,
-            separatorBuilder: (context, index) => Divider(),
-            itemBuilder: (context, index) {
-              final burger = burgers[index];
-              return ListTile(
-                title: Text(
-                  burger['name']!,
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(burger['restaurant']!),
-                trailing: Text(
-                  burger['price']!,
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),
-                ),
-              );
-            },
+          icon: Padding(
+            padding: const EdgeInsets.only(right: 3),
+            child: Icon(Icons.arrow_drop_down),
           ),
-          SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Рестораны',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          elevation: 2,
+          style: TextStyle(
+            fontSize: 13,
+            color: Color(0xff181C2E),
+            fontWeight: FontWeight.bold
+          ),
+          onChanged: (String? newValue) {
+            if (newValue != null) {
+              setState(() {
+                _selectedCategory = newValue;
+              });
+            }
+          },
+          items: _categories.map<DropdownMenuItem<String>>((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Text(value),
               ),
-              TextButton(
-                onPressed: () {},
-                child: Text('Смотреть все >'),
+            );
+          }).toList(),
+        ),
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 24),
+          child: GestureDetector(
+            onTap: () => context.pop(),
+            child: CircleAvatar(
+              backgroundColor: Colors.black.withAlpha(25),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 1),
+                child: SvgPicture.asset(
+                  PathImages.back,
+                  width: 8,
+                  colorFilter: const ColorFilter.mode(Colors.black, BlendMode.srcIn),
+                  fit: BoxFit.scaleDown,
+                ),
               ),
-            ],
+            ),
+          ),
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () => context.goNamed(AppRoute.basket.name),
+            child: CircleAvatar(
+              radius: 24,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              child: SvgPicture.asset(
+                PathImages.search,
+                width: 19,
+                colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+              ),
+            ),
+          ),
+          const SizedBox(width: 10),
+          GestureDetector(
+            onTap: () => context.goNamed(AppRoute.basket.name),
+            child: CircleAvatar(
+              radius: 24,
+              backgroundColor: Colors.black.withAlpha(25),
+              child: SvgPicture.asset(
+                PathImages.fillter,
+                width: 24,
+              ),
+            ),
           ),
         ],
       ),
+      body: FutureBuilder<List<Restaurant>>(
+        future: restaurantFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Ошибка: ${snapshot.error}'));
+          } else if (snapshot.hasData) {
+            restaurants = snapshot.data!;
+            return _buildContentForCategory();
+          } else {
+            return const Center(child: Text('Нет данных о ресторанах'));
+          }
+        },
+      ),
     );
   }
-}
 
-// Страница с овощами
-class VegetablesPage extends StatelessWidget {
-  final List<Map<String, String>> vegetables = [
-    {'name': 'Огурцы гладкие', 'price': '115 ₽', 'weight': '500 ₽'},
-    {'name': 'Огурец, 200г', 'price': '115 ₽', 'weight': '200 ₽'},
-    {'name': 'Картофель вес', 'price': '115 ₽', 'weight': '2 кг'},
-    {'name': 'Картофель красный вес', 'price': '135 ₽', 'weight': '3 кг'},
-    {'name': 'Картофель криммаластеризованный', 'price': '100 ₽', 'weight': '500 ₽'},
-    {'name': 'Картофель белорусский вес', 'price': '288 ₽', 'weight': '3 кг'},
-  ];
+  Widget _buildContentForCategory() {
+    switch (_selectedCategory) {
+      case 'РЕСТОРАНЫ':
+        return _buildRestaurantsList();
+      default:
+        return _buildCategoryItemsList();
+    }
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Овощи',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+  Widget _buildCategoryItemsList() {
+    final items = _categoryItems[_selectedCategory] ?? [];
+    _selectedCategory?.toLowerCase();
+
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.only(right: 24, left: 24, top: 15, bottom: 8),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              Text(
+                'Популярные ${_selectedCategory?.toLowerCase()}',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ]),
           ),
-          SizedBox(height: 16),
-          GridView.count(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            childAspectRatio: 0.8,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            children: vegetables.map((veg) {
-              return Card(
-                elevation: 2,
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          sliver: SliverGrid(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 10,
+              childAspectRatio: 0.8,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) => _buildProductItem(items[index]),
+              childCount: items.length,
+            ),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Рестораны",
+                    style: Theme.of(context).textTheme.headlineSmall,
+                  ),
+                  TextButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        _selectedCategory = 'РЕСТОРАНЫ';
+                      });
+                    },
+                    label: Text(
+                      'Смотреть все',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
+                    icon: SvgPicture.asset(PathImages.forward),
+                    iconAlignment: IconAlignment.end,
+                    style: TextButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      splashFactory: NoSplash.splashFactory,
+                    ),
+                  ),
+                ],
+              ),
+            ]),
+          ),
+        ),
+        _buildRestaurantsPreview(),
+      ],
+    );
+  }
+
+  Widget _buildRestaurantsPreview() {
+    return SliverList.builder(
+      itemCount: restaurants.length,
+      itemBuilder: (context, index) {
+        final restaurant = restaurants[index];
+        
+        return Container(
+          margin: const EdgeInsets.symmetric(horizontal: 21, vertical: 10),
+          child: MyRestaurantCard(
+            nameRestaurant: restaurant.nameRestaurant,
+            menuRestaurant: restaurant.menuRestaurant,
+            ratingRestaurant: restaurant.ratingRestaurant,
+            deliveryRestaurant: restaurant.deliveryRestaurant,
+            clockRestaurant: restaurant.clockRestaurant,
+            imageRestaurant: restaurant.imageRestaurant,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _buildRestaurantsList() {
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: const EdgeInsets.only(right: 24, left: 24, top: 12),
+          sliver: SliverList(
+            delegate: SliverChildListDelegate([
+              const Text(
+                'Все рестораны',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ]),
+          ),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 21, vertical: 15),
+          sliver: SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final restaurant = restaurants[index];
+                return MyRestaurantCard(
+                  nameRestaurant: restaurant.nameRestaurant,
+                  menuRestaurant: restaurant.menuRestaurant,
+                  ratingRestaurant: restaurant.ratingRestaurant,
+                  deliveryRestaurant: restaurant.deliveryRestaurant,
+                  clockRestaurant: restaurant.clockRestaurant,
+                  imageRestaurant: restaurant.imageRestaurant,
+                );
+              },
+              childCount: restaurants.length,
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProductItem(Map<String, String> item) {
+    return Stack(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 45),
+          child: Transform(
+            transform: Matrix4.identity()
+              ..setEntry(3, 2, 0.001)
+              ..rotateX(-0.30),
+            alignment: Alignment.center,
+            child: Container(
+              width: double.infinity,
+              height: 140,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withAlpha(20),
+                    blurRadius: 20,
+                    offset: const Offset(7, 10),
+                  ),
+                ],
+              ),
+              child: Transform(
+                transform: Matrix4.identity()
+                  ..setEntry(3, 2, 0.001)
+                  ..rotateX(0.20),
+                alignment: Alignment.center,
                 child: Padding(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.only(top: 53, right: 11, left: 11),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        veg['name']!,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        item['name']!,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 15),
                       ),
-                      SizedBox(height: 8),
                       Text(
-                        veg['price']!,
-                        style: TextStyle(fontSize: 16, color: Colors.red),
+                        item['place']!,
+                        overflow: TextOverflow.ellipsis,
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontSize: 13,
+                          color: Color(0xff646982),
+                        )
                       ),
-                      SizedBox(height: 4),
-                      Text(
-                        veg['weight']!,
-                        style: TextStyle(color: Colors.grey),
+                      const SizedBox(height: 5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(item['price']!),
+                          GestureDetector(
+                            onTap: () {},
+                            child: CircleAvatar(
+                              radius: 17,
+                              backgroundColor: Theme.of(context).colorScheme.tertiary,
+                              child: const Icon(
+                                Icons.add,
+                                size: 22,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                 ),
-              );
-            }).toList(),
+              ),
+            ),
           ),
-        ],
-      ),
+        ),
+        Positioned(
+          top: 12,
+          left: 12.5,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: Image.network(
+              item['image'] ?? '',
+              width: 122,
+              height: 84,
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

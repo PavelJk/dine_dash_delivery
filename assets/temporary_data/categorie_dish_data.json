@@ -4,10 +4,6 @@
       "name": "Все"
     },
     {
-      "icon": "https://emojigraph.org/media/apple/hot-dog_1f32d.png",
-      "name": "Хот-Дог"
-    },
-    {
       "icon": "https://emojigraph.org/media/apple/hamburger_1f354.png",
       "name": "Бургер"
     },
@@ -16,8 +12,8 @@
       "name": "Суши"
     },
     {
-      "icon": "https://emojigraph.org/media/emojidex/burrito_1f32f.png",
-      "name": "Шаурма"
+      "icon": "https://emojigraph.org/media/joypixels/pizza_1f355.png",
+      "name": "Пицца"
     },
     {
       "icon": "https://emojigraph.org/media/google/shortcake_1f370.png",
