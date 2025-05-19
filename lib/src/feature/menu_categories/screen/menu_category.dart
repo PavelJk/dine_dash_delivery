@@ -2,6 +2,7 @@ import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/home/data/data.dart';
 import 'package:dine_dash_delivery/src/feature/home/model/info_restaurant.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,9 +17,14 @@ class FoodCategoryScreen extends StatefulWidget {
 }
 
 class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
-  String? _selectedCategory;
+    String? _selectedCategory;
   late final Future<List<Restaurant>> restaurantFuture;
   List<Restaurant> restaurants = [];
+  final List<bool> _deliveryOptionsSelected = [true, false, false, true];
+  final List<bool> _deliveryTimeSelected = [true, false, false];
+  double _minPrice = 0;
+  double _maxPrice = 999999;
+  int _rating = 0;
 
   @override
   void initState() {
@@ -218,7 +224,7 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
         ),
         actions: [
           GestureDetector(
-            onTap: () => context.goNamed(AppRoute.basket.name),
+            onTap: () => context.goNamed(AppRoute.search.name),
             child: CircleAvatar(
               radius: 24,
               backgroundColor: Theme.of(context).colorScheme.secondary,
@@ -231,7 +237,7 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
           ),
           const SizedBox(width: 10),
           GestureDetector(
-            onTap: () => context.goNamed(AppRoute.basket.name),
+            onTap: () => _showFilterDialog(context),
             child: CircleAvatar(
               radius: 24,
               backgroundColor: Colors.black.withAlpha(25),
@@ -496,4 +502,253 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
       ],
     );
   }
+
+void _showFilterDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) => Dialog(
+      backgroundColor: Colors.white,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.82,
+        child: StatefulBuilder(
+          builder: (context, setModalState) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 21),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildHeader(context),
+                    const SizedBox(height: 10),
+                    _buildDeliveryOptions(context, setModalState),
+                    const SizedBox(height: 20),
+                    _buildDeliveryTimeOptions(context, setModalState),
+                    const SizedBox(height: 20),
+                    _buildPriceFilter(setModalState),
+                    const SizedBox(height: 20),
+                    _buildRatingFilter(setModalState),
+                    const SizedBox(height: 20),
+                    MyCustomMainButton(
+                      onPressed: () {},
+                      text: 'ПРИМЕНИТЬ',
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _buildHeader(BuildContext context) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      const Text(
+        'Фильтр',
+        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+      ),
+      GestureDetector(
+        onTap: () => Navigator.pop(context),
+        child: const CircleAvatar(
+          backgroundColor: Color(0xffECF0F4),
+          radius: 21,
+          child: Icon(Icons.close),
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _buildDeliveryOptions(BuildContext context, StateSetter setModalState) {
+  final List<String> deliveryLabels = ['Доставка', 'Самовывоз', 'Акции', 'Онлайн-оплата'];
+  final List<double> deliveryWidths = [101, 110, 78, 148];
+  
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'ВЫБРАТЬ',
+        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+      ),
+      const SizedBox(height: 10),
+      Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: List.generate(deliveryLabels.length, (index) {
+          return GestureDetector(
+            onTap: () {
+              setModalState(() {
+                _deliveryOptionsSelected[index] = !_deliveryOptionsSelected[index];
+              });
+            },
+            child: _buildFilterChip(
+              context: context,
+              label: deliveryLabels[index],
+              width: deliveryWidths[index],
+              isSelected: _deliveryOptionsSelected[index],
+            ),
+          );
+        }),
+      ),
+    ],
+  );
+}
+
+Widget _buildDeliveryTimeOptions(BuildContext context, StateSetter setModalState) {
+  final List<String> timeLabels = ['10-15 мин', '20 мин', '30 мин'];
+  
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'ВРЕМЯ ДОСТАВКИ',
+        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+      ),
+      const SizedBox(height: 10),
+      Wrap(
+        spacing: 10,
+        runSpacing: 10,
+        children: List.generate(timeLabels.length, (index) {
+          return GestureDetector(
+            onTap: () {
+              setModalState(() {
+                // Сделать выбор только одного варианта времени
+                for (int i = 0; i < _deliveryTimeSelected.length; i++) {
+                  _deliveryTimeSelected[i] = (i == index);
+                }
+              });
+            },
+            child: _buildFilterChip(
+              context: context,
+              label: timeLabels[index],
+              width: 97,
+              isSelected: _deliveryTimeSelected[index],
+            ),
+          );
+        }),
+      ),
+    ],
+  );
+}
+
+Widget _buildPriceFilter(StateSetter setModalState) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'ЦЕНА',
+        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+      ),
+      const SizedBox(height: 10),
+      Row(
+        children: [
+          const Text('ОТ', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: TextField(
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: '0',
+                hintStyle: TextStyle(color: Color.fromARGB(244, 146, 146, 149)),
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+              ),
+              keyboardType: TextInputType.number,
+              onChanged: (value) => setModalState(() {
+                _minPrice = double.tryParse(value) ?? 0;
+              }),
+            ),
+          ),
+          const SizedBox(width: 10),
+          const Text('ДО', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14)),
+          const SizedBox(width: 10),
+          Expanded(
+            child: TextField(
+              decoration: const InputDecoration(
+                hintText: "9999999",
+                contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                hintStyle: TextStyle(color: Color.fromARGB(244, 146, 146, 149)),
+                border: OutlineInputBorder(),
+              ),
+              keyboardType: TextInputType.number,
+              onChanged: (value) => setModalState(() {
+                _maxPrice = double.tryParse(value) ?? 999999;
+              }),
+            ),
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
+Widget _buildRatingFilter(StateSetter setModalState) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'РЕЙТИНГ',
+        style: TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+      ),
+      const SizedBox(height: 10),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: List.generate(5, (index) {
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: GestureDetector(
+              onTap: () => setModalState(() => _rating = index + 1),
+              child: CircleAvatar(
+                radius: 22,
+                backgroundColor: const Color(0xff292925),
+                child: Icon(
+                  Icons.star,
+                  color: index < _rating 
+                    ? Theme.of(context).colorScheme.tertiary 
+                    : const Color(0xffDCDCDC),
+                  size: 17,
+                ),
+              ),
+            ),
+          );
+        }),
+      ),
+    ],
+  );
+}
+
+Widget _buildFilterChip({
+  required BuildContext context,
+  required String label,
+  required double width,
+  required bool isSelected,
+}) {
+  return Container(
+    width: width,
+    height: 46,
+    decoration: BoxDecoration(
+      color: isSelected 
+        ? Theme.of(context).colorScheme.tertiary 
+        : Colors.transparent,
+      border: Border.all(
+        color: isSelected 
+          ? Theme.of(context).colorScheme.tertiary 
+          : const Color(0xffEDEDED)),
+      borderRadius: BorderRadius.circular(33),
+    ),
+    child: Center(
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          fontSize: 15,
+          color: isSelected ? Colors.black : Colors.black,
+        )
+      ),
+    ),
+  );
+}
 }
