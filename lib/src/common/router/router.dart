@@ -1,6 +1,7 @@
 import 'package:dine_dash_delivery/src/feature/auth/screens/info_about_me.dart';
 import 'package:dine_dash_delivery/src/feature/auth/screens/otp_code.dart';
 import 'package:dine_dash_delivery/src/feature/basket/basket.dart';
+import 'package:dine_dash_delivery/src/feature/card/screens/restar_card.dart';
 import 'package:dine_dash_delivery/src/feature/categories/screens/category.dart';
 import 'package:dine_dash_delivery/src/feature/favourites/screens/favourites.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/add_review.dart';
@@ -48,6 +49,7 @@ enum AppRoute{
   paymentMethodScreen,
   paymentSecefulScreen,
   menuCategories,
+  restCard,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -187,6 +189,16 @@ final GoRouter goRouter = GoRouter(
           path: 'menuCategories/:hor',
           builder: (context, state) => FoodCategoryScreen(
             hor: state.pathParameters["hor"]!,
+          ),
+        ),
+        GoRoute(
+          name: AppRoute.restCard.name,
+          path: 'restCard/:nameRest/:rating/:deliver/:clock',
+          builder: (context, state) => RestaurantDetailPage(
+            nameRest: state.pathParameters["nameRest"]!,
+            rating: state.pathParameters["rating"]!,
+            deliver: state.pathParameters["deliver"]!,
+            clock: state.pathParameters["clock"]!,
           ),
         ),
       ]

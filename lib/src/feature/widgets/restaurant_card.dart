@@ -1,6 +1,8 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class MyRestaurantCard extends StatelessWidget {
 
@@ -26,7 +28,17 @@ class MyRestaurantCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: (){
+        context.goNamed(
+          AppRoute.restCard.name,
+          pathParameters:{
+            "nameRest" : nameRestaurant,
+            "rating" : ratingRestaurant,
+            "deliver" : deliveryRestaurant,
+            "clock" : clockRestaurant,
+          }, 
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 16),
         child: Column(
