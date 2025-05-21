@@ -19,13 +19,7 @@ class RestaurantDetailPage extends StatefulWidget {
 }
 
 class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
-  final List<String> imageUrls = [
-    'https://avatars.mds.yandex.net/i?id=75b440b7e11f2e3b21276dd78caa7b2d03be53dc-7545494-images-thumbs&n=13',
-    'https://avatars.mds.yandex.net/i?id=f8d656d8d3dac3a34a342090a29bf8d450691d29-12500642-images-thumbs&n=13',
-    'https://avatars.mds.yandex.net/i?id=357fbc3933f8d8cc9303940e1f725a72ff457d82-5278228-images-thumbs&n=13',
-    'https://avatars.mds.yandex.net/i?id=6e9178701a2b863bf4fc496b84ca117b05b3456a-5869703-images-thumbs&n=13',
-    'https://avatars.mds.yandex.net/i?id=5b5a85ece7590631b30f89b5cf699c5bb29266ac-5220454-images-thumbs&n=13',
-  ];
+
   final Map<String, List<String>> _restaurantImages = {
     'Бургер Кинг': [
       'https://avatars.mds.yandex.net/i?id=708358ecda1808bed986e190f023cacdc4584976-8185042-images-thumbs&n=13',
@@ -41,7 +35,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
       'https://avatars.mds.yandex.net/i?id=6e9178701a2b863bf4fc496b84ca117b05b3456a-5869703-images-thumbs&n=13',
       'https://avatars.mds.yandex.net/i?id=5b5a85ece7590631b30f89b5cf699c5bb29266ac-5220454-images-thumbs&n=13',
     ],
-    'Камелот': [
+    'Ресторан Камелот': [
       'https://avatars.mds.yandex.net/i?id=2d8e64c4af79f7eb38ec45b3b50e9fa171acf2e8-10754985-images-thumbs&n=13',
       'https://avatars.mds.yandex.net/i?id=f23d1732e1a26a6121607c9f2ae9cb81fd97626e-10232965-images-thumbs&n=13',
       'https://avatars.mds.yandex.net/i?id=f65fb4c23f38600ecbab9019063ced46d57af631-4146491-images-thumbs&n=13',
@@ -50,18 +44,10 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
     ],
   };
 
-  // Получаем изображения для текущего ресторана
-  List<String> get _currentRestaurantImages {
-    return _restaurantImages[widget.nameRest] ?? [
-      '',
-      '',
-    ];
-  }
-
   final Map<String, String> _restaurantDescriptions = {
     'Бургер Кинг': 'Бургер Кинг — это царство сочных бургеров, где каждый сэндвич создается с королевским размахом. Это место, где вкус побеждает голод, а сочность и аромат остаются в памяти надолго.',
     'Автосуши': 'Автосуши — это современный взгляд на японскую кухню, где свежесть риса, нежность рыбы и яркие акценты соусов создают идеальные роллы.',
-    'Камелот': 'Камелот — это средневековое пиршество в современном формате. Здесь подают блюда, достойные королевского стола: сочное мясо на гриле, ароматные супы в хлебных горшочках и сытные гарниры.',
+    'Ресторан Камелот': 'Ресторан Камелот — это средневековое пиршество в современном формате. Здесь подают блюда, достойные королевского стола: сочное мясо на гриле, ароматные супы в хлебных горшочках и сытные гарниры.',
   };
 
   final Map<String, List<CardFavorites>> _categoryItems = {
@@ -85,30 +71,42 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
         image: 'https://avatars.mds.yandex.net/i?id=54d32bc6112f71dae8110a994f607fb48925b170-8220915-images-thumbs&n=13',
       ),
       CardFavorites(
-        title: 'Биг Спешиал',
-        restaurant: 'Вкусно — и точка',
-        price: '299',
-        image: 'https://avatars.mds.yandex.net/i?id=0c58eca209506cf55b9dead1ea3d94616756b2aa-9181886-images-thumbs&n=13',
+        title: 'Бургер классика',
+        restaurant: 'Автосуши',
+        price: '260',
+        image: 'https://avatars.mds.yandex.net/i?id=51fa120a1005110d58c05487f8c20358f10e47ba-6712958-images-thumbs&n=13',
+      ),
+      CardFavorites(
+        title: 'Цезарь Кинг',
+        restaurant: 'Бургер Кинг',
+        price: '139',
+        image: 'https://avatars.mds.yandex.net/i?id=175092391a326d45505c54385bf91dfa7e6af092-5305527-images-thumbs&n=13',
       ),
     ],
     'Пицца': [
       CardFavorites(
         title: 'Пицца "Микс"',
-        restaurant: 'Автопицца',
+        restaurant: 'Автосуши',
         price: '660',
         image: 'https://avatars.mds.yandex.net/i?id=909efe3f0bfc6e5c8fbcbbce988c9b6fe0619846-5292008-images-thumbs&n=13',
       ),
       CardFavorites(
-        title: 'Пицца "Милано"',
-        restaurant: 'Милано',
-        price: '360',
-        image: 'https://cdn.arora.pro/l/upload/64d836cd-bd93-4a0a-bf1f-f651d3c302b2/size-2/032be522-d3c2-4ec3-be77-b251005496f7.jpg?webp&scale=2&width=374&height=21',
+        title: 'Пицца с томатами и ветчиной',
+        restaurant: 'Ресторан Камелот',
+        price: '500',
+        image: 'https://avatars.mds.yandex.net/i?id=8827a09d0e016286baa7de68f9cf42a286925d92-5886703-images-thumbs&n=13',
       ),
       CardFavorites(
-        title: 'Пицца "Пепперони фреш"',
-        restaurant: 'Додо Пицца',
-        price: '359',
-        image: 'https://avatars.mds.yandex.net/i?id=b3d9740810e308a4c6511399ad7e2698337bfac6-7546644-images-thumbs&n=13',
+        title: 'Пицца "Ямайка с креветками"',
+        restaurant: 'Автосуши',
+        price: '415',
+        image: 'https://avatars.mds.yandex.net/i?id=3727e843a8163f70f249fbebe83873f6df1ecf70-5348428-images-thumbs&n=13',
+      ),
+      CardFavorites(
+        title: 'Пицца "Пепперони"',
+        restaurant: 'Автосуши',
+        price: '345',
+        image: 'https://avatars.mds.yandex.net/i?id=23dea17c9cee7d1d1ff9e3e30194452943d711af-5222634-images-thumbs&n=13',
       ),
     ],
     'Суши': [
@@ -145,12 +143,44 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
         image: 'https://avatars.mds.yandex.net/i?id=80add6aa1500b4a296b1e1dc6dab3187c40d6aef-9229750-images-thumbs&n=13',
       ),
       CardFavorites(
-        title: 'Сырники',
-        restaurant: 'Додо Пицца',
-        price: '145',
-        image: 'https://avatars.mds.yandex.net/i?id=cea48512e63fde7a28ff677c2f90d2fed6069b42-5065420-images-thumbs&n=13',
+        title: 'Шоколадный шейк',
+        restaurant: 'Бургер Кинг',
+        price: '179',
+        image: 'https://orderapp-static.burgerkingrus.ru/x256/mobile_image/368255ba2850e49cbed6a2da4da4b430.webp',
+      ),
+      CardFavorites(
+        title: 'Крепт Сюзетт',
+        restaurant: 'Ресторан Камелот',
+        price: '330',
+        image: 'https://avatars.mds.yandex.net/i?id=77f0a9e192ef42be788982f7e6cd78caec664b0c-8182695-images-thumbs&n=13',
+      ),
+      CardFavorites(
+        title: 'Ролл "Тропик"',
+        restaurant: 'Автосуши',
+        price: '335',
+        image: 'https://avatars.mds.yandex.net/i?id=a7c9573fd92d2976d8bb7bd441f782889e2ee7fe-3691998-images-thumbs&n=13',
       ),
     ],
+    'Салаты': [
+      CardFavorites(
+        title: 'Греческий',
+        restaurant: 'Ресторан Камелот',
+        price: '380',
+        image: 'https://avatars.mds.yandex.net/i?id=9b0ab17ecd729153a2a29718169114d833b7b193-4545247-images-thumbs&n=13',
+      ),
+      CardFavorites(
+        title: 'Салат Пражский',
+        restaurant: 'Ресторан Камелот',
+        price: '380',
+        image: 'https://avatars.mds.yandex.net/i?id=f7ed8a38684191362cce664e93050b136c1091f4-9107083-images-thumbs&n=13',
+      ),
+    ],
+  };
+
+  final Map<String, List<String>> _categories = {
+    'Бургер Кинг': ['Бургеры', 'Десерты'],
+    'Автосуши': ['Пицца', 'Суши', 'Бургеры', 'Десерты'],
+    'Ресторан Камелот': ['Пицца', 'Десерты', 'Салаты'],
   };
     // Получаем описание ресторана по его имени
   String get _restaurantDescription {
@@ -158,7 +188,23 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
            '${widget.nameRest} — это уютное заведение с вкусной кухней и приятной атмосферой.';
   }
 
-  final List<String> categories = ['Пицца', 'Суши', 'Бургеры', 'Десерты'];
+  List<String> get categories {
+    return _categories[widget.nameRest] ?? ['Бургеры', 'Пицца', 'Суши', 'Десерты'];
+  }
+
+  List<CardFavorites> _getFilteredItems(String category) {
+    final allItems = _categoryItems[category] ?? [];
+    return allItems.where((item) => item.restaurant == widget.nameRest).toList();
+  }
+
+    // Получаем изображения для текущего ресторана
+  List<String> get _currentRestaurantImages {
+    return _restaurantImages[widget.nameRest] ?? [
+      '',
+      '',
+    ];
+  }
+
   int _currentIndex = 0;
   int _selectedCategoryIndex = 0;
   final CarouselSliderController _controller = CarouselSliderController();
@@ -166,8 +212,8 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   @override
   Widget build(BuildContext context) {
     final currentCategory = categories[_selectedCategoryIndex];
-    final currentItems = _categoryItems[currentCategory] ?? [];
-    
+    final currentItems = _getFilteredItems(currentCategory);
+    print(currentItems);
     
     return Scaffold(
       body: SingleChildScrollView(
@@ -303,7 +349,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(33),
                                 color: _selectedCategoryIndex == index 
-                                    ? const Color(0xFFFFD700) // Желтый цвет для выбранной категории
+                                    ? const Color(0xFFFFD700)
                                     : Colors.transparent,
                                 border: Border.all(
                                   color: const Color(0xffEDEDED),
@@ -314,9 +360,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                   categories[index],
                                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                     fontSize: 16,
-                                    color: _selectedCategoryIndex == index 
-                                        ? Colors.black // Черный текст для выбранной категории
-                                        : Colors.black,
+                                    color:  Colors.black
                                   ),
                                 ),
                               ),
@@ -328,28 +372,38 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                   ),
                   
                   const SizedBox(height: 16),
-                  Text(
-                    '$currentCategory (${currentItems.length})',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      fontSize: 20,
+                  if (currentItems.isNotEmpty)
+                    Text(
+                      '$currentCategory (${currentItems.length})',
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 10,
-                      childAspectRatio: 0.8,
+
+                   if (currentItems.isNotEmpty)
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 0.8,
+                      ),
+                      itemCount: currentItems.length,
+                      itemBuilder: (context, index) {
+                        final item = currentItems[index];
+                        return _buildFavoriteItem(item);
+                      },
                     ),
-                    itemCount: currentItems.length,
-                    itemBuilder: (context, index) {
-                      final item = currentItems[index];
-                      return _buildFavoriteItem(item);
-                    },
-                  ),
+                    if (currentItems.isEmpty)
+                    const Center(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 50),
+                        child: Text('Нет доступных блюд в этой категории'),
+                      ),
+                    ),
                 ],
               ),
             ),

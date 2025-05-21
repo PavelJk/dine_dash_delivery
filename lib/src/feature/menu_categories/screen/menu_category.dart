@@ -43,6 +43,7 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
     'РЕСТОРАНЫ',
     'СУШИ',
     'ДЕСЕРТЫ',
+    'САЛАТЫ'
   ];
 
   // Данные для разных категорий
@@ -67,36 +68,50 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
         'image': 'https://avatars.mds.yandex.net/i?id=54d32bc6112f71dae8110a994f607fb48925b170-8220915-images-thumbs&n=13',
       },
       {
-        'name': 'Биг Спешиал',
-        'place': 'Вкусно — и точка',
-        'price': '299 р',
-        'image': 'https://avatars.mds.yandex.net/i?id=0c58eca209506cf55b9dead1ea3d94616756b2aa-9181886-images-thumbs&n=13',
+        'name': 'Цезарь Кинг',
+        'place': 'Бургер Кинг',
+        'price': '139 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=175092391a326d45505c54385bf91dfa7e6af092-5305527-images-thumbs&n=13',
+      },
+    ],
+    'САЛАТЫ': [
+      {
+        'name': 'Греческий',
+        'place': 'Ресторан Камелот',
+        'price': '380 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=9b0ab17ecd729153a2a29718169114d833b7b193-4545247-images-thumbs&n=13',
+      },
+      {
+        'name': 'Салат Пражский',
+        'place': 'Ресторан Камелот',
+        'price': '380 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=f7ed8a38684191362cce664e93050b136c1091f4-9107083-images-thumbs&n=13',
       },
     ],
     'ПИЦЦА': [
       {
         'name': 'Пицца "Микс"',
-        'place': 'Автопицца',
+        'place': 'Автосуши',
         'price': '660 р',
         'image': 'https://avatars.mds.yandex.net/i?id=909efe3f0bfc6e5c8fbcbbce988c9b6fe0619846-5292008-images-thumbs&n=13',
       },
       {
-        'name': 'Пицца "Милано"',
-        'place': 'Милано',
-        'price': '360 р',
-        'image': 'https://cdn.arora.pro/l/upload/64d836cd-bd93-4a0a-bf1f-f651d3c302b2/size-2/032be522-d3c2-4ec3-be77-b251005496f7.jpg?webp&scale=2&width=374&height=21',
+        'name': 'Пицца с томатами и ветчиной',
+        'place': 'Ресторан Камелот',
+        'price': '500 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=8827a09d0e016286baa7de68f9cf42a286925d92-5886703-images-thumbs&n=13',
       },
       {
-        'name': 'Пицца "Сырная"',
-        'place': 'Додо Пицца',
-        'price': '359 р',
-        'image': 'https://avatars.mds.yandex.net/i?id=bd617427c7dc5e69db2cf2e4c26e5bb00b58c0c3-6234058-images-thumbs&n=13'
+        'name': 'Пицца "Ямайка с креветками"',
+        'place': 'Автосуши',
+        'price': '415 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=3727e843a8163f70f249fbebe83873f6df1ecf70-5348428-images-thumbs&n=13'
       },
       {
-        'name': 'Пицца "Пепперони фреш"',
-        'place': 'Додо Пицца',
-        'price': '359 р',
-        'image': 'https://avatars.mds.yandex.net/i?id=b3d9740810e308a4c6511399ad7e2698337bfac6-7546644-images-thumbs&n=13',
+        'name': 'Пицца "Пепперони"',
+        'place': 'Автосуши',
+        'price': '345 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=23dea17c9cee7d1d1ff9e3e30194452943d711af-5222634-images-thumbs&n=13',
       },
     ],
     'СУШИ': [
@@ -133,22 +148,22 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
         'image': 'https://avatars.mds.yandex.net/i?id=80add6aa1500b4a296b1e1dc6dab3187c40d6aef-9229750-images-thumbs&n=13',
       },
       {
-        'name': 'Чизкейк Нью-Йорк',
-        'place': 'Пекарня "Сладкоежка"',
-        'price': '235 р',
-        'image': 'https://avatars.mds.yandex.net/i?id=c811b23c4a8dff5f06e87aa92752e6262e2cb446-9123854-images-thumbs&n=13',
-      },
-      {
-        'name': 'Карамельный чизкейк',
-        'place': 'Додо Пицца',
+        'name': 'Шоколадный шейк',
+        'place': 'Бургер Кинг',
         'price': '179 р',
-        'image': 'https://avatars.mds.yandex.net/i?id=52fbcc17e40bf0109282ee429e027911a10a1a04-4561933-images-thumbs&n=13',
+        'image': 'https://orderapp-static.burgerkingrus.ru/x256/mobile_image/368255ba2850e49cbed6a2da4da4b430.webp',
       },
       {
-        'name': 'Сырники',
-        'place': 'Додо Пицца',
-        'price': '145 р',
-        'image': 'https://avatars.mds.yandex.net/i?id=cea48512e63fde7a28ff677c2f90d2fed6069b42-5065420-images-thumbs&n=13',
+        'name': 'Крепт Сюзетт',
+        'place': 'Ресторан Камелот',
+        'price': '330 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=77f0a9e192ef42be788982f7e6cd78caec664b0c-8182695-images-thumbs&n=13',
+      },
+      {
+        'name': 'Ролл "Тропик"',
+        'place': 'Автосуши',
+        'price': '335 р',
+        'image': 'https://avatars.mds.yandex.net/i?id=a7c9573fd92d2976d8bb7bd441f782889e2ee7fe-3691998-images-thumbs&n=13',
       },
     ],
   };

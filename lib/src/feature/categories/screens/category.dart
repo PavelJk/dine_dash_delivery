@@ -23,6 +23,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         'https://emojigraph.org/media/google/shortcake_1f370.png'),
     Categories('Блюда', 'Пицца',
         'https://emojigraph.org/media/joypixels/pizza_1f355.png'),
+    Categories('Блюда', 'Салаты',
+        'https://emojigraph.org/media/google/green-salad_1f957.png'),
   ];
 
   // Группируем категории

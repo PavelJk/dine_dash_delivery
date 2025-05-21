@@ -18,5 +18,9 @@
     {
       "icon": "https://emojigraph.org/media/google/shortcake_1f370.png",
       "name": "Десерты"
+    },
+    {
+      "icon": "https://emojigraph.org/media/google/green-salad_1f957.png",
+      "name": "Салаты"
     }
 ]
