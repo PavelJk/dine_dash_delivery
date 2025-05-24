@@ -66,6 +66,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                           widget.productImage,
                           width: 40,
                           height: 40,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       SizedBox(width: 10,),

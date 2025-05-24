@@ -47,10 +47,10 @@ class _ReviewsScreenState extends State<ReviewsScreen> with SingleTickerProvider
 
   Widget _buildPendingReviews() {
     final items = [
-      'Кофе Вилль',
+      'Бургер Кинг',
     ];
     final items2 = [
-      'https://avatars.mds.yandex.net/i?id=a473c0ccfdf43ebf31334b39d4bde8ffa1daac47-5314093-images-thumbs&n=13',
+      'https://avatars.mds.yandex.net/i?id=fa41e27c5f7ac00bdf09fbc23aaf2b9643684aa5-12625178-images-thumbs&n=13',
       
     ];
     return ListView.builder(
@@ -117,6 +117,7 @@ class _ReviewsScreenState extends State<ReviewsScreen> with SingleTickerProvider
                           image,
                           width: 70,
                           height: 70,
+                          fit: BoxFit.cover,
                         ),
                       ),
                       SizedBox(width: 15,),

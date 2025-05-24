@@ -40,7 +40,7 @@ class PaymentSuccessScreen extends StatelessWidget {
             Spacer(),
             MyCustomMainButton(
               onPressed: (){
-                context.goNamed(AppRoute.mainHome.name);
+                context.goNamed(AppRoute.traking.name);
               },
               text: 'ПЕРЕЙТИ К ОТСЛЕЖИВАНИЮ'
             ),

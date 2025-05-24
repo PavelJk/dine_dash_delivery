@@ -3,6 +3,7 @@ import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/home/data/data.dart';
 import 'package:dine_dash_delivery/src/feature/home/model/info_restaurant.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/product_card.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -52,25 +53,25 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
       {
         'name': 'Воппер По-испански',
         'place': 'Бургер Кинг',
-        'price': '349 р',
+        'price': '349',
         'image': 'https://avatars.mds.yandex.net/i?id=5cd7767cd13d73d2ecaf804373ea992fdcffd804-12658900-images-thumbs&n=13',
       },
       {
         'name': 'Чикен Тар-Тар',
         'place': 'Бургер Кинг',
-        'price': '229 р',
+        'price': '229',
         'image': 'https://avatars.mds.yandex.net/i?id=e5df7be8eb79e6a90215dbea35c928b4e21a7070-12374505-images-thumbs&n=13',
       },
       {
         'name': 'Гранд Чиз',
         'place': 'Бургер Кинг',
-        'price': '259 р',
+        'price': '259',
         'image': 'https://avatars.mds.yandex.net/i?id=54d32bc6112f71dae8110a994f607fb48925b170-8220915-images-thumbs&n=13',
       },
       {
         'name': 'Цезарь Кинг',
         'place': 'Бургер Кинг',
-        'price': '139 р',
+        'price': '139',
         'image': 'https://avatars.mds.yandex.net/i?id=175092391a326d45505c54385bf91dfa7e6af092-5305527-images-thumbs&n=13',
       },
     ],
@@ -78,13 +79,13 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
       {
         'name': 'Греческий',
         'place': 'Ресторан Камелот',
-        'price': '380 р',
+        'price': '380',
         'image': 'https://avatars.mds.yandex.net/i?id=9b0ab17ecd729153a2a29718169114d833b7b193-4545247-images-thumbs&n=13',
       },
       {
         'name': 'Салат Пражский',
         'place': 'Ресторан Камелот',
-        'price': '380 р',
+        'price': '380',
         'image': 'https://avatars.mds.yandex.net/i?id=f7ed8a38684191362cce664e93050b136c1091f4-9107083-images-thumbs&n=13',
       },
     ],
@@ -92,25 +93,25 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
       {
         'name': 'Пицца "Микс"',
         'place': 'Автосуши',
-        'price': '660 р',
+        'price': '660',
         'image': 'https://avatars.mds.yandex.net/i?id=909efe3f0bfc6e5c8fbcbbce988c9b6fe0619846-5292008-images-thumbs&n=13',
       },
       {
         'name': 'Пицца с томатами и ветчиной',
         'place': 'Ресторан Камелот',
-        'price': '500 р',
+        'price': '500',
         'image': 'https://avatars.mds.yandex.net/i?id=8827a09d0e016286baa7de68f9cf42a286925d92-5886703-images-thumbs&n=13',
       },
       {
         'name': 'Пицца "Ямайка с креветками"',
         'place': 'Автосуши',
-        'price': '415 р',
+        'price': '415',
         'image': 'https://avatars.mds.yandex.net/i?id=3727e843a8163f70f249fbebe83873f6df1ecf70-5348428-images-thumbs&n=13'
       },
       {
         'name': 'Пицца "Пепперони"',
         'place': 'Автосуши',
-        'price': '345 р',
+        'price': '345',
         'image': 'https://avatars.mds.yandex.net/i?id=23dea17c9cee7d1d1ff9e3e30194452943d711af-5222634-images-thumbs&n=13',
       },
     ],
@@ -118,25 +119,25 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
       {
         'name': 'Ролл "Флорида"',
         'place': 'Автосуши',
-        'price': '365 р',
+        'price': '365',
         'image': 'https://avatars.mds.yandex.net/i?id=cf71a829e0f4ae560f10d2d136528eed1bcacdd3-6637353-images-thumbs&n=13',
       },
       {
         'name': 'Ролл 4 сыра',
         'place': 'Автосуши',
-        'price': '370 р',
+        'price': '370',
         'image': 'https://avatars.mds.yandex.net/i?id=9eb40c26b72c30022307c9ce81953f9c8e2facef-12423753-images-thumbs&n=13',
       },
       {
         'name': 'Ролл "Джамп"',
         'place': 'Автосуши',
-        'price': '290 р',
+        'price': '290',
         'image': 'https://avatars.mds.yandex.net/i?id=bf9693dd7351924b9eae59abf7d4239a8fec67be-4525867-images-thumbs&n=13',
       },
       {
         'name': 'Ролл "Цезарь Темпура"',
         'place': 'Автосуши',
-        'price': '310 р',
+        'price': '310',
         'image': 'https://avatars.mds.yandex.net/i?id=b6667793c72d313bbd288802c758d5bdbe4007c5d907e9c8-6909092-images-thumbs&n=13',
       },
     ],
@@ -144,25 +145,25 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
       {
         'name': 'Тирамису',
         'place': 'Автосуши',
-        'price': '235 р',
+        'price': '235',
         'image': 'https://avatars.mds.yandex.net/i?id=80add6aa1500b4a296b1e1dc6dab3187c40d6aef-9229750-images-thumbs&n=13',
       },
       {
         'name': 'Шоколадный шейк',
         'place': 'Бургер Кинг',
-        'price': '179 р',
+        'price': '179',
         'image': 'https://orderapp-static.burgerkingrus.ru/x256/mobile_image/368255ba2850e49cbed6a2da4da4b430.webp',
       },
       {
         'name': 'Крепт Сюзетт',
         'place': 'Ресторан Камелот',
-        'price': '330 р',
+        'price': '330',
         'image': 'https://avatars.mds.yandex.net/i?id=77f0a9e192ef42be788982f7e6cd78caec664b0c-8182695-images-thumbs&n=13',
       },
       {
         'name': 'Ролл "Тропик"',
         'place': 'Автосуши',
-        'price': '335 р',
+        'price': '335',
         'image': 'https://avatars.mds.yandex.net/i?id=a7c9573fd92d2976d8bb7bd441f782889e2ee7fe-3691998-images-thumbs&n=13',
       },
     ],
@@ -172,7 +173,6 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         leadingWidth: 75,
         scrolledUnderElevation: 0,
         toolbarHeight: 75,
@@ -429,92 +429,11 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
   }
 
   Widget _buildProductItem(Map<String, String> item) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 45),
-          child: Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..rotateX(-0.30),
-            alignment: Alignment.center,
-            child: Container(
-              width: double.infinity,
-              height: 140,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withAlpha(20),
-                    blurRadius: 20,
-                    offset: const Offset(7, 10),
-                  ),
-                ],
-              ),
-              child: Transform(
-                transform: Matrix4.identity()
-                  ..setEntry(3, 2, 0.001)
-                  ..rotateX(0.20),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 53, right: 11, left: 11),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item['name']!,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 15),
-                      ),
-                      Text(
-                        item['place']!,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          fontSize: 13,
-                          color: Color(0xff646982),
-                        )
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(item['price']!),
-                          GestureDetector(
-                            onTap: () {},
-                            child: CircleAvatar(
-                              radius: 17,
-                              backgroundColor: Theme.of(context).colorScheme.tertiary,
-                              child: const Icon(
-                                Icons.add,
-                                size: 22,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        Positioned(
-          top: 12,
-          left: 12.5,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.network(
-              item['image'] ?? '',
-              width: 122,
-              height: 84,
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
-      ],
+    return MyCustonCardProduct(
+      name: item['name']!,
+      place: item['place']!, 
+      price: item['price']!, 
+      image: item['image']!
     );
   }
 

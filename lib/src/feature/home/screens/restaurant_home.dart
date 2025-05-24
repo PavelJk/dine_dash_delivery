@@ -19,8 +19,8 @@ class RestaurantHomeScreen extends StatefulWidget {
 
 class _RestaurantHomeScreenState extends State<RestaurantHomeScreen> {
   
-  List<String> address = ['ул. Пушкина, 15, кв. 50', 'ул. Дружбы, 89, кв. 50'];
-  String? selectItem = 'ул. Пушкина, 15, кв. 50';
+  List<String> address = ['пер. Советкий, д. 2Б', 'ул. Дружбы, 89, кв. 50'];
+  String? selectItem = 'пер. Советкий, д. 2Б';
   late final Future<List<Restaurant>> restaurantFuture;
   late final Future<List<CategorieDish>> categorieDishFuture;
   late Widget newSlivreElement;

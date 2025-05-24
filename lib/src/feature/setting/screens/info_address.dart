@@ -17,7 +17,7 @@ class _AddressScreenState extends State<AddressScreen> {
   final List<Address> _addresses = [
     Address(
       title: 'ДОМ',
-      fullAddress: 'г. Йошкар-Ола, ул. Пушкина, 15, кв. 50, 2 под., 3 этаж, домофон +',
+      fullAddress: 'г. Йошкар-Ола, c. Семеновка, пер. Советский, д. 2Б, домофон синий забор позввонить',
     ),
     Address(
       title: 'РАБОТА',

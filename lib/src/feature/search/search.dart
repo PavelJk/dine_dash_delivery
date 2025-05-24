@@ -62,43 +62,44 @@ class _SearchScreenState extends State<SearchScreen> {
   final List<SearchResult> searchResults = [
     SearchResult(
       type: 'restaurant',
-      name: 'Пиццерия Милано',
-      rating: 4.6,
+      name: 'Автосуши',
+      rating: 4.7,
       deliveryTime: '20 мин',
-      image: 'https://avatars.mds.yandex.net/i?id=1cd619b20cfedad63c2c431bf8d2dcaa967b3e9c-10636727-images-thumbs&n=13',
+      image: 'https://avatars.mds.yandex.net/i?id=de94162a6ff6f4647aa03c43b06456303efd5cc3-9842162-images-thumbs&n=13',
       items: [
         SearchItem(
-          name: 'Пицца По-Европейски',
-          price: 820,
-          placeName: 'Пиццерия Милано',
-          image: 'https://avatars.mds.yandex.net/i?id=36646b8fdae77aad150df7ce9ad4d711003f7024-7946262-images-thumbs&n=13'
-        ),
-        SearchItem(
-          name: 'Пицца По-Гавайски',
-          price: 580,
-          placeName: 'Пиццерия Милано',
-          image: 'https://avatars.mds.yandex.net/i?id=7f399f304dcd5b8fd5686041a708b782ba3d1b02-4120589-images-thumbs&n=13'
-        ),
+        name: 'Пицца "Микс"',
+        placeName: 'Автосуши',
+        price: 660,
+        image: 'https://avatars.mds.yandex.net/i?id=909efe3f0bfc6e5c8fbcbbce988c9b6fe0619846-5292008-images-thumbs&n=13',
+      ),
+            SearchItem(
+        name: 'Пицца "Ямайка с креветками"',
+        placeName: 'Автосуши',
+        price: 415,
+        image: 'https://avatars.mds.yandex.net/i?id=3727e843a8163f70f249fbebe83873f6df1ecf70-5348428-images-thumbs&n=13',
+      ),
+      SearchItem(
+        name: 'Пицца "Пепперони"',
+        placeName: 'Автосуши',
+        price: 345,
+        image: 'https://avatars.mds.yandex.net/i?id=23dea17c9cee7d1d1ff9e3e30194452943d711af-5222634-images-thumbs&n=13',
+      ),
       ],
     ),
     SearchResult(
-      type: 'store',
-      name: 'Магнит',
-      deliveryTime: '20-25 мин',
-      image: 'https://avatars.mds.yandex.net/i?id=19f91718aeeaabf9de38bf8f7439bf179354e048-4809531-images-thumbs&n=13',
+      type: 'restaurant',
+      name: 'Ресторан Камелот',
+      rating: 5.0,
+      deliveryTime: '40 мин',
+      image: 'https://avatars.mds.yandex.net/i?id=c2c5c0176b1cc7200f999175d100344c88d08186-8438802-images-thumbs&n=13',
       items: [
         SearchItem(
-          name: 'Пицца Сибирская Коллекция 4 Сыра',
-          price: 430,
-          placeName: 'Магнит',
-          image: 'https://avatars.mds.yandex.net/i?id=f274e83131827bea1c23d0da1fcbbe6d1ac70f3fbb1ac9af-12642203-images-thumbs&n=13'
-        ),
-        SearchItem(
-          name: 'Пицца Цезарь с ветчиной и грибами',
-          price: 300,
-          placeName: 'Магнит',
-          image: 'https://avatars.mds.yandex.net/i?id=113eff6399974651e57ecd2a3c89e8d9f67ed56c-11003753-images-thumbs&n=13'
-        ),
+        name: 'Пицца с томатами и ветчиной',
+        placeName: 'Ресторан Камелот',
+        price: 500,
+        image: 'https://avatars.mds.yandex.net/i?id=8827a09d0e016286baa7de68f9cf42a286925d92-5886703-images-thumbs&n=13',
+      ),
       ],
     ),
   ];
@@ -107,7 +108,6 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         leadingWidth: 70,
         scrolledUnderElevation: 0,
         toolbarHeight: 75,
@@ -219,27 +219,8 @@ class _SearchScreenState extends State<SearchScreen> {
                 fillColor: Theme.of(context).colorScheme.surface,
               ),
             ),
-            SizedBox(height: 10),
-            Container(
-              height: 35,
-              decoration: BoxDecoration(
-                color: const Color(0xffF6F6F6),
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(color: const Color(0xffE2E2E2)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(1),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _buildFilterButton('Все', 0),
-                    _buildFilterButton('Рестораны', 1),
-                    _buildFilterButton('Магазины', 2),
-                  ],
-                ),
-              ),
-            ),
             SizedBox(height: 20),
+           
             Expanded(
               child: ListView(
                 clipBehavior: Clip.none,

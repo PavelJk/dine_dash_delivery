@@ -15,34 +15,22 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
 
   final List<CardFavorites> product = [
       CardFavorites(
-        title: 'Пицца По-Европейски',
-        restaurant : 'Пиццерия Милано',
-        image: 'https://avatars.mds.yandex.net/i?id=4a9bfb26ce9f230a45e26f9eb907349c762da253-10245136-images-thumbs&n=13',
-        price: '820',
+        title: 'Салат Пражский',
+        restaurant : 'Ресторан Камелот',
+        image: 'https://avatars.mds.yandex.net/i?id=f7ed8a38684191362cce664e93050b136c1091f4-9107083-images-thumbs&n=13',
+        price: '380',
       ),
       CardFavorites(
-        title: 'Суп Борщ',
-        restaurant : 'Белый кролик',
-        image: 'https://avatars.mds.yandex.net/i?id=ac8c02735e1c10d74522139cc55662cabcabd946-12475985-images-thumbs&n=13',
-        price: '600',
+        title: 'Ролл "Флорида"',
+        restaurant : 'Автосуши',
+        image: 'https://avatars.mds.yandex.net/i?id=cf71a829e0f4ae560f10d2d136528eed1bcacdd3-6637353-images-thumbs&n=13',
+        price: '365',
       ),
       CardFavorites(
-        title: 'Грибной Суп',
-        restaurant : 'Белый кролик',
-        image: 'https://avatars.mds.yandex.net/i?id=49b2b23d580e0fea869da9935b5102b72b5f6a15-5537820-images-thumbs&n=13',
-        price: '700',
-      ),
-      CardFavorites(
-        title: 'Бургер Бивстро',
-        restaurant : 'Розовый Сад',
-        image: 'https://avatars.mds.yandex.net/i?id=1f0b4cccccc1bb64d7d671cf7da3d3768d0b2278-5233733-images-thumbs&n=13',
-        price: '340',
-      ),
-      CardFavorites(
-        title: 'Пицца Милано',
-        restaurant : 'Пиццерия Милано',
-        image: 'https://avatars.mds.yandex.net/i?id=f55eef80038229120c0d0184daf3dce210373db7f73754fc-10256883-images-thumbs&n=13',
-        price: '580',
+        title: 'Пицца "Пепперони"',
+        restaurant : 'Автосуши',
+        image: 'https://avatars.mds.yandex.net/i?id=23dea17c9cee7d1d1ff9e3e30194452943d711af-5222634-images-thumbs&n=13',
+        price: '345',
       ),
   ];
 

@@ -16,18 +16,18 @@ class _BasketScreenState extends State<BasketScreen> {
   bool isEditMode = false;
   List<CartItem> cartItems = [
     CartItem(
-      name: 'Пицца По-Европейски', 
-      price: 820, 
+      name: 'Пицца "Пепперони"', 
+      price: 345, 
       size: '14 см',
       quantity: 2,
-      image: 'https://avatars.mds.yandex.net/i?id=36646b8fdae77aad150df7ce9ad4d711003f7024-7946262-images-thumbs&n=13',
+      image: 'https://avatars.mds.yandex.net/i?id=23dea17c9cee7d1d1ff9e3e30194452943d711af-5222634-images-thumbs&n=13',
     ),
     CartItem(
-      name: 'Пицца Милано', 
-      price: 580, 
-      size: '14 см',
+      name: 'Пицца "Микс"', 
+      price: 660, 
+      size: '13 см',
       quantity: 1,
-      image: 'https://avatars.mds.yandex.net/i?id=bfefd39d408a2025c979bcbdeb80ca88d2cce723-4828420-images-thumbs&n=13',
+      image: 'https://avatars.mds.yandex.net/i?id=909efe3f0bfc6e5c8fbcbbce988c9b6fe0619846-5292008-images-thumbs&n=13',
     ),
   ];
 
@@ -179,7 +179,7 @@ class _BasketScreenState extends State<BasketScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'ул. Пушкина, 15, кв. 50, 2 под., 3 этаж, домофон +',
+                            'c. Семеновка, пер. Советский, д. 2Б, домофон синий забор позвонить',
                             overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                   fontSize: 15, 

@@ -286,7 +286,7 @@ class _ContentSlidingUpPanelState extends State<ContentSlidingUpPanel> {
           ),
           MyCustomMainButton(
             onPressed: () {
-              context.goNamed(AppRoute.mainHome.name);
+              context.goNamed(AppRoute.restaurantHome.name);
             }, 
           text: 'СОХРАНИТЬ АДРЕС'
         ),

@@ -31,7 +31,7 @@ class LocationAccessScreen extends StatelessWidget {
               SizedBox(height: 9,),
               TextButton(
                 onPressed: (){
-                  context.goNamed(AppRoute.mainHome.name);
+                  context.goNamed(AppRoute.restaurantHome.name);
                 },
                 style: TextButton.styleFrom(
                   splashFactory: NoSplash.splashFactory,

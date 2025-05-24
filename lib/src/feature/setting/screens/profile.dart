@@ -14,7 +14,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   final String _name = "Павел Бартеньев";
   final String _email = "pavel.2021@list.ru";
-  final String _phone = "+7 777 778-80-18";
+  final String _phone = "+7 969 778-60-18";
   final String _birthDate = "01.03.2003";
 
   @override

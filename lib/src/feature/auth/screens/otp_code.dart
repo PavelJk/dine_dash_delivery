@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/auth/validators/validators.dart';
@@ -21,40 +22,48 @@ class OTPCode extends StatefulWidget {
 
 class _OTPCodeState extends State<OTPCode> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final List<String> _predefinedCodes = ['1234', '5678', '9012'];
+  String? _currentCode;
+  bool _showCode = false; // Флаг для отображения кода на экране
 
   int _currentTimerValue = 60;
   bool _isResendCode = false;
   late Timer _timer;
+  late Timer _initialSmsTimer;
 
   void resend(){
+    final random = Random();
+    _currentCode = _predefinedCodes[random.nextInt(_predefinedCodes.length)];
+    
     setState(() {
       _isResendCode = true;
+      _currentTimerValue = 60;
+      _showCode = true; // Показываем код при отправке
     });
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
-        setState(() {
-          if (_currentTimerValue == 0) {
-            _currentTimerValue = 60;
-            _isResendCode = false;
-            timer.cancel();
-          }else{
-            _currentTimerValue--;
-          }
-        });
-     }
-     );
+    
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_currentTimerValue == 0) {
+          _isResendCode = false;
+          _showCode = false; // Скрываем код когда таймер истёк
+          timer.cancel();
+        } else {
+          _currentTimerValue--;
+        }
+      });
+    });
   }
 
   @override
   void initState() {
     super.initState();
-    resend();
+    _initialSmsTimer = Timer(const Duration(seconds: 3), resend);
   }
 
   @override
   void dispose() {
-    if(_timer.isActive){
-      _timer.cancel();
-    }
+    _timer.cancel();
+    _initialSmsTimer.cancel();
     super.dispose();
   }
 
@@ -93,98 +102,120 @@ class _OTPCodeState extends State<OTPCode> {
                   "Введите код",
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
-                SizedBox(height: 6,),
-                Text(
-                  textAlign: TextAlign.center,
-                  "Мы оправили код на ваш номер\n${widget.phoneNumber}",
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
-                SizedBox(height: 27,),
-                Expanded(
-                  child: Container(
-                      height: MediaQuery.of(context).size.height,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.inversePrimary,
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(25)
-                        )
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(24),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "КОД",
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: Theme.of(context).colorScheme.onPrimary,
-                                  ),
-                                ),
-                                _isResendCode ?
-                                Text(
-                                  "Получить повторно: $_currentTimerValue сек.",
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontSize: 14,
-                                    color: Theme.of(context).colorScheme.onPrimary,
-                                  ),
-                                ):
-                                SizedBox(
-                                  height: 21,
-                                  child: TextButton(
-                                    onPressed: (){
-                                      setState(() {
-                                        if (_isResendCode) return;
-                                        resend();
-                                      });
-                                    },
-                                    style: TextButton.styleFrom(
-                                      splashFactory: NoSplash.splashFactory,
-                                      padding: EdgeInsets.zero,
-                                    ),
-                                    child: Text(
-                                      'Отправить повторно',
-                                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                      fontSize: 14,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                    )
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 6,),
-                            Form(
-                              key: _formKey,
-                              child: Pinput(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                                defaultPinTheme: PinTheme(
-                                  width: 65,
-                                  height: 65,
-                                  textStyle: Theme.of(context).textTheme.bodyMedium,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Theme.of(context).colorScheme.surface,
-                                  )
-                                ),
-                                validator: (pin) => Validator.oTPCode(pin),
-                              ),
-                            ),
-                            Spacer(),
-                            MyCustomMainButton(
-                              onPressed: (){
-                                if (_formKey.currentState!.validate()) {
-                                  context.goNamed(AppRoute.registrInfoAboutMe.name);
-                                }
-                              },
-                              text: 'ПРОДОЛЖИТЬ',
-                            )
-                          ],
+                const SizedBox(height: 6),
+                Column(
+                  children: [
+                    Text(
+                      textAlign: TextAlign.center,
+                      "Мы отправили код на ваш номер\n${widget.phoneNumber}",
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    if (_showCode && _currentCode != null) // Показываем код если флаг активен
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Text(
+                          'Ваш код: $_currentCode',
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: Colors.green,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
+                  ],
+                ),
+                const SizedBox(height: 27),
+                Expanded(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(25)
+                      )
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(24),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "КОД",
+                                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: Theme.of(context).colorScheme.onPrimary,
+                                ),
+                              ),
+                              _isResendCode
+                                ? Text(
+                                    "Получить повторно: $_currentTimerValue сек.",
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                      fontSize: 14,
+                                      color: Theme.of(context).colorScheme.onPrimary,
+                                    ),
+                                  )
+                                : SizedBox(
+                                    height: 21,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        if (!_isResendCode) {
+                                          resend();
+                                        }
+                                      },
+                                      style: TextButton.styleFrom(
+                                        splashFactory: NoSplash.splashFactory,
+                                        padding: EdgeInsets.zero,
+                                      ),
+                                      child: Text(
+                                        'Отправить повторно',
+                                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                          fontSize: 14,
+                                          decoration: TextDecoration.underline,
+                                        ),
+                                      )
+                                    ),
+                                  ),
+                            ],
+                          ),
+                          const SizedBox(height: 6),
+                          Form(
+                            key: _formKey,
+                            child: Pinput(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                              defaultPinTheme: PinTheme(
+                                width: 65,
+                                height: 65,
+                                textStyle: Theme.of(context).textTheme.bodyMedium,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Theme.of(context).colorScheme.surface,
+                                )
+                              ),
+                              validator: (pin) {
+                                if (pin == null || pin.isEmpty) {
+                                  return 'Введите код';
+                                }
+                                if (pin != _currentCode) {
+                                  return 'Неверный код';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          const Spacer(),
+                          MyCustomMainButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                context.goNamed(AppRoute.registrInfoAboutMe.name);
+                              }
+                            },
+                            text: 'ПРОДОЛЖИТЬ',
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],

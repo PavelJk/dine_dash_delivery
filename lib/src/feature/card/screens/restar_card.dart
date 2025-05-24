@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/feature/widgets/product_card.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -414,98 +415,11 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
   }
 
   Widget _buildFavoriteItem(CardFavorites item) {
-    return Stack(
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 45),
-          child: Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..rotateX(-0.30),
-            alignment: Alignment.center,
-            child: Container(
-              width: 153,
-              height: 140,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(24),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.08),
-                    blurRadius: 20,
-                    offset: const Offset(7, 10),
-                  ),
-                ],
-              ),
-              child: Transform(
-                transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateX(0.20),
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 53, right: 11, left: 11),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        item.title,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 15,
-                        ),
-                      ),
-                      Text(
-                        item.restaurant,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xff646982)
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '${item.price} р',
-                            style: Theme.of(context).textTheme.bodyMedium,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: CircleAvatar(
-                              radius: 17,
-                              backgroundColor: Theme.of(context).colorScheme.tertiary,
-                              child: const Icon(
-                                Icons.add,
-                                size: 22,
-                                color: Colors.black,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-        
-        Padding(
-          padding: const EdgeInsets.only(top: 12, left: 15),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.network(
-              item.image,
-              width: 122,
-              height: 84,
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),
-      ],
+    return MyCustonCardProduct(
+      name: item.title,
+      place: item.restaurant, 
+      price: item.price, 
+      image: item.image,
     );
   }
 

@@ -1,13 +1,13 @@
 import 'package:dine_dash_delivery/src/feature/auth/screens/info_about_me.dart';
 import 'package:dine_dash_delivery/src/feature/auth/screens/otp_code.dart';
 import 'package:dine_dash_delivery/src/feature/basket/basket.dart';
+import 'package:dine_dash_delivery/src/feature/card/screens/product_card.dart';
 import 'package:dine_dash_delivery/src/feature/card/screens/restar_card.dart';
 import 'package:dine_dash_delivery/src/feature/categories/screens/category.dart';
 import 'package:dine_dash_delivery/src/feature/favourites/screens/favourites.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/add_review.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/order.dart';
 import 'package:dine_dash_delivery/src/feature/history/screen/review.dart';
-import 'package:dine_dash_delivery/src/feature/home/screens/main_home.dart';
 import 'package:dine_dash_delivery/src/feature/home/screens/restaurant_home.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/location_access.dart';
 import 'package:dine_dash_delivery/src/feature/location/screens/map.dart';
@@ -17,6 +17,7 @@ import 'package:dine_dash_delivery/src/feature/search/search.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/info_address.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/profile.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/setting_app.dart';
+import 'package:dine_dash_delivery/src/feature/tracking/screens/tracking.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/add_card.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/payment_method_empty.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/payment_successfull.dart';
@@ -50,6 +51,8 @@ enum AppRoute{
   paymentSecefulScreen,
   menuCategories,
   restCard,
+  prodCard,
+  traking,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -57,7 +60,7 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: AppRoute.registrPhone.name,
       path: '/',
-      builder: (context, state) => MainHome(),
+      builder: (context, state) => RestaurantHomeScreen(),
       routes: [
         GoRoute(
           name: AppRoute.otpCode.name,
@@ -80,11 +83,6 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.map.name,
           path: 'map',
           builder: (context, state) => MapScreen(),
-        ),
-        GoRoute(
-          name: AppRoute.mainHome.name,
-          path: 'mainHome',
-          builder: (context, state) => MainHome(),
         ),
         GoRoute(
           name: AppRoute.restaurantHome.name,
@@ -200,6 +198,21 @@ final GoRouter goRouter = GoRouter(
             deliver: state.pathParameters["deliver"]!,
             clock: state.pathParameters["clock"]!,
           ),
+        ),
+        GoRoute(
+          name: AppRoute.prodCard.name,
+          path: 'prodCard/:nameRest/:nameProduct/:price/:image',
+          builder: (context, state) => ProductDetailScreen(
+            nameRest: state.pathParameters["nameRest"]!,
+            nameProduct:  state.pathParameters["nameProduct"]!, 
+            price: state.pathParameters["price"]!, 
+            image: state.pathParameters["image"]!,
+          ),
+        ),
+        GoRoute(
+          name: AppRoute.traking.name,
+          path: 'traking',
+          builder: (context, state) => OrderTrackingCard(),
         ),
       ]
     )

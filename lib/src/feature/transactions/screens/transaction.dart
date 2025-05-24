@@ -26,7 +26,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
   int _selectedMethodIndex = 1;
   String mir = 'Мир';
   final List<PaymentMethod> _paymentMethods = [
-    PaymentMethod(name: 'СБП', icon: 'https://img.logodad.com/upload/S/BFR/sbp-Symbol-icon.png'),
+    PaymentMethod(name: 'СБП', icon: 'https://upload.wikimedia.org/wikipedia/ru/thumb/c/c7/СБП_логотип.svg/359px-СБП_логотип.svg.png?20211108071206'),
     PaymentMethod(name: 'Мир', icon: 'https://toplogos.ru/images/logo-mir.png'),
     PaymentMethod(name: 'ЮMoney', icon: 'https://static.insales-cdn.com/files/1/19/20037651/original/_.png'),
   ];
