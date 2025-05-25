@@ -243,34 +243,6 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Widget _buildFilterButton(String text, int index) {
-    return Expanded(
-      child: SizedBox(
-        width: double.infinity,
-        child: TextButton(
-          onPressed: () {
-            setState(() {
-              _selectedFilter = index;
-            });
-          },
-          style: TextButton.styleFrom(
-            backgroundColor: _selectedFilter == index
-                ? Theme.of(context).colorScheme.tertiary
-                : Colors.transparent,
-            padding: EdgeInsets.zero,
-            splashFactory: NoSplash.splashFactory,
-          ),
-          child: Text(
-            text,
-            style: TextStyle(
-              color: _selectedFilter == index ? Colors.black : Colors.grey,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   List<SearchResult> _getFilteredResults() {
     return searchResults.where((result) {
       if (_selectedFilter == 0) return true;

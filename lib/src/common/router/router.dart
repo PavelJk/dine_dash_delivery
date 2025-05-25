@@ -17,6 +17,7 @@ import 'package:dine_dash_delivery/src/feature/search/search.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/info_address.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/profile.dart';
 import 'package:dine_dash_delivery/src/feature/setting/screens/setting_app.dart';
+import 'package:dine_dash_delivery/src/feature/tracking/screens/chat.dart';
 import 'package:dine_dash_delivery/src/feature/tracking/screens/tracking.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/add_card.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/screens/payment_method_empty.dart';
@@ -53,6 +54,7 @@ enum AppRoute{
   restCard,
   prodCard,
   traking,
+  chat,
 }
 
 final GoRouter goRouter = GoRouter(
@@ -213,6 +215,11 @@ final GoRouter goRouter = GoRouter(
           name: AppRoute.traking.name,
           path: 'traking',
           builder: (context, state) => OrderTrackingCard(),
+        ),
+        GoRoute(
+          name: AppRoute.chat.name,
+          path: 'chat',
+          builder: (context, state) => CourierChatScreen(),
         ),
       ]
     )

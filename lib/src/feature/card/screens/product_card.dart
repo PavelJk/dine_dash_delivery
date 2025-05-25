@@ -1,7 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
-import 'package:dine_dash_delivery/src/feature/widgets/product_card.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

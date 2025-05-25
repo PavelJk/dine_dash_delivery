@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math';
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
-import 'package:dine_dash_delivery/src/feature/auth/validators/validators.dart';
 import 'package:dine_dash_delivery/src/feature/auth/widgets/appbar.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,5 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:dine_dash_delivery/src/common/router/router.dart';
-import 'package:dine_dash_delivery/src/feature/auth/widgets/text_field.dart';
 import 'package:dine_dash_delivery/src/feature/transactions/widgets/transac_app_bar.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
