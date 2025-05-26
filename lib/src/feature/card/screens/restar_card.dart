@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/product_card.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
@@ -231,7 +232,12 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 24),
                     child: GestureDetector(
-                      onTap: () => context.pop(),
+                      onTap: () => context.goNamed(
+                        AppRoute.menuCategories.name,
+                        pathParameters:{
+                          "hor" : "РЕСТОРАНЫ",
+                        }, 
+                      ),
                       child: CircleAvatar(
                         backgroundColor: Colors.white,
                         radius: 25,

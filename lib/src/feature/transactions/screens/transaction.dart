@@ -35,6 +35,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
     return Scaffold(
       appBar: TransactionsAppBar(
         text: 'Оплата',
+        onTap: () {
+          context.goNamed(AppRoute.basket.name);
+        },
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -5,8 +5,9 @@ import 'package:go_router/go_router.dart';
 
 class TransactionsAppBar extends StatelessWidget implements  PreferredSizeWidget{
   final String text;
+  final void Function()? onTap;
 
-  const TransactionsAppBar({super.key, required this.text});
+  const TransactionsAppBar({super.key, required this.text, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +25,7 @@ class TransactionsAppBar extends StatelessWidget implements  PreferredSizeWidget
         leading: Padding(
         padding: const EdgeInsets.only(left: 24),
         child: GestureDetector(
-          onTap: (){
-            context.pop('value');
-          },
+          onTap: onTap,
           child: CircleAvatar(
             backgroundColor: Color(0xffECF0F4),
             child: Padding(

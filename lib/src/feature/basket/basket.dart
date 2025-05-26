@@ -67,7 +67,7 @@ class _BasketScreenState extends State<BasketScreen> {
               padding: const EdgeInsets.only(left: 24),
               child: GestureDetector(
                 onTap: () {
-                  context.pop('value');
+                  context.goNamed(AppRoute.mainHome.name);
                 },
                 child: CircleAvatar(
                   backgroundColor: Colors.black.withAlpha(25),

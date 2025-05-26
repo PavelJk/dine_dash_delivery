@@ -88,6 +88,7 @@ class RegistrNumberScreen extends StatelessWidget {
                             MyCustomMainButton(
                               onPressed: (){
                                 if(_formKey.currentState!.validate()){
+                                  
                                   context.goNamed(
                                     AppRoute.otpCode.name,
                                     pathParameters:{

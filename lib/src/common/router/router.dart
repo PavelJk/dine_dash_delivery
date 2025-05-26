@@ -1,5 +1,6 @@
 import 'package:dine_dash_delivery/src/feature/auth/screens/info_about_me.dart';
 import 'package:dine_dash_delivery/src/feature/auth/screens/otp_code.dart';
+import 'package:dine_dash_delivery/src/feature/auth/screens/registr_number.dart';
 import 'package:dine_dash_delivery/src/feature/basket/basket.dart';
 import 'package:dine_dash_delivery/src/feature/card/screens/product_card.dart';
 import 'package:dine_dash_delivery/src/feature/card/screens/restar_card.dart';
@@ -33,7 +34,6 @@ enum AppRoute{
   locationAccess,
   map,
   mainHome,
-  restaurantHome,
   profile,
   setting,
   infoAddress,
@@ -62,7 +62,7 @@ final GoRouter goRouter = GoRouter(
     GoRoute(
       name: AppRoute.registrPhone.name,
       path: '/',
-      builder: (context, state) => RestaurantHomeScreen(),
+      builder: (context, state) => RegistrNumberScreen(),
       routes: [
         GoRoute(
           name: AppRoute.otpCode.name,
@@ -87,7 +87,7 @@ final GoRouter goRouter = GoRouter(
           builder: (context, state) => MapScreen(),
         ),
         GoRoute(
-          name: AppRoute.restaurantHome.name,
+          name: AppRoute.mainHome.name,
           path: 'restaurantHome',
           builder: (context, state) => RestaurantHomeScreen(),
         ),
@@ -203,9 +203,9 @@ final GoRouter goRouter = GoRouter(
         ),
         GoRoute(
           name: AppRoute.prodCard.name,
-          path: 'prodCard/:nameRest/:nameProduct/:price/:image',
+          path: 'prodCard/:restar/:nameProduct/:price/:image',
           builder: (context, state) => ProductDetailScreen(
-            nameRest: state.pathParameters["nameRest"]!,
+            restar: state.pathParameters["restar"]!,
             nameProduct:  state.pathParameters["nameProduct"]!, 
             price: state.pathParameters["price"]!, 
             image: state.pathParameters["image"]!,

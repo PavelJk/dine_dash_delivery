@@ -33,6 +33,9 @@ class _ReviewsScreenState extends State<ReviewsScreen> with SingleTickerProvider
         textTabBarOne: 'Ждут отзыва', 
         textTabBarTwo: 'Мои отзывы',
         controller: _tabController,
+        onTap: () {
+          context.goNamed(AppRoute.mainHome.name);
+        },
       ),
 
       body: TabBarView(

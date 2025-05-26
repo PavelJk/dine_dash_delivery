@@ -55,7 +55,7 @@ class _OrderTrackingCardState extends State<OrderTrackingCard> {
         extendBodyBehindAppBar: true,
         appBar: MyAuthAndLocationAppbar(
           onTap: () {
-            context.pop('value');
+            context.goNamed(AppRoute.myOrder.name);
           },
           backgroundColor: Theme.of(context).colorScheme.secondary,
           iconColor: Theme.of(context).colorScheme.inversePrimary,

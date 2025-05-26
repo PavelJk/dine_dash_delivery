@@ -14,7 +14,10 @@ class PaymentMethodEmpty extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TransactionsAppBar(
-        text: 'Способ оплаты'
+        text: 'Способ оплаты',
+        onTap: () {
+          context.goNamed(AppRoute.mainHome.name);
+        },
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),

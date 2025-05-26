@@ -222,7 +222,7 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 24),
           child: GestureDetector(
-            onTap: () => context.pop(),
+            onTap: () => context.goNamed(AppRoute.categories.name),
             child: CircleAvatar(
               backgroundColor: Colors.black.withAlpha(25),
               child: Padding(

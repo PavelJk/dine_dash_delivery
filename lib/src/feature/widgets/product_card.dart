@@ -68,7 +68,7 @@ class MyCustonCardProduct extends StatelessWidget {
                               context.goNamed(
                                 AppRoute.prodCard.name,
                                 pathParameters:{
-                                  "nameRest" : place,
+                                  "restar" : place,
                                   "nameProduct" : name,
                                   "price" : price,
                                   "image" : image,

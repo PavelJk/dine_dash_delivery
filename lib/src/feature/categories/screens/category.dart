@@ -57,7 +57,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
         leading: Padding(
           padding: const EdgeInsets.only(left: 24),
           child: GestureDetector(
-            onTap: () => context.goNamed(AppRoute.restaurantHome.name),
+            onTap: () => context.goNamed(AppRoute.mainHome.name),
             child: CircleAvatar(
               backgroundColor: const Color(0xffECF0F4),
               child: Padding(

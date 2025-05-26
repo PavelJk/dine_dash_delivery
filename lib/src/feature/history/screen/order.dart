@@ -21,9 +21,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> with SingleTickerProvid
   List<_OrderItem> orders1 = [
       _OrderItem(
         id: '#240112',
-        title: 'Ресторан Камелот',
-        image: 'https://avatars.mds.yandex.net/i?id=77f0a9e192ef42be788982f7e6cd78caec664b0c-8182695-images-thumbs&n=13',
-        price: '330 руб.',
+        title: 'Бургер Кинг',
+        image: 'https://avatars.mds.yandex.net/i?id=fa41e27c5f7ac00bdf09fbc23aaf2b9643684aa5-12625178-images-thumbs&n=13',
+        price: '139 руб.',
         status: null,
         date: null,
       ),
@@ -31,9 +31,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> with SingleTickerProvid
     List<_OrderItem> orders2 = [
       _OrderItem(
         id: '#162432',
-        title: 'Бургер Кинг',
-        image: 'https://avatars.mds.yandex.net/i?id=fa41e27c5f7ac00bdf09fbc23aaf2b9643684aa5-12625178-images-thumbs&n=13',
-        price: '139 руб.',
+        title: 'Ресторан Камелот',
+        image: 'https://avatars.mds.yandex.net/i?id=77f0a9e192ef42be788982f7e6cd78caec664b0c-8182695-images-thumbs&n=13',
+        price: '330 руб.',
         status: 'Завершен',
         date: '29 янв., 12:30',
       ),
@@ -67,6 +67,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> with SingleTickerProvid
         textTabBarOne: 'Текущие', 
         textTabBarTwo: 'История',
         controller: _tabController,
+        onTap: () {
+          context.goNamed(AppRoute.mainHome.name);
+        },
       ),
       body: TabBarView(
         controller: _tabController,
@@ -175,7 +178,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> with SingleTickerProvid
               Expanded(
                 child: GestureDetector(
                   onTap: () {
-                    order.status == null ? print('нажал') : context.goNamed(AppRoute.review.name);
+                    order.status == null ? context.goNamed(AppRoute.traking.name) : context.goNamed(AppRoute.review.name);
                   },
                   child: Container(
                     width: double.infinity,

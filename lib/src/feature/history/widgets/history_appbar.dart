@@ -1,15 +1,15 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
 
 class HistoryAppBar extends StatelessWidget implements PreferredSizeWidget{
   final TabController? controller;
   final String title;
   final String textTabBarOne;
   final String textTabBarTwo;
+  final void Function()? onTap;
 
-  const HistoryAppBar({super.key, this.controller, required this.title, required this.textTabBarOne, required this.textTabBarTwo});
+  const HistoryAppBar({super.key, this.controller, required this.title, required this.textTabBarOne, required this.textTabBarTwo, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -38,9 +38,7 @@ class HistoryAppBar extends StatelessWidget implements PreferredSizeWidget{
         leading: Padding(
         padding: const EdgeInsets.only(left: 24, top: 12),
         child: GestureDetector(
-          onTap: (){
-            context.pop('value');
-          },
+          onTap: onTap,
           child: CircleAvatar(
             backgroundColor: Color(0xffECF0F4),
             child: Padding(

@@ -1,4 +1,5 @@
 import 'package:dine_dash_delivery/src/common/resources/path_images.dart';
+import 'package:dine_dash_delivery/src/common/router/router.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:dine_dash_delivery/src/feature/widgets/restaurant_card.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +8,13 @@ import 'package:go_router/go_router.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String nameProduct;
-  final String nameRest;
+  final String restar;
   final String price;
   final String image;
 
 
 
-  const ProductDetailScreen({super.key, required this.nameRest, required this.nameProduct, required this.price, required this.image});
+  const ProductDetailScreen({super.key, required this.restar, required this.nameProduct, required this.price, required this.image});
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -57,7 +58,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 
   List<String> get info {
-    return _info[widget.nameRest] ?? ['', '', '',];
+    return _info[widget.restar] ?? ['', '', '',];
   }
 
   void _incrementQuantity() {
@@ -103,7 +104,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 24),
                   child: GestureDetector(
-                    onTap: () => context.pop(),
+                    onTap: () => context.goNamed(
+                      AppRoute.restCard.name,
+                      pathParameters:{
+                        "nameRest" : widget.restar,
+                        "rating" : info[0],
+                        "deliver" : info[1],
+                        "clock" : info[2],
+                      }, 
+                    ),
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 25,
@@ -170,7 +179,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     ),
                     SizedBox(width: 10,),
                     Text(
-                      widget.nameRest,
+                      widget.restar,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontSize: 15,
                       ),

@@ -45,6 +45,25 @@ class _AddCardScreenState extends State<AddCardScreen> {
     return Scaffold(
       appBar: TransactionsAppBar(
         text: 'Добавление карты',
+        onTap: () {
+          if (widget.ismethod == 'true') {
+            context.goNamed(
+            AppRoute.paymentMethodScreen.name,
+            pathParameters:{
+              "isCard" : 'false',
+              "cardNumber" : 'cardNumber',
+              "totalAmount" : widget.totalAmount,
+            });
+          }else{
+            context.goNamed(
+            AppRoute.paymentMethodEmpty.name,
+            pathParameters:{
+              "isCard" : 'false',
+              "cardNumber" : 'dfd',
+            },
+          );
+          }
+        },
       ),
 
       body: Padding(

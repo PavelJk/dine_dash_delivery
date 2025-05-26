@@ -58,7 +58,7 @@ class _MapScreenState extends State<MapScreen> {
         extendBodyBehindAppBar: true,
         appBar: MyAuthAndLocationAppbar(
           onTap: () {
-            context.pop('value');
+            context.goNamed(AppRoute.locationAccess.name);
           },
           backgroundColor: Theme.of(context).colorScheme.secondary,
           iconColor: Theme.of(context).colorScheme.inversePrimary,
@@ -286,7 +286,7 @@ class _ContentSlidingUpPanelState extends State<ContentSlidingUpPanel> {
           ),
           MyCustomMainButton(
             onPressed: () {
-              context.goNamed(AppRoute.restaurantHome.name);
+              context.goNamed(AppRoute.mainHome.name);
             }, 
           text: 'СОХРАНИТЬ АДРЕС'
         ),
