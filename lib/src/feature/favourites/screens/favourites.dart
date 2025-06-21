@@ -148,7 +148,15 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            
+                             context.goNamed(
+                                AppRoute.prodCard.name,
+                                pathParameters:{
+                                  "restar" : item.restaurant,
+                                  "nameProduct" : item.title,
+                                  "price" : item.price,
+                                  "image" : item.image,
+                                }, 
+                              );
                           },
                           child: CircleAvatar(
                             radius: 17,

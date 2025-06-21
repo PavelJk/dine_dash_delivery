@@ -7,6 +7,7 @@ import 'package:dine_dash_delivery/src/feature/location/widgets/text_field_widge
 import 'package:dine_dash_delivery/src/feature/widgets/main_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -22,7 +23,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-
+  final TextEditingController _addressController = TextEditingController();
   late GoogleMapController googleMapController;
   bool _isPanelOpen = false;
   Set<Marker> markers = {};
@@ -33,7 +34,7 @@ class _MapScreenState extends State<MapScreen> {
     addCustomMarker();
     super.initState();
   }
-
+  
   void addCustomMarker() {
     BitmapDescriptor.asset(
       ImageConfiguration(), 
@@ -44,7 +45,11 @@ class _MapScreenState extends State<MapScreen> {
       });
     });
   }
-
+  @override
+  void dispose() {
+    _addressController.dispose();
+    super.dispose();
+  }
   CameraPosition _kGooglePlex([double latitude = 56.631600, double longitude = 47.886178]) {
     return CameraPosition(
       target: LatLng(latitude, longitude),
@@ -94,6 +99,14 @@ class _MapScreenState extends State<MapScreen> {
                         ),
                       );
                       setState(() {});
+
+                      // NEW: Получаем адрес и устанавливаем в поле
+                      List<Placemark> placemarks = await placemarkFromCoordinates(position.latitude, position.longitude);
+                      if (placemarks.isNotEmpty) {
+                        final place = placemarks.first;
+                        final fullAddress = '${place.locality}, ${place.street}, ${place.name}';
+                        _addressController.text = fullAddress;
+                      }
                     },
                     child: CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.tertiary,
@@ -135,7 +148,7 @@ class _MapScreenState extends State<MapScreen> {
                             flexibleSpace: MyAppBarSlidingUpPanel(),
                           ),
                           SliverToBoxAdapter(
-                            child: ContentSlidingUpPanel(),
+                            child: ContentSlidingUpPanel(controller: _addressController),
                           ),
                         ],
                       )
@@ -145,7 +158,7 @@ class _MapScreenState extends State<MapScreen> {
                           SizedBox(
                             height: 20,
                           ),
-                          ContentSlidingUpPanel(),
+                          ContentSlidingUpPanel(controller: _addressController),
                         ],
                       );
               }
@@ -177,15 +190,18 @@ class MyAppBarSlidingUpPanel extends StatelessWidget {
 
 
 class ContentSlidingUpPanel extends StatefulWidget {
-  const ContentSlidingUpPanel({super.key});
+  final TextEditingController controller;
+  const ContentSlidingUpPanel({super.key, required this.controller});
 
   @override
   State<ContentSlidingUpPanel> createState() => _ContentSlidingUpPanelState();
 }
 
 class _ContentSlidingUpPanelState extends State<ContentSlidingUpPanel> {
-
+ 
   BuildingType? _selectedBuilding;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -200,6 +216,7 @@ class _ContentSlidingUpPanelState extends State<ContentSlidingUpPanel> {
               PathImages.location,
               fit: BoxFit.scaleDown,
             ),
+            controller: widget.controller,
           ),
           SizedBox(
             height: 13,

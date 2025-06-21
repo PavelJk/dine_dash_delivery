@@ -21,7 +21,7 @@ class OTPCode extends StatefulWidget {
 
 class _OTPCodeState extends State<OTPCode> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  final List<String> _predefinedCodes = ['1234', '5678', '9012'];
+  final List<String> _predefinedCodes = ['2795', '5678', '9012'];
   String? _currentCode;
   bool _showCode = false; // Флаг для отображения кода на экране
 

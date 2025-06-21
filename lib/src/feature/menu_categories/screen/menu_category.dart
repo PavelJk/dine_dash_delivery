@@ -54,7 +54,7 @@ class _FoodCategoryScreenState extends State<FoodCategoryScreen> {
         'name': 'Воппер По-испански',
         'place': 'Бургер Кинг',
         'price': '349',
-        'image': 'https://avatars.mds.yandex.net/i?id=5cd7767cd13d73d2ecaf804373ea992fdcffd804-12658900-images-thumbs&n=13',
+        'image': 'https://avatars.mds.yandex.net/i?id=bb021288f63f43d45abbd322821c7bdd-5664298-images-thumbs&n=13',
       },
       {
         'name': 'Чикен Тар-Тар',
