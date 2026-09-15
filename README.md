@@ -26,34 +26,18 @@
 
 ## 📁 Структура проекта
 
-dine_dash_delivery
+<img width="626" height="326" alt="image" src="https://github.com/user-attachments/assets/954d13c1-59e5-4573-8c95-7ab6f24afb5d" />
 
-— android/ # Нативная конфигурация для Android
+## 🔗 Источники данных
+В проекте используются следующие источники данных:
 
-— ios/ # Нативная конфигурация для iOS
-
-— linux/ # Конфигурация для Linux
-
-— macos/ # Конфигурация для macOS
-
-—web/ # Конфигурация для Web
-
-— windows/ # Конфигурация для Windows (интеграция Google Maps и geolocator)
-
-— assets/ # Ресурсы приложения
-│ ├── icons/ # Иконки приложения и интерфейса
-│ └── images/ # Изображения (фото блюд, логотипы ресторанов, баннеры)
-├── lib/ # Исходный код на Dart
-│ ├── main.dart # Точка входа в приложение
-│ ├── models/ # Модели данных (Restaurant, Dish, Order, User)
-│ ├── screens/ # Экраны приложения (Home, Cart, Map, Profile)
-│ ├── services/ # Сервисы (API, геолокация, карты, авторизация)
-│ └── widgets/ # Переиспользуемые виджеты
-├── test/ # Тесты
-├── splash.yaml # Конфигурация splash screen
-├── pubspec.yaml # Зависимости проекта
-└── README.md # Документация проекта
-
+1. **Google Maps Platform** — карты, геокодирование, построение маршрутов.
+   - [Официальная документация Google Maps Platform](https://developers.google.com/maps/documentation)
+2. **Geolocator (Flutter plugin)** — получение текущего местоположения устройства.
+   - [Пакет geolocator на pub.dev](https://pub.dev/packages/geolocator)
+3. **REST API ресторанов** (планируется) — получение меню и информации о ресторанах.
+4. **Локальные ассеты** — изображения блюд, иконки приложения, splash screen.
+5. **Иконки и splash screen** — сгенерированы с помощью `flutter_launcher_icons` и `flutter_native_splash`.
 
 ## 🚀 Начало работы
 
@@ -75,3 +59,18 @@ flutter pub get
 
 3. Проверьте подключение устройств
 flutter devices
+
+## 📝 Примеры данных
+### Пример модели блюда (JSON)
+<img width="543" height="250" alt="image" src="https://github.com/user-attachments/assets/276ffaac-af09-4b26-bc25-17a840eea86f" />
+
+### Пример модели блюда (JSON)
+<img width="467" height="411" alt="image" src="https://github.com/user-attachments/assets/b971bfd6-3ce5-4869-b42a-41aa4e4f4dbc" />
+
+
+## 📞 Контакты
+Свяжитесь с нами любым удобным способом:
+
+- 📧 Email: your.email@example.com
+
+- 📱 Телефон: +7 (999) 123-45-67
