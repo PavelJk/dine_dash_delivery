@@ -27,7 +27,7 @@
 ## 📁 Структура проекта
 
 dine_dash_delivery/
-├── android/ # Нативная конфигурация для Android
+- android/ # Нативная конфигурация для Android
 ├── ios/ # Нативная конфигурация для iOS
 ├── linux/ # Конфигурация для Linux
 ├── macos/ # Конфигурация для macOS
