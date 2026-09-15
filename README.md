@@ -26,7 +26,8 @@
 
 ## 📁 Структура проекта
 
-<img width="626" height="326" alt="image" src="https://github.com/user-attachments/assets/954d13c1-59e5-4573-8c95-7ab6f24afb5d" />
+<img width="681" height="812" alt="image" src="https://github.com/user-attachments/assets/5dbd60a7-a064-4d5a-9d82-8b2741b0d4a2" />
+
 
 ## 🔗 Источники данных
 В проекте используются следующие источники данных:
