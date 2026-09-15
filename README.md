@@ -29,12 +29,18 @@
 dine_dash_delivery
 
 — android/ # Нативная конфигурация для Android
-├── ios/ # Нативная конфигурация для iOS
-├── linux/ # Конфигурация для Linux
-├── macos/ # Конфигурация для macOS
-├── web/ # Конфигурация для Web
-├── windows/ # Конфигурация для Windows (интеграция Google Maps и geolocator)
-├── assets/ # Ресурсы приложения
+
+— ios/ # Нативная конфигурация для iOS
+
+— linux/ # Конфигурация для Linux
+
+— macos/ # Конфигурация для macOS
+
+—web/ # Конфигурация для Web
+
+— windows/ # Конфигурация для Windows (интеграция Google Maps и geolocator)
+
+— assets/ # Ресурсы приложения
 │ ├── icons/ # Иконки приложения и интерфейса
 │ └── images/ # Изображения (фото блюд, логотипы ресторанов, баннеры)
 ├── lib/ # Исходный код на Dart
